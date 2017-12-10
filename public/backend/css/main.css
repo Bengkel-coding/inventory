@@ -1,0 +1,28 @@
+body {font:11px/15px verdana;color:#666666;overflow-y:scroll;background:transparent url('../img/general/bg-body.jpg') center repeat;}
+#app_header {background:transparent url('../img/bg_header.png') center repeat-x;height:36px;}
+#app_header #icon {font:12px/35px arial;color:#fff;background:transparent url('../img/icon/header-icon.png') center left no-repeat;padding-left: 20px;float:left;margin-left:15px;}
+#app_header #notification,#app_header #inbox,#app_header #welcome-message {margin:5px 5px 0 0;padding:0 8px;float:right;height:23px;line-height:23px;color:#87c9e7;background-color:#1e5873;-webkit-border-radius :5px;border-radius:5px;}
+#app_header #welcome-message {padding:0 1px 0 10px;}
+#app_header #welcome-message .username {border-bottom:1px solid;}
+#app_header #welcome-message .username a {color:#87c9e7;}
+#app_header #welcome-message #logout a {display:block;background:#08394f url('../img/icon/btn-logout.png') 50% 40% no-repeat;width:27px;height:22px;line-height:22px;-webkit-border-radius :0 5px 5px 0;border-radius:0 5px 5px 0;margin-left:10px;border-color:#699cb3;}
+#app_shorcut {background:transparent url('../img/general/bg-short-cut.png') center repeat-x;height:74px;}
+#app_shorcut > div {background:transparent url('../img/general/bg-short-cut.jpg') top left no-repeat;height:74px;}
+#app_navigation {background:#fff url('../img/general/bg-navigation.png') top left repeat-x;min-height:39px;}
+#app_header_shadowing{height:7px;background:transparent url('../img/general/shadow-master.png') center repeat-x}
+#app_content {margin: 10px 30px 68px;}
+#app_content #content_header {padding:0 20px;background:transparent url('../img/general/bg-content-header.png') center repeat-x;height:35px;}
+/** ======================================= **/
+/** ===========   HEADING 3RD   =========== **/
+/** ======================================= **/
+#app_content #content_header h3{font: 14px/35px verdana;color: #fff;font-weight: 500;background-position:left 12px;background-repeat:no-repeat;background-color:transparent;padding-left:22px;}
+    #app_content #content_header h3.dashboard {background-image:url('../img/icon/h3_dashboard.jpg');}
+    #app_content #content_header h3.news {background-image:url('../img/icon/h3_news.jpg');}
+    #app_content #content_header h3.medialibrary {background-image:url('../img/icon/h3_medialibrary.jpg');}
+#app_content #content_body {padding:25px 20px;background-color:#fff;border:1px solid #ccc;border-top:none;}
+#app_content #content_body h3.title-page {font-weight:normal;color: #333333;line-height: 30px;font-size: 24px;margin-bottom: 20px;text-transform: uppercase;}
+#app_content #content_body .line-break {height: 8px;border-bottom: 1px solid #efefef;margin-bottom: 8px;width: 100%;}
+#app_footer {background:transparent url('../img/general/bg-footer.png') center repeat-x;height:58px;width:100%;position:fixed;bottom:0;}
+#app_footer .logo {background:transparent url('../img/general/logo-trinata.png') right center no-repeat;padding-right:60px;margin: 25px 20px 0 0;line-height:20px;float:right;}
+h3.sub-title {font-size:160%;font-weight:normal;line-height:22px;margin-bottom:6px;}
+li {line-height:17px;}

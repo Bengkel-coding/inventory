@@ -1,0 +1,45 @@
+/** General **/
+body {font-size:11px;color:#333;overflow-y:scroll;background:transparent url('../../img/body-repeater.jpg') center repeat;}
+#wg-user-admin-trinata-login { margin : 0 auto;}
+#wg-user-admin-trinata-login .wg-header {height:82px;width:inherit;background-position:top left;background-repeat:no-repeat;position:relative;z-index:0;}
+#wg-user-admin-trinata-login .wg-header.header-left {background-image:url('../../img/wg-header-left.png');}
+#wg-user-admin-trinata-login .wg-header.header-right {background-image:url('../../img/wg-header-right.png');background-position:top right;}
+#wg-user-admin-trinata-login .wg-header.header-right {background-image:url('../../img/wg-header-right.png');}
+#wg-user-admin-trinata-login .wg-header.header-center {background-image:url('../../img/wg-header-repeater.png');background-repeat:repeat-x;}
+#wg-user-admin-trinata-login #inner-header-right {background:url('../../img/wg-header-right.jpg') top right no-repeat;height:74px;background-position:100% 1px;margin:0 -4px;}
+#wg-user-admin-trinata-login #inner-header-right .logo-client {width:145px;height:54px;float:left;margin:10px 20px;background-repeat:no-repeat;background-position:top left;background-image:url('../../img/logo-client.png');}
+#wg-user-admin-trinata-login .wg-content {background-color:#fff;border-left:1px solid #ececec;border-right:1px solid #ececec;float:left;margin:-6px 0 0 0;min-height:200px;z-index:-10;}
+#wg-user-admin-trinata-login .wg-content .wording {padding:33px 43px;}
+#wg-user-admin-trinata-login .label,#wg-user-admin-trinata-login .input {height:39px;}
+#wg-user-admin-trinata-login .label.username {width:46px;background:url('../../img/wg-text-username.png');}
+#wg-user-admin-trinata-login .label.password {width:46px;background:url('../../img/wg-text-password.png');}
+#wg-user-admin-trinata-login .input {background:url('../../img/wg-text-right.png') top right no-repeat;}
+#wg-user-admin-trinata-login .input .shadow-left {background:url('../../img/wg-text-left.png') top left no-repeat;width:100%;}
+/*#wg-user-admin-trinata-login .input input {color:#999999;font:14px/37px "verdana";height:39px;margin-right:5px;background:url('../../img/wg-text-middle.png') top center repeat-x;}*/
+#wg-user-admin-trinata-login .input input{
+	background: rgba(0, 0, 0, 0) url("../../img/wg-text-middle.png") repeat-x scroll center top;
+	height:34px;
+	border:1px #ccc solid;
+	color: #999999;
+	font: 14px/37px "verdana";
+}
+#wg-user-admin-trinata-login .wg-footer {height:76px;background:url('../../img/wg-footer-shadow.png')bottom center no-repeat;clear:left;}
+#wg-user-admin-trinata-login .wg-footer .wording {height:42px;background: #094c69 url('../../img/wg-footer-wording.jpg') left center no-repeat;font:12px/42px "Arial";color:#fff;padding-left:60px;background-position:40px center;}
+#wg-user-admin-trinata-login .submit {float:right;width:114px;height:32px;background:url('../../img/wb-submit-button.png')top left no-repeat;cursor:pointer;}
+#wg-user-admin-trinata-login .submit:hover,#wg-user-admin-trinata-login .submit.active {background-position:100% -33px;}
+#wg-user-admin-trinata-login .logo-trinata {background:url('../../img/logo-trinata.png') bottom center no-repeat;color:#666666;font:11px/9px "verdana";text-align:center;height:39px;}
+#wg-user-admin-trinata-login .error-message {color:red;display:inline-block;line-height:16px;}
+
+/** Normal Class **/
+#wg-user-admin-trinata-login.normal {width:333px;height:423px;}
+#wg-user-admin-trinata-login.normal .wg-content {width:331px;}
+#wg-user-admin-trinata-login.normal .wg-header.header-center {margin:0 4px;width:325px;}
+#wg-user-admin-trinata-login.normal .input input {width:193px;}
+#wg-user-admin-trinata-login.normal .input input.captcha {width:115px;margin-left:5px;}
+
+/** Captcha Class **/
+#wg-user-admin-trinata-login.with-captcha {height:478px;}
+.form-request-new-password-container {display:inline-block;}
+.form-request-new-password-container input[type="text"] {padding:5px 10px;line-height:20px;}
+.form-request-new-password-container input[type="text"].error {border:1px solid rgb(255,0,0);}
+.form-request-new-password-container input[type="submit"] {cursor:pointer;padding:5px 10px;border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;-webkit-border-radius:5px;background-position:scenter bottom;color:#fff;background-image:linear-gradient(top, #333333 0%, #111111 100%);background-image:-o-linear-gradient(top, #333333 0%, #111111 100%);background-image:-moz-linear-gradient(top, #333333 0%, #111111 100%);background-image:-webkit-linear-gradient(top, #333333 0%, #111111 100%);background-image:-ms-linear-gradient(top, #333333 0%, #111111 100%);background-image:-webkit-gradient(linear,left bottom,left top,color-stop(0, #111111),color-stop(1, #111111));}

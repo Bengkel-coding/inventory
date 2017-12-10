@@ -1,0 +1,188 @@
+.nous-paging-container {
+    float           : right;
+    margin-top      : 5px;
+}
+.nous-paging-container .result-item {
+    margin          : 2px 10px 0 0;
+    position        : relative;
+    float           : left;
+}
+
+.nous-paging-container a.inactive {
+    cursor          : default;
+}
+.nous-paging-container a.inactive img {
+    opacity         : 0.4;
+    filter:alpha(opacity=40);
+}
+
+#nous-waiting-layering {
+    position        : fixed !important;
+    top             : 0;
+    left            : 0;
+    background      : transparent url('../images/transparent.png') top left repeat;
+    width           : 100%;
+    height          : 100%;
+    z-index         : 99999;
+}
+
+.nous-waiting-container {
+    width           : 300px;
+    position        : fixed !important;
+    top             : 40%;
+    left            : 40%;
+}
+
+.nous_message_container {
+    background-color: #eaeaea;
+    padding         : 10px;
+    color           : #333333;
+}
+    .nous_message_container > .spinner, .spinner {
+        background  : transparent url(../images/spinner.gif) top center no-repeat;
+        height      : 25px; 
+        width       : 25px;
+        float       : left;
+    }
+    
+    .nous_message_container > .message {
+        margin      : 5px 0 0 10px;
+        float       : left;
+    }
+    
+
+#transparent-masking {
+    position        : fixed;
+    top             : 0;
+    left            : 0;
+    width           : 100%;
+    height          : 100%;
+    z-index         : 20;
+    background-color: #bbb;
+    opacity         : 0.2;
+    z-index         : 9999;
+    cursor          : pointer;
+}
+
+#masking-html,
+.masking-html {
+    position        : absolute;
+    z-index         : 9999;
+    opacity         : 1;
+    background-color: #7a7a7a;
+    padding         : 10px;
+    min-width       : 200px;
+    line-height     : 26px;
+    color           : #fff;
+    
+    -webkit-border-radius   : 8px;
+    -moz-border-radius      : 8px;
+    border-radius           : 8px; 
+}
+#masking-html.browser-file,
+.masking-html.browser-file {
+    color                   : #333;
+    background-color        : #fff;
+    border                  : 2px solid rgb(211, 209, 209);
+}
+#masking-html-close,
+.masking-html-close {
+    background-color        : #000;    
+    -webkit-border-radius   : 10px;
+    -moz-border-radius      : 10px;
+    border-radius           : 10px;  
+    width                   : 20px;
+    height                  : 20px;
+    color                   : #fff;
+    text-align              : center;
+    float                   : right; 
+    font-size               : 9px;
+    line-height             : 20px;
+    cursor                  : pointer;    
+}
+.new-folder-name-wrapper input[type="submit"],
+.new-folder-name-wrapper input[type="button"] {
+    background-color        : #515151;
+    border                  : 1px solid #585858;
+    line-height             : 20px;
+    padding                 : 0 10px;
+    color                   : #fff;
+    cursor                  : pointer;
+}
+#media-library-wrapper .file-manager .gallery .thumb,
+.view-detail.image.icon  {
+    width                   : 100%;
+    height                  : 50px;
+    background-position     : center;
+    background-repeat       : no-repeat;
+    text-align              : center;
+    margin                  : 0 auto;
+}
+.thumb.unknown-file,
+.icon.unknown-file {
+    background-image        : url('../images/files/unknown.png');
+}
+.thumb.jpg-file,
+.icon.jpg-file {
+    background-image        : url('../images/files/jpeg.png');}
+.thumb.jpeg-file,
+.icon.jpeg-file {
+    background-image        : url('../images/files/jpeg.png');
+}
+.thumb.gif-file,
+.icon.gif-file {
+    background-image        : url('../images/files/gif.png');
+}
+.thumb.png-file,
+.icon.png-file {
+    background-image        : url('../images/files/png.png');
+}
+.thumb.txt-file,
+.icon.txt-file {
+    background-image        : url('../images/files/txt.png');
+}
+.thumb.pdf-file,
+.icon.pdf-file {
+    background-image        : url('../images/files/pdf.png');}
+.thumb.mp4-file,
+.icon.mp4-file {
+    background-image        : url('../images/files/mp4.png');
+}
+.thumb.mpeg-file,
+.icon.mpeg-file {
+    background-image        : url('../images/files/mpeg.png');
+}
+.thumb.flv-file,
+.icon.flv-file {
+    background-image        : url('../images/files/flv.png');
+}
+
+.view-detail.image{
+    float                   : left;
+    display                 : inline-block;
+    position                : relative;
+}
+.view-detail.image.icon {
+    width                   : 60px;
+}
+.view-detail.image.icon span {
+    display                 : block;
+    margin-top              : 55px;
+    color                   : rgb(255,0,0);
+    font-weight             : bolder;
+    text-transform          : lowercase;
+    cursor                  : pointer;
+}
+.view-detail.text {
+    float                   : left;
+    display                 : inline-block;
+    position                : relative;
+    margin-left             : 10px;
+    line-height             : 18px;
+}
+.inline-block.label-section {
+    width                   : 80px;
+}
+.inline-block.value-section {
+    padding-left            : 5px;
+}

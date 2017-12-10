@@ -1,0 +1,422 @@
+#station-form-wrapper {
+    position            : relative;    
+}
+#station-form-wrapper div#content {
+    
+}
+#station-form-wrapper #transaction_message {
+    font-weight         : bold;
+    padding-bottom      : 20px;
+    color               : orange;    
+}
+
+#station-form-wrapper .block_left,
+#station-form-wrapper .block_right,
+#station-form-wrapper .block_separator,
+#station-form-wrapper .no_label {
+    float               : left;
+}
+#station-form-wrapper .block_left,
+#station-form-wrapper .block_separator {
+    margin-top          : 4px;
+}
+#station-form-wrapper .block_left {
+    width               : 250px;
+}
+#station-form-wrapper .block_separator {
+    width               : 20px;
+}
+#station-form-wrapper .block_right {
+    
+}
+#station-form-wrapper .block_right.block_hidden {
+    visibility          : hidden !important;
+    height              : 1px !important;
+}
+#station-form-wrapper .no_label {
+    width               : 270px;
+}
+#station-form-wrapper input[type="text"],
+#station-form-wrapper input[type="password"],
+#station-form-wrapper select {
+    background-image    : url(../img/wg-text-middle.png);
+    background-repeat   : repeat-x;
+}    
+#station-form-wrapper input[type="text"],
+#station-form-wrapper input[type="password"],
+#station-form-wrapper textarea,
+#station-form-wrapper select {
+    font                : 11px/14px 'arial';
+    border              : 1px solid #bababa;
+    border-radius       : 3px;
+    -moz-border-radius      : 3px;
+    -webkit-border-radius   : 3px;
+    color               : #666;
+}
+
+#station-form-wrapper input[type="text"].error,
+#station-form-wrapper input[type="password"].error,
+#station-form-wrapper textarea.error,
+#station-form-wrapper select.error {
+    border              : 1px solid #DB0D25;
+}
+
+#station-form-wrapper input[type="text"],
+#station-form-wrapper input[type="password"] {
+    width               : 250px;
+    height              : 22px;
+    line-height         : 18px;
+    padding             : 0 5px 2px 5px;
+}
+
+#station-form-wrapper select {
+    width               : 200px;
+    height              : 30px;
+    line-height         : 30px;
+    padding             : 5px 2px;
+}
+
+#station-form-wrapper select option[disabled] {
+    background-color    : #C9C9C9;
+    color               : #890303;
+}
+
+#station-form-wrapper textarea {
+    height              : 220px;
+    padding             : 5px;
+    resize              : none;
+}
+
+#station-form-wrapper textarea.simple-editor,
+#station-form-wrapper textarea.simplex-editor,
+#station-form-wrapper textarea.full-editor,
+#station-form-wrapper textarea.mega-editor,
+#station-form-wrapper textarea.make-editor {
+    position            : absolute;
+    margin-left         : -2000px;    
+    display             : block !important;
+    visibility          : visible !important;
+}
+
+#station-form-wrapper .checkbox_container {
+    width               : 20px;
+}
+#station-form-wrapper .checkbox_wording {
+    margin-top          : -2px;
+}
+
+#station-form-wrapper .subtitle_container {
+    border-bottom       : 1px solid #e1e1e1;
+}
+#station-form-wrapper .subtitle_container span {
+    background-color    : #e1e1e1;
+    padding             : 5px 10px;
+    display             : block;
+    width               : 200px;
+    font-size           : 13px;
+    color               : #666;
+}
+
+#station-form-wrapper #submit_wrapper, 
+#station-form-wrapper .submit-form,
+#station-form-wrapper #cancel_wrapper {
+    height              : 32px;
+}
+#station-form-wrapper #submit_wrapper > span,
+#station-form-wrapper .submit-form > span {
+    display             : block;
+}
+#station-form-wrapper input[type="submit"],
+#station-form-wrapper #submit_wrapper > span, 
+#station-form-wrapper .submit-form > span,
+#station-form-wrapper button {
+    color               : #fff;
+    cursor              : pointer;
+    height              : 32px;
+    font                : 12px/32px verdana;
+    background-color    : transparent;
+}
+#station-form-wrapper #submit_wrapper,
+#station-form-wrapper .submit-form {
+    padding-left        : 35px;
+    cursor              : pointer;
+    background          : transparent url('../img/button-save-left.png') top  left no-repeat;
+    position            : relative;
+    z-index             : 0;
+}
+#station-form-wrapper #submit_wrapper > input,
+#station-form-wrapper #submit_wrapper > span,
+#station-form-wrapper .submit-form > input,
+#station-form-wrapper .submit-form > span {
+    padding             : 0 15px 2px 0;
+    position            : relative;
+    z-index             : -10;
+    background          : url('../img/button-save-no-repeat.png') top right no-repeat;
+}
+#station-form-wrapper #cancel_wrapper {
+    padding-left        : 35px;
+    margin-left         : 15px;
+    cursor              : pointer;
+    background          : url('../img/button-cancel-left.png') top left no-repeat;
+}
+#station-form-wrapper #cancel_wrapper > button {
+    padding             : 0 15px 0 0;
+    color               : #666666;
+    background          : url('../img/button-cancel-no-repeat.png') top right no-repeat;
+}
+#station-form-wrapper #submit_wrapper:hover input[type="submit"],
+#station-form-wrapper #submit_wrapper:hover span {
+    color               : #fff600;
+}
+#station-form-wrapper #cancel_wrapper:hover > button {
+    color               : #e9050a;
+}
+
+/** Tab **/
+#station-form-wrapper .tab-selector {
+    border-bottom       : solid 1px #E3DED1;
+    height              : 24px;
+    margin-bottom       : 8px;
+}
+#station-form-wrapper .tab-selector ul {
+    margin-left         : 10px;
+    margin              : 0 0 8px 0;
+    float               : left;
+}
+#station-form-wrapper .tab-selector.media {
+    position            : absolute; 
+    right               : 0;
+    border              : 0;
+    margin-top          : -24px;
+    margin-right        : 5px;
+    z-index             : 999;
+}
+#station-form-wrapper .tab-selector.content-text + .tab-selector.media,
+#station-form-wrapper .tab-selector.lang + .tab-selector.media {
+    margin-top          : -33px; 
+}
+#station-form-wrapper .tab-selector.media ~ #content {
+    position            : relative;
+    border-top          : solid 1px #E3DED1;
+    padding-top         : 10px;
+    margin-top          : 35px;
+}
+#station-form-wrapper .tab-selector.content-text + .tab-selector.media ~ #content, 
+#station-form-wrapper .tab-selector.lang + .tab-selector.media ~ #content {
+    border-top          : none;
+    margin-top          : 0;
+    padding             : 0;
+}
+#station-form-wrapper .tab-selector ul li {
+    float               : left;
+    height              : 24px;
+    margin-left         : 8px;
+    margin-top          : -2px;
+}
+
+#station-form-wrapper .tab-selector ul li span {
+    background-color    : #f2f2f2;
+    color               : #3f3f3f;
+    border              : solid 1px #E3DED1;
+    border-bottom       : 0;
+    display             : block;
+    height              : 2em;
+    line-height         : 1.5em;
+    padding             : 0.3em 1.1em 0em 1.1em;
+    cursor              : pointer;
+}
+#station-form-wrapper .tab-selector ul li.active span {
+    background-color    : #fff;
+    border-bottom       : 1px solid #fff;
+}
+
+#station-form-wrapper .tab-selector ul#lang-tab li span.default {
+    background-image    : url(../img/gold.png);
+    background-position : top right;
+    background-repeat   : no-repeat;
+    padding-right       : 20px;
+}
+
+#station-form-wrapper .tab-content  {
+    
+}
+
+#station-form-wrapper .tab-content.hide {
+    position            : absolute;
+    border              : 1px solid blue;
+    top                 : -1000px;    
+}
+
+.frm-hint {
+    width               : 16px;
+    height              : 16px;
+    background          : transparent url('../img/help16.png') top left no-repeat;
+    float               : left;
+    margin              : 4px 0 0 8px;
+    cursor              : pointer;
+}
+.frm-hint-text {
+    background-color    : #fbf3c0;
+    padding             : 10px;
+    border              : 2px solid #ccc;
+    position            : absolute;
+}
+#station-form-wrapper .element-information {
+    padding-top         : 5px;
+    color               : #000;
+    font-size           : 9px; 
+}
+#station-form-wrapper .element-information:before {
+    content             : "*"        
+}
+
+#station-form-wrapper .error_information label {
+    color               : #d10707;
+    font-size           : 9px;
+    line-height         : 22px;
+}
+#station-form-wrapper .error_information label:before {
+    content             : "* ";
+}
+#station-form-wrapper form .line-break {
+    height              : 8px;
+    border-bottom       : 1px solid #efefef;
+    margin-bottom       : 8px;
+    width               : 100%;
+}
+#station-form-wrapper .title-form {
+    color               : #333333;
+    line-height         : 30px;
+    font-size           : 24px;
+    margin-bottom       : 20px;
+    text-transform      : uppercase;
+}
+#station-form-wrapper fieldset legend{
+    display             : block;
+}
+#station-form-wrapper .media-container,
+#station-form-wrapper .media-container.active#media-content-container ~ .browseMedia {
+    position            : absolute;
+    margin-left         : -2000px;
+}
+#station-form-wrapper .media-container.active {
+    position            : relative;
+    margin-left         : 0;
+    padding-top         : 10px; 
+}
+#station-form-wrapper .browseMedia {
+    color               : #fff;
+    padding             : 5px 0;
+    width               : 150px;
+    cursor              : pointer;
+	border              : 1px solid #919191;
+	font                : 14px/22px tahoma,Arial, Helvetica, sans-serif;
+	text-align          : center;
+	text-shadow         : 0 -1px 0 rgba(0,0,0,0.25);
+	background-color    : #505050;
+	background-image    : linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image    : -o-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image    : -moz-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image    : -webkit-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image    : -ms-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image    : -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #505050),
+		color-stop(1, #707070)
+	);
+	background-position : center top;
+	background-repeat   : no-repeat;
+}
+#station-form-wrapper .browseMedia:hover {
+	background-color    : #606060;
+	background-image    : linear-gradient(top, #606060 0%, #808080 100%);
+	background-image    : -o-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image    : -moz-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image    : -webkit-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image    : -ms-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image    : -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #606060),
+		color-stop(1, #808080)
+	);
+	background-position : center bottom;
+}
+#station-form-wrapper .media-container .media-item-container {
+    border              : 1px solid #ccc;
+    margin              : 0 0 5px;
+    border-radius       : 4px;
+    -moz-border-radius  : 4px;
+    -o-border-radius    : 4px;
+    -webkit-border-radius : 4px;
+    padding             : 5px 0;
+    min-height          : 70px;
+    background-color    : #eee;
+}
+#station-form-wrapper .media-container .media-item-container {
+    height              : 68px;
+    height              : inherit;
+}
+#station-form-wrapper .media-container .media-item-container.image {
+    height              : 120px;
+    height              : inherit;
+    min-height          : 120px;
+}
+#station-form-wrapper .media-container .media-item-container.image textarea {
+    height              : inherit;
+}
+.view-detail.text .inline-block {
+    vertical-align      : top;
+}
+#station-form-wrapper .media-file-information {
+    padding             : 10px;
+    background-color    : #3f3f3f;
+    border-radius       : 5px;
+    -moz-border-radius  : 5px;
+    -webkit-border-radius : 5px;
+    -o-border-radius    : 5px;
+    color               : #fff;
+    margin-bottom       : 10px;
+}
+.ui-sortable-helper {
+    
+}
+
+.masking-html-container.browser-file {
+    width               : 800px;
+}
+
+.dynamic-button {
+    background-color    : #222;
+    padding             : 5px 10px;
+    color               : #fff;
+    border-radius       : 8px;
+    cursor              : pointer;
+}
+.dynamic-button.del {
+    margin-left         : 5px;
+}
+
+.button-helper.plus {
+    width               : 25px;
+    height              : 25px;
+    background          : transparent url('../img/plus-sign.png') center no-repeat;
+}
+
+.button-helper.min {
+    width               : 25px;
+    height              : 25px;
+    background          : transparent url('../img/min-sign.png') center no-repeat;
+}
+
+.button-helper.left:first-child {
+    margin-left         : 0;
+}
+.button-helper.left {
+    float               : left;
+    margin-left         : 3px;
+    cursor              : pointer;
+}

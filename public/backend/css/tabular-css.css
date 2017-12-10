@@ -1,0 +1,383 @@
+/** Make your table **/
+div.tabular        { 
+    display                 : table; /** table **/
+    border                  : 1px solid #d8d8d8;
+    border-bottom           : 0;
+    width                   : 100%;
+}
+
+div.tabular .header {
+    display: table-header-group; /** thead **/
+    background-color        : #f1f1f1;
+} 
+    div.tabular .header .cell {
+        font                : 12px/25px 'Verdana';
+        color               : #333333;
+        text-align          : center;
+        border-top          : 2px solid #f8f8f8;
+    }
+    
+div.tabular .row-group { 
+    display                 : table-row-group; /** tbody **/ 
+} 
+
+div.tabular .footer { 
+    display                 : table-footer-group; /** tfoot**/  
+}
+
+/** Row  Action **/
+div.tabular .row {
+    display                 : table-row; /** tr **/
+}
+div.tabular .row:hover .cell,
+tbody tr:hover td{
+    background-color        : #94CEEB !important;
+}
+    div.tabular .row .cell {
+        font                : 11px/24px 'Verdana';
+        color               : #666;
+    }
+    div.tabular .row.blue .cell,
+    div.tabular .row .cell.blue,
+    tbody tr.blue td,
+    tbody tr td.blue {
+        background-color    : #edf9ff;
+    }
+    div.tabular .row.lightBlue .cell,
+    div.tabular .row .cell.lightBlue,
+    tbody tr.lightBlue td,
+    tbody tr td.lightBlue {
+        background-color    : #17B2FF;
+        color               : #fff;
+    }
+    div.tabular .row.red .cell,
+    div.tabular .row .cell.red,
+    tbody tr.red td,
+    tbody tr td.red {
+        background-color    : #ffeded;
+    }
+    div.tabular .row.pink .cell,
+    div.tabular .row .cell.pink,
+    tbody tr.pink td,
+    tbody tr td.pink {
+        background-color    : #ffedfe;
+    }
+    div.tabular .row.green .cell,
+    div.tabular .row .cell.green,
+    div.tabular .row.system .cell,
+    div.tabular .row .cell.system,
+    tbody tr.green td,
+    tbody tr td.green,
+    tbody tr.system td,
+    tbody tr td.system { 
+        background-color    : #f3ffed;
+    }
+    div.tabular .row .cell.publish,
+    tbody tr td.publish {
+        color               : #7ba218;
+    }
+    div.tabular .row .cell.un-publish {
+        color               : #d5150b;
+    }
+    div.tabular .row .cell.is-active {
+        width               : 100px;
+        text-align          : center;
+    }
+    div.tabular .row .cell.code {
+        width               : 100px;
+        text-align          : center;
+    }
+
+/** Cell Block **/
+div.tabular .cell {
+    display                 : table-cell; /** td,th **/
+    padding                 : 5px;
+    border-bottom           : 1px solid #d8d8d8; 
+    border-left             : 1px solid #d8d8d8;
+}
+    div.tabular .cell:first-child{
+        border-left         : 0; 
+    }
+    div.tabular .cell.center,
+    div.tabular .cell.action ,
+    div.tabular .cell.create-time,
+    div.tabular .cell.update-time,
+    tbody tr td.center,
+    tbody tr td.action,
+    tbody tr td.create-time,
+    tbody tr td.update-time {
+        text-align          : center;
+    }
+    div.tabular .cell.create-time,
+    div.tabular .cell.update-time,
+    tbody tr td.create-time,
+    tbody tr td.update-time {
+        width               : 150px;
+    }
+    div.tabular .cell.no-border-left {
+        border-left         : 0;
+    }
+    div.tabular .cell.no-border-bottom {
+        border-bottom       : 0;
+    }
+    
+    div.tabular .header .cell.numbering,
+    table.tabular thead tr td.numbering {
+        width               : 40px;
+    }
+    
+    table.tabular thead tr td.numbering.traversing-index {
+        width               : 80px;
+    }
+    /** Action Block **/
+    div.tabular .header .cell.action.job1,
+    div.tabular .header .cell.action.job2,
+    table.tabular thead tr td.action.job1,
+    table.tabular thead tr td.action.job2 {
+        width               : 80px;    
+    }
+    div.tabular .header .cell.action.job3,
+    table.tabular thead tr td.action.job3 {
+        width               : 110px;
+    }
+    div.tabular .header .cell.action.job4,
+    table.tabular thead tr td.action.job4 {
+        width               : 140px;
+    }
+    div.tabular .header .cell.action.job5,
+    table.tabular thead tr td.action.job5 {
+        width               : 170px;
+    }
+    div.tabular .row .cell.action {
+    }
+        .action a.icon, .action span.icon {
+            display             : inline-block;
+            width               : 22px;
+            height              : 22px;
+            background-image    : url('../img/icon-action.png');
+            background-repeat   : no-repeat;
+            background-color    : transparent;
+            cursor              : pointer;
+            margin-left         : 5px;
+            margin-bottom       : -7px;
+        }
+        .action a.icon:first-child, .action span.icon:first-child{
+            margin-left         : 0;         
+        }
+        .action a.icon.status.active:hover, .action span.icon.status.active:hover{
+            background-position : 0 -23px;
+        }
+        .action a.icon.status.in-active, .action span.icon.status.in-active {
+            background-position : -23px 0;
+        }
+        .action a.icon.status.in-active:hover, .action span.icon.status.in-active:hover {
+            background-position : -23px -23px;
+        }
+        .action a.icon.edit, .action span.icon.edit{
+            background-position : -46px 0;
+        }
+        .action a.icon.edit:hover, .action span.icon.edit:hover{
+            background-position : -46px -23px;
+        }
+        .action a.icon.view, .action span.icon.view{
+            background-position : 0px -46px;
+        }
+        .action a.icon.view:hover, .action span.icon.view:hover{
+            background-position : 0 -69px;
+        }
+        .action a.icon.delete, .action span.icon.delete{
+            background-position : -69px 0;
+        }
+        .action a.icon.delete:hover, .action span.icon.delete:hover{
+            background-position : -69px -23px;
+        }        
+        .action a.icon.feature, .action span.icon.feature{
+            background-position : -23px -46px;
+        }
+        .action a.icon.feature:hover, .action span.icon.feature:hover{
+            background-position : -23px -69px;
+        }
+        .action a.icon.save, .action span.icon.save{
+            background-position : -92px 0;
+        }
+        .action a.icon.save:hover, .action span.icon.save:hover{
+            background-position : -92px -23px;
+        }
+    
+div.tabular .column-group {
+    display                 : table-column-group; /** column group **/  
+}
+
+div.tabular .column { 
+    display                 : table-column; /** column **/ 
+}
+
+div.tabular .caption { 
+    display                 : table-caption; /** table caption **/ 
+}
+
+
+/** Button **/
+#create-button {
+    height                  : 28px;
+    clear                   : both;
+    float                   : left;
+}
+#create-button a, #create-button a span  {
+    display                 : block;
+    line-height             : 28px;
+}
+#create-button a  {
+    background              : transparent url('../img/bg-left-add-button.png') no-repeat top left;   
+    color                   : #333;
+    padding-left            : 30px;
+}
+#create-button a span{ 
+    background              : transparent url('../img/bg-right-add-button.png') no-repeat top right;
+    padding                 : 0 12px 0 10px;
+}
+div.tabular-pagination {
+    margin-top              : 20px;
+    text-align              : right;
+}
+
+
+table.tabular        {
+    border-collapse         : separate;
+    border                  : 1px solid #d8d8d8;
+    border-bottom           : 0;
+    width                   : 100%;
+}
+
+table.tabular td {
+    display                 : table-cell; /** td,th **/
+    padding                 : 5px;
+    border-bottom           : 1px solid #d8d8d8; 
+    border-left             : 1px solid #d8d8d8;
+    font                    : 11px/24px 'Verdana';
+    color                   : #666;
+}
+    table.tabular td:first-child {
+        border-left         : 0;
+    }
+
+table.tabular thead tr {
+    background-color        : #f1f1f1;
+}
+    table.tabular thead tr td {
+        font                : 12px/25px 'Verdana';
+        color               : #333333;
+        text-align          : center;
+        border-top          : 2px solid #f8f8f8;
+    }
+    
+/** Tool **/
+.tool-wrapper {
+    float                   : right;
+}
+.tool-wrapper .item-tool {
+    display                 : inline-block;
+    margin-left             : 10px;
+}
+.tool-wrapper .item-tool .background-css {
+    display                 : block;
+    padding                 : 5px 10px;
+    cursor                  : pointer;
+    border-radius           : 5px;
+    -moz-border-radius      : 5px;
+    -webkit-border-radius   : 5px;
+    -o-border-radius        : 5px;
+	background-color        : rgb(187, 187, 187);
+	background-image        : linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -o-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -moz-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -webkit-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -ms-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -webkit-gradient(linear,left bottom,\left top,color-stop(0, rgb(187, 187, 187)),color-stop(1, rgb(230, 230, 230)));
+	background-position     : center bottom;
+}
+.tool-wrapper .item-tool .background-css:hover,.tool-wrapper .item-tool .background-css.active:hover {
+    background-image        : linear-gradient(top, rgb(230, 230, 230) 0%, rgb(187, 187, 187) 100%);
+	background-image        : -o-linear-gradient(top, rgb(230, 230, 230) 0%, rgb(187, 187, 187) 100%);
+	background-image        : -moz-linear-gradient(top, rgb(230, 230, 230) 0%, rgb(187, 187, 187) 100%);
+	background-image        : -webkit-linear-gradient(top, rgb(230, 230, 230) 0%, rgb(187, 187, 187) 100%);
+	background-image        : -ms-linear-gradient(top, rgb(230, 230, 230) 0%, rgb(187, 187, 187) 100%);
+	background-image        : -webkit-gradient(linear,left bottom,\left top,color-stop(0, rgb(230, 230, 230)),color-stop(1, rgb(187, 187, 187)));
+}
+.tool-wrapper .item-tool .background-css.active {
+    color                   : #fff;                
+    background-image        : linear-gradient(top, rgb(160, 160, 160) 0%, rgb(10, 10, 10) 100%);
+	background-image        : -o-linear-gradient(top, rgb(160, 160, 160) 0%, rgb(10, 10, 10) 100%);
+	background-image        : -moz-linear-gradient(top, rgb(160, 160, 160) 0%, rgb(10, 10, 10) 100%);
+	background-image        : -webkit-linear-gradient(top, rgb(160, 160, 160) 0%, rgb(10, 10, 10) 100%);
+	background-image        : -ms-linear-gradient(top, rgb(160, 160, 160) 0%, rgb(10, 10, 10) 100%);
+	background-image        : -webkit-gradient(linear,left bottom,\left top,color-stop(0, rgb(160, 160, 160)),color-stop(1, rgb(10, 10, 10)));
+}
+.tool-wrapper .item-tool:last-child {
+    margin-right            : 2px;
+}
+.item-tool-selection {
+    color                   : #333;
+    display                 : none;
+    position                : absolute;
+    right                   : 0;
+    margin-right            : 51px !important;
+    border-radius           : 5px;
+    -moz-border-radius      : 5px;
+    -webkit-border-radius   : 5px;
+    -o-border-radius        : 5px;
+    margin                  : 0 0 0 -35px;
+    padding                 : 5px 10px;
+	background-image        : linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -o-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -moz-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -webkit-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -ms-linear-gradient(top, rgb(187, 187, 187) 0%, rgb(230, 230, 230) 100%);
+	background-image        : -webkit-gradient(linear,left bottom,\left top,color-stop(0, rgb(187, 187, 187)),color-stop(1, rgb(230, 230, 230)));
+}
+.tool-wrapper .item-tool.sort_by ul li:hover .item-tool-selection,
+.tool-wrapper .item-tool.sort_by ul li.hover .item-tool-selection {
+    display                 : block;
+}
+.item-tool-selection li {
+    line-height             : 22px;
+}
+.item-tool-selection li .checkbox {
+    position                : absolute;
+    right                   : 0;
+    margin                  : 5px 10px 0 5px;
+}
+.item-tool-selection li .checkbox ~ div.label {
+    margin-right             : 20px;
+}
+.item-tool-selection li .checkbox ~ div.label.asc:before {
+    content                 : '(ASC) ';
+}
+.item-tool-selection li .checkbox ~ div.label.desc:before {
+    content                 : '(DESC) ';
+}
+.item-tool input[type="submit"] {
+    background-color        : rgb(179, 179, 179);
+    padding                 : 2px 5px;
+    border-radius           : 5px;
+    -moz-border-radius      : 5px;
+    -webkit-border-radius   : 5px;
+    -o-border-radius        : 5px;
+    cursor                  : pointer;
+}
+.item-tool-selection input[type="submit"] {
+    float                   : right;
+}
+.item-tool input[type="text"] {
+    border                  : 1px solid #CCCCCC;
+    border-radius           : 5px 5px 5px 5px;
+    line-height             : 20px;
+    margin-right            : 5px;
+    padding                 : 5px;
+    color                   : #666;
+}
+.search-result-item {
+    color                   : rgb(255,0,0);
+    margin                  : 0;
+    padding                 : 0;
+}

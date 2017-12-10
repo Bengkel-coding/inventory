@@ -1,0 +1,200 @@
+/* ====================================== */
+/* ===========    CSS ROOT    =========== */
+/* ====================================== */
+.wg_base_module_navigation {width:3000px;}
+.wg_base_module_navigation ul {
+    padding             : 0;
+    margin              : 6px 0 0;
+    float               : left;
+}
+
+.wg_base_module_navigation ul li {
+    height              : 26px;
+    float               : left;
+}
+.wg_base_module_navigation ul li.root {
+    padding             : 0 4px;
+}
+.wg_base_module_navigation ul li.root#open,
+.wg_base_module_navigation ul li.root.hover {
+    background          : transparent url('../img/icon/menu-active-shadow.png') right 3px no-repeat;
+}
+
+
+/* ====================================== */
+/* ==========    CSS CHILD    =========== */
+/* ====================================== */
+
+.wg_base_module_navigation ul li.root ul {
+    position            : absolute;
+    margin              : 0 0 0 -25px;
+    display             : none;
+    width               : auto;
+    left                : 30px;
+    width               : 100%;
+}
+
+.wg_base_module_navigation ul li.root ul li:first-child{
+    margin-left         : 20px;
+}
+
+.wg_base_module_navigation ul li li {
+    height              : 27px;
+    margin              : 0;
+}
+
+.wg_base_module_navigation ul li.root#open ul {
+    display             : block;
+    z-index             : 10;
+}
+
+
+/* ====================================== */
+/* ===========   CSS ANCHOR   =========== */
+/* ====================================== */
+
+.wg_base_module_navigation a {
+    font                : 11px/26px verdana;
+    color               : #666666;
+    display             : block;
+    padding             : 0 8px;
+    cursor              : pointer;
+}
+
+.wg_base_module_navigation ul li.root > a {
+    text-transform      : uppercase;
+}
+
+.wg_base_module_navigation ul li.root > a span {
+    display             : inline-block;
+    padding             : 0 5px;
+    background-position : left center;
+    background-repeat   : no-repeat;
+    background-color    : transparent;
+    padding-left        : 15px;
+}
+
+.wg_base_module_navigation ul li.root#open > a,
+.wg_base_module_navigation ul li.root.hover > a {
+    color                   : #094b69;
+    background-color        : #fff;
+    border-radius           : 3px 3px 0 0;
+    -moz-border-radius      : 3px 3px 0 0;
+    -webkit-border-radius   : 3px 3px 0 0;
+    -o-border-radius        : 3px 3px 0 0;
+}
+
+.wg_base_module_navigation ul li li a {
+    font-weight         : 500;    
+    line-height         : 27px;
+}
+
+.wg_base_module_navigation ul li li a:hover {
+    color               : #08364b;
+}
+.wg_base_module_navigation ul li li a#active {
+    color               : #094b69;
+}
+.wg_base_module_navigation ul li.root a.dashboard span{
+    background-image    : url(../img/icon/icon-nav-dashboard.png);
+}
+.wg_base_module_navigation ul li.root#open a.dashboard span,
+.wg_base_module_navigation ul li.root.hover a.dashboard span {
+    background-image    : url(../img/icon/icon-nav-dashboard-active.png);
+}
+
+.wg_base_module_navigation ul li.root a.config span{
+    background-image    : url(../img/icon/icon-nav-content.png);
+}
+.wg_base_module_navigation ul li.root#open a.config span,
+.wg_base_module_navigation ul li.root.hover a.config span {
+    background-image    : url(../img/icon/icon-nav-content-active.png);
+}
+
+.wg_base_module_navigation ul li.root a.user span{
+    background-image    : url(../img/icon/icon-nav-user.png);
+}
+.wg_base_module_navigation ul li.root#open a.user span,
+.wg_base_module_navigation ul li.root.hover a.user span {
+    background-image    : url(../img/icon/icon-nav-user-active.png);
+}
+
+.wg_base_module_navigation ul li.root a.language span{
+    background-image    : url(../img/icon/icon-nav-content.png);
+}
+.wg_base_module_navigation ul li.root#open a.language span,
+.wg_base_module_navigation ul li.root.hover a.language span {
+    background-image    : url(../img/icon/icon-nav-content-active.png);
+}
+
+.wg_base_module_navigation ul li.root a span,
+.wg_base_module_navigation ul li.root a.page span{
+    background-image    : url(../img/icon/icon-nav-page.png);
+}
+.wg_base_module_navigation ul li.root#open a.page span,
+.wg_base_module_navigation ul li.root.hover a.page span {
+    background-image    : url(../img/icon/icon-nav-page-active.png);
+}
+
+.wg_base_module_navigation ul li.root a.product span{
+    background-image    : url(../img/icon/icon-nav-product.png);
+}
+.wg_base_module_navigation ul li.root#open a.product span,
+.wg_base_module_navigation ul li.root.hover a.product span {
+    background-image    : url(../img/icon/icon-nav-product-active.png);
+}
+
+.wg_base_module_navigation ul li.root a.contact span{
+    background-image    : url(../img/icon/icon-nav-user.png);
+}
+.wg_base_module_navigation ul li.root#open a.contact span,
+.wg_base_module_navigation ul li.root.hover a.contact span {
+    background-image    : url(../img/icon/icon-nav-user-active.png);
+}
+
+.wg_base_module_navigation ul li.root a.news span{
+    background-image    : url(../img/icon/icon-nav-news.png);
+}
+.wg_base_module_navigation ul li.root#open a.news span,
+.wg_base_module_navigation ul li.root.hover a.news span {
+    background-image    : url(../img/icon/icon-nav-news-active.png);
+}
+
+.wg_base_module_navigation ul li.root a.medialibrary span{
+    background-image    : url(../img/icon/icon-nav-medialibrary.png);
+}
+.wg_base_module_navigation ul li.root#open a.medialibrary span,
+.wg_base_module_navigation ul li.root.hover a.medialibrary span {
+    background-image    : url(../img/icon/icon-nav-medialibrary-active.png);
+} 
+
+
+/*** Additional ***/
+.wg_base_module_navigation ul li.root a.faq span{
+    background-image    : url(../img/icon/icon-nav-page.png);
+}
+.wg_base_module_navigation ul li.root#open a.faq span,
+.wg_base_module_navigation ul li.root.hover a.faq span {
+    background-image    : url(../img/icon/icon-nav-page-active.png);
+}
+.wg_base_module_navigation ul li.root a.promo span{
+    background-image    : url(../img/icon/icon-nav-page.png);
+}
+.wg_base_module_navigation ul li.root#open a.promo span,
+.wg_base_module_navigation ul li.root.hover a.promo span {
+    background-image    : url(../img/icon/icon-nav-page-active.png);
+}
+
+
+/** Slick Append **/
+#slick-navigation {position:relative;overflow:hidden;z-index:0;margin-left:30px;}
+#snbp,#snbn {display:none;width:30px;height:30px;font-weight:bold;position:absolute;top:120px;/**margin-top:10px;**/visibility:hidden;cursor:pointer;}
+#snbp {left:10px;}
+#snbn {right:10px;} 
+
+#navigation-slick-children {position:absolute;min-height:30px;top:147px;left:30px;}
+ul.child {display:none;}
+ul.child.active {display:block;}
+ul.child li {float:left;height: 27px;line-height: 17px;padding: 0 4px;}
+ul.child li a {color: #666666;}
+ul.child li a#active,ul.child li a:hover{color: #14C005;}
