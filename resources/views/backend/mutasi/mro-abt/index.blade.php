@@ -23,8 +23,6 @@
                       </div>
                       
                     <a href="#" class="btn btn-info">Lihat</a>
-                    <a href="#" class="btn btn-danger">Ekspor</a>
-                    <a href="#" class="btn btn-success">Impor</a>
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>

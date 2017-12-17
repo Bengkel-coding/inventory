@@ -13,6 +13,17 @@
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     {!! trinata::buttonCreate() !!}
+
+                      <div class="form-group">
+                        <label>Kategori Barang</label>
+                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
+                      </div>
+                      <div class="form-group">
+                        <label>Lokasi Gudang</label>
+                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                      </div>
+                      
+                    <a href="#" class="btn btn-info">Lihat</a>
                     <a href="#" class="btn btn-danger">Ekspor</a>
                     <a href="#" class="btn btn-success">Impor</a>
                     <p>&nbsp;</p>
