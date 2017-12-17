@@ -9,6 +9,6 @@
 
 return [
 	
-	'backendUrl'		=> 'admin-cp',
+	'backendUrl'		=> 'cms-panel',
 	'backendName'		=> 'Core'
 ];

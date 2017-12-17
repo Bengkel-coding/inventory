@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     
 	Route::controller('login','Backend\LoginController');
 
-	Route::get('admin-cp' , function(){
+	Route::get('cms-panel' , function(){
 		return redirect('login');
 	});
 
