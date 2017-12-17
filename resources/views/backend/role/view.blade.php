@@ -35,48 +35,29 @@
               <table class = 'table table-bordered'>
                 
                   @foreach($menu->whereParentId(null)->orderBy('order','asc')->get() as $parent)
-                    @if($parent->title!="Media Library" && $parent->title!="Development" && $parent->title != "Dashboard")
-                      @if($parent->childs->count() > 0)
-                        <thead>
-                          <tr class = 'danger'>
-                            <th >{{ $parent->title }}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach($parent->childs as $child)
-
-                              @foreach($child->actions as $action)
-                                
-                                  
-
-                                  <tr class = 'success'>
-                                  
-                                    <td><input <?= @$checked($action->pivot->id,$model->id) ?> name ='menu_action_id[]' value = '{{  $action->pivot->id }}' type = 'checkbox'> {{ $action->title }} {{ $child->title }}</td>
-                                  
-                                  </tr>
-
-                              @endforeach
-                          
-                          @endforeach
-                        </tbody>  
-                      @else
+                    @if($parent->childs->count() > 0)
                       <thead>
-                          <tr class = 'danger'>
-                            <th >{{ $parent->title }}</th>
-                          </tr>
-                        </thead>
-                        <tbody> 
-                            @foreach($parent->actions as $action)
-                                  <tr class = 'success'>
-                                  
-                                    <td><input <?= @$checked($action->pivot->id,$model->id) ?> name ='menu_action_id[]' value = '{{  $action->pivot->id }}' type = 'checkbox'> {{ $action->title }} {{ $parent->title }}</td>
-                                  
-                                  </tr>
+                        <tr class = 'danger'>
+                          <th >{{ $parent->title }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($parent->childs as $child)
+
+                            @foreach($child->actions as $action)
+                              
+                                
+
+                                <tr class = 'success'>
+                                
+                                  <td><input <?= @$checked($action->pivot->id,$model->id) ?> name ='menu_action_id[]' value = '{{  $action->pivot->id }}' type = 'checkbox'> {{ $action->title }} {{ $child->title }}</td>
+                                
+                                </tr>
+
                             @endforeach
-
-                        </tbody>
-
-                      @endif
+                        
+                        @endforeach
+                      </tbody>  
                     @endif
                   @endforeach
                 

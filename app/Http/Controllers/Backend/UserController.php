@@ -19,13 +19,13 @@ class UserController extends TrinataController
 
 	public function roles()
 	{
-        return $this->role->lists('role','id');
+		return $this->role->lists('role','id')->toArray();
 	}
 
 	public function getData()
 	{
 		$model = $this->model->select('users.id','name','email','role')
-			->join('roles','roles.id','=','users.role_id')->orderBy('users.id');
+			->join('roles','roles.id','=','users.role_id');
 
 		$data = Table::of($model)
 		
@@ -47,11 +47,10 @@ class UserController extends TrinataController
 
     public function handleInsert($request)
     {
-        
-    	$inputs = $request->except(['_token','verify_password']);
+    	$inputs = $request->all();
 
-        $inputs['password'] = \Hash::make($request->password);
-        // unset($inputs['verify_password']);
+    	$inputs['password'] = \Hash::make($request->password);
+
     	return $inputs;
     }
 
@@ -59,25 +58,16 @@ class UserController extends TrinataController
     {
         $model = $this->model;
         $roles = $this->roles();
-        $head = [''] + $this->model->whereType('member')->lists('name','id');
-        $division = Division::lists('name','id');
-
-        return view('backend.user._form',compact('model','roles', 'head', 'division'));
+        return view('backend.user._form',compact('model','roles'));
     }
 
     public function postCreate(Request $request)
     {
-        // $this->validate($request,$this->model->rules());
+    	$this->validate($request,$this->model->rules());
 
-        $data = $this->handleInsert($request);
-        $user = $this->model->create($data);
-        
-        if ($user) {
-            $inputs['user_id'] = $user->id;
-            $inputs['name'] = $request->name;
+    	$data = $this->handleInsert($request);
 
-            MemberProfile::create($inputs);
-        }
+    	$this->model->create($data);
 
     	return redirect(urlBackendAction('index'))->withSuccess('Data has been saved');
     }
@@ -86,22 +76,16 @@ class UserController extends TrinataController
     {
         $model = $this->model->findOrFail($id);
         $roles = $this->roles();
-        $head = [''] + $this->model->whereType('member')->lists('name','id');
-        $division = Division::lists('name','id');
-
-        return view('backend.user._form',compact('model','roles', 'head', 'division'));
+        return view('backend.user._form',compact('model','roles'));
     }
 
     public function postUpdate(Request $request,$id)
     {
-        // if (\Auth::user()->username != 'superadmin') $this->validate($request,$this->model->rules($id));
+        $this->validate($request,$this->model->rules($id));
 
-// \DB::enableQueryLog();
         $data = $this->handleInsert($request);
-        $model = $this->model->findOrFail($id)->update($data);
-        MemberProfile::whereUserId($id)->update(['name'=>$request->name]);
-        // dd(\DB::getQueryLog());
-        // dd($this->model->findOrFail($id), $request->all());
+
+        $this->model->findOrFail($id)->update($data);
 
         return redirect(urlBackendAction('index'))->withSuccess('Data has been updated');
     }

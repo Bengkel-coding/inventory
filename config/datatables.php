@@ -1,8 +1,8 @@
 <?php
 
 return [
-
-    'search'  => [
+    'search' => [
+        'smart'            => true,
         'case_insensitive' => true,
         'use_wildcards'    => false,
     ],
@@ -10,4 +10,6 @@ return [
     'fractal' => [
         'serializer' => 'League\Fractal\Serializer\DataArraySerializer',
     ],
+
+    'script_template' => 'datatables::script',
 ];

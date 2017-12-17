@@ -1,8 +1,7 @@
 <?php namespace App\Http\Controllers\Backend;
 
-/**
- * Sample Crud
- */
+
+ 
 
 use Illuminate\Http\Request;
 
@@ -15,11 +14,11 @@ use trinata;
 
 class CrudController extends TrinataController
 {
+  
     public function __construct(Crud $model)
     {
     	parent::__construct();
-
-    	$this->model = $model;
+        $this->model = $model;
     }
 
     public function getData()
@@ -27,12 +26,10 @@ class CrudController extends TrinataController
     	$model = $this->model->select('id','title','status');
 
     	$data = Table::of($model)
-    		
     		->addColumn('action',function($model){
                 $status = $model->status == 'y' ? true : false;
     			return trinata::buttons($model->id , [] , $status);
     		})
-    		
     		->make(true);
 
     	return $data;
@@ -46,45 +43,15 @@ class CrudController extends TrinataController
     public function getCreate()
     {
     	$model = $this->model;
-
-    	return view('backend.crud._form',compact('model'));
+        return view('backend.crud._form',compact('model'));
     }
 
-    public function handleUpload($request,$model)
-    {
-       $image = $request->file('image');
-
-        if(!empty($image))
-        {
-             if(!empty($model->image))
-                {
-                    @unlink(public_path('contents/'.$model->image));
-                }
-
-            $imageName = randomImage().'.'.$image->getClientOriginalExtension();
-
-            Image::make($image)->save(public_path('contents/'.$imageName));
-
-            return $imageName;
-        }else{
-
-            return $model->image;
-        }
-    }
-
-    public function postCreate(Request $request)
+   public function postCreate(Requests\Backend\CrudRequest $request)
     {
         $model = $this->model;
-
-        $this->validate($request,$model->rules());
-
         $inputs = $request->all();
-
-        $inputs['image'] = $this->handleUpload($request,$model);
-
-        $model->create($inputs);
-
-        return redirect(urlBackendAction('index'))->withSuccess('data has been saved');
+        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
+        return $this->insertOrUpdate($model,$inputs);
     }
 
     public function getUpdate($id)
@@ -94,55 +61,23 @@ class CrudController extends TrinataController
         return view('backend.crud._form',compact('model'));
     }
 
-    public function postUpdate(Request $request,$id)
+    public function postUpdate(Requests\Backend\CrudRequest $request,$id)
     {
         $model = $this->model->findOrFail($id);
-
-        $this->validate($request,$model->rules());
-
         $inputs = $request->all();
-
-        $inputs['image'] = $this->handleUpload($request,$model);
-
-        $model->update($inputs);
-
-        return redirect(urlBackendAction('index'))->withSuccess('data has been updated');
+        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
+        return $this->insertOrUpdate($model,$inputs);
     }
 
     public function getDelete($id)
     {
         $model = $this->model->findOrFail($id);
-
-        try
-        {
-            @unlink(public_path('contents/'.$model->image));
-            $model->delete();
-            return redirect(urlBackendAction('index'))->withSuccess('data has been deleted');
-        
-        }catch(\Exception $e){
-        
-            return redirect(urlBackendAction('index'))->withInfo('data cannot be deleted');
-        }
+        return $this->delete($model,[$model->image]);
     }
 
     public function getPublish($id)
     {
         $model = $this->model->findOrFail($id);
-
-        if($model->status == 'y')
-        {
-            $status = 'n';
-            $msg = 'Data has been Published';
-        
-        }else{
-            $status = 'y';
-            $msg = 'Data has been UnPublished';
-        }
-
-        $model->update([
-            'status' => $status,
-        ]);
-
-        return redirect(urlBackendAction('index'))->withSuccess($msg);
+        return $this->publish($model);
     }
 }

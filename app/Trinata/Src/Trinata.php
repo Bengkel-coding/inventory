@@ -24,7 +24,7 @@ class Trinata
 		{
 			$url = urlBackendAction('update/'.$params);
 			
-			return '<a href = "'.$url.'" class = "btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>';	
+			return '<a href = "'.$url.'" class = "btn btn-info btn-sm"><span class="fa fa-pencil"></span></a>';	
 		}
 	}
 
@@ -34,7 +34,7 @@ class Trinata
 		{
 			$url = urlBackendAction('delete/'.$params);
 			
-			return '<a href = "'.$url.'" class = "btn btn-danger btn-sm" onclick = "return confirm(\'Are You sure want to delete this data?\')"><i class="fa fa-trash"></i></a>';	
+			return '<a href = "'.$url.'" class = "btn btn-danger btn-sm" onclick = "return confirm(\'Are You sure want to delete this data?\')"><span class="fa fa-trash"></span></a>';	
 		}
 	}
 
@@ -44,7 +44,7 @@ class Trinata
 		{
 			$url = urlBackendAction('view/'.$params);
 			
-			return '<a href = "'.$url.'" class = "btn btn-warning btn-sm"><i class="fa fa-search"></i></a>';	
+			return '<a href = "'.$url.'" class = "btn btn-warning btn-sm"><span class="fa fa-search"></span></a>';	
 		}
 	}
 
@@ -53,7 +53,7 @@ class Trinata
 		if($this->right('create') == 'true')
 		{
 			$url = urlBackendAction('create/'.$params);
-			return '<a href = "'.$url.'" class = "btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>';
+			return '<a href = "'.$url.'" class = "btn btn-primary btn-sm"><span class="fa fa-plus"></span> Add New</a>';
 		}
 	}
 
@@ -62,8 +62,8 @@ class Trinata
 		if($this->right('publish') == 'true')
 		{
 			$url = urlBackendAction('publish/'.$params);
-			$active =  '<a onclick = "return confirm(\'are you sure want to un publish this data ?\')" href = "'.$url.'" class = "btn btn-default btn-sm"><i class="fa fa-eye-open"></i></a>';
-			$notActive =  '<a onclick = "return confirm(\'are you sure want to  publish this data ?\')" href = "'.$url.'" class = "btn btn-default btn-sm"><i class="fa fa-eye-close"></i></a>';
+			$active =  '<a onclick = "return confirm(\'are you sure want to un publish this data ?\')" href = "'.$url.'" class = "btn btn-default btn-sm"><span class="fa fa-eye"></span></a>';
+			$notActive =  '<a onclick = "return confirm(\'are you sure want to  publish this data ?\')" href = "'.$url.'" class = "btn btn-default btn-sm"><span class="fa fa-eye-slash"></span></a>';
 			
 			if($status == true)
 			{
@@ -108,7 +108,7 @@ class Trinata
 
 	public function getMenu()
 	{
-		$permalink = \Request::segment(2);
+		$permalink = request()->segment(2);
 
 		$model = injectModel('Menu')->whereSlug($permalink)->first();
 		
@@ -121,7 +121,7 @@ class Trinata
 		{
 			$slug = $slug;
 		}else{
-			$slug = \Request::segment(3);
+			$slug = request()->segment(3);
 		}
 
 		$model = injectModel('Action')->whereSlug($slug)->first();
@@ -151,7 +151,7 @@ class Trinata
 		{
 			$action = $action;
 		}else{
-			$action = \Request::segment(3);
+			$action = request()->segment(3);
 		}
 
 		$menu = $this->getMenu();
@@ -287,12 +287,23 @@ class Trinata
 		$model = injectModel('Menu')->whereSlug($slug)->first()->delete();
 	}
 
-	public function pagingAppendLink($model, $request)
-    {
-    	
-        if ($request->q) $model->appends(['name' => $request->q])->links();
-        
-        return $model; 
-    }
 
+	public function htmlImage($name,$imagePath="",$model="")
+    {
+        $paramModel = get_class($model);
+        $paramModel = explode("\\", $paramModel)[2];
+        $display = !empty($model->{$name}) ? 'inherit' : 'none';
+       
+
+        $image=\Form::file($name,['id'=>$name,'onchange'=>"readURL(this,'image_$name')",'id'=>$name]);
+        
+        $image.= \Html::image(asset('contents/'.$imagePath),'',['height'=>100,'width'=>100,'id'=>'image_'.$name,'style'=>'display:'.$display]);
+        
+        
+        $image.="<div style = 'cursor:pointer;display:$display;' id = 'div_image_$name'>";
+            $image.= \Html::link("#","Delete",['onclick'=>"hide_image('$paramModel','$model->id','$name')"]);
+        $image.="</div>";
+        
+        return $image;                       
+    }
 }

@@ -224,7 +224,7 @@ INSERT INTO roles VALUES ('4', 'admin', '2016-03-22 12:52:56', '2016-03-22 12:52
 -- ----------------------------
 -- Table structure for `users`
 -- ----------------------------
-/*DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -244,12 +244,12 @@ CREATE TABLE `users` (
   KEY `users_role_id_foreign` (`role_id`),
   CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-*/
+
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO users VALUES ('6', 'TRINATA', 'superadmin@gmail.com', '$2y$10$S7VLrocupfPYJufaMLNLE.OhS/Mfll7RmhoFKdO2eazKQnNIS/w1C', 'admin','CqAw6PcMesNbMZRCEeDZFFlPPFKRGPVIAKsVONqLO46MjQQIcrde0t3hKkrc', '2016-03-22 13:07:29', '2016-03-24 16:16:08', '1', 'pria', '', '0', 'superadmin',0,0,'','');
-INSERT INTO users VALUES ('7', 'admin', 'ovan89@gmail.com', '$2y$10$gPafGNqLHVtVtPgO7/KqjeqGwLhBr/ZSe1G3YnZWp80Yo8GcpdYRG', 'admin', 'AsrSmU1PESaINwJGI1pH1KQgrYetdGz0QyQO5y02Ix0rfOGVIIOvh1ugrwgD', '2016-03-22 13:08:00', '2016-03-23 09:51:11', '4', 'pria', '', '0', 'admin',0,0,'','');
+INSERT INTO users VALUES ('6', 'TRINATA', 'reza.wikrama3@gmail.com', '$2y$10$ROTdTDIEwHkCdBLP8X6eH.ydOxr7LKkZ.vGTXU5bPbsoNTn9q/FCC', 'lX0dI5UQXVugD9l0JMFyoStJWGCucKeOu9zQh92jDbhzfpQEovYX57xNuc27', '2016-03-22 13:07:29', '2016-03-24 16:16:08', '1', 'pria', '', '0', 'superadmin');
+INSERT INTO users VALUES ('7', 'admin', 'ultramantigar@gmail.com', '$2y$10$gPafGNqLHVtVtPgO7/KqjeqGwLhBr/ZSe1G3YnZWp80Yo8GcpdYRG', 'AsrSmU1PESaINwJGI1pH1KQgrYetdGz0QyQO5y02Ix0rfOGVIIOvh1ugrwgD', '2016-03-22 13:08:00', '2016-03-23 09:51:11', '4', 'pria', '', '0', 'admin');
 
 -- ----------------------------
 -- Table structure for `user_activities`

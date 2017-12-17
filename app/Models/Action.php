@@ -11,7 +11,7 @@ class Action extends Model
 
     public function menus()
     {
-        return $this->belongsToMany(new Menu,'menu_actions')->withPivot('id');
+        return $this->belongsToMany(Menu::class,'menu_actions')->withPivot('id');
     }
 
     public function rules($id="")

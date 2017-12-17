@@ -2,25 +2,31 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Routes File
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
+| Here is where you will register all of the routes in an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
 */
 
-Route::get('/', 'HomeController@getIndex');
+Route::get('/', function () {
+	return redirect('login');
+});
 
-Route::controller('home', 'HomeController');
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-
-// Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web']], function () {
     
 	Route::controller('login','Backend\LoginController');
 
@@ -28,11 +34,9 @@ Route::controllers([
 		return redirect('login');
 	});
 
-	if(\Request::segment(1) == trinata()->backendUrl)
+	if(request()->segment(1) == trinata()->backendUrl)
 	{
 		include __DIR__.'/backendRoutes.php';
 	}
 
-// });
-
-require 'apiRoutes.php';
+});

@@ -19,14 +19,7 @@
                         <label>Role</label>
                         {!! Form::select('role_id' , $roles ,null,['class' => 'form-control']) !!}
                       </div>
-                      <div class="form-group">
-                        <label>Head</label>
-                        {!! Form::select('head_id' , $head ,null,['class' => 'form-control']) !!}
-                      </div>
-                      <div class="form-group">
-                        <label>Division</label>
-                        {!! Form::select('division_id' , $division ,null,['class' => 'form-control']) !!}
-                      </div>
+                      
                       <div class="form-group">
                         <label>Username</label>
                         {!! Form::text('username' , null ,['class' => 'form-control']) !!}
@@ -51,10 +44,7 @@
                         <label>Verify Password</label>
                         {!! Form::password('verify_password',['class' => 'form-control']) !!}
                       </div>
-                      <div class="form-group">
-                        <label>Jenis Member</label>
-                        {!! Form::select('position',['member'=>'Member', 'eselon_1'=>'Eselon 1','eselon_2'=>'Eselon 2', 'eselon_3'=>'Eselon 3', 'eselon_4'=>'Eselon 4'], null,['class' => 'form-control']) !!}
-                      </div>
+                      
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     
                     {!! Form::close() !!}

@@ -14,7 +14,6 @@ class LoginController extends Controller
 {
     public function handleAct($title)
     {
-        
         $userId = getUser()->id;
         
         $action = getUser()->username.' '.$title;
@@ -37,7 +36,7 @@ class LoginController extends Controller
     		'username'	=> 'required',
     		'password'	=> 'required',
     	];
-       
+
     	$this->validate($request,$rules);
 
     	$credentials = [
@@ -59,11 +58,10 @@ class LoginController extends Controller
 
     public function getLogout()
     {
-        // dd(url('login'));
         $this->handleAct('Logout');
     	Auth::logout();
 
-    	return redirect(url('login'));
+    	return redirect('login');
     }
 
     public function getForgotPassword()

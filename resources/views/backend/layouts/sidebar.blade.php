@@ -39,24 +39,22 @@
       </li>
 
       @foreach(injectModel('Menu')->whereParentId(null)->orderBy('order','asc')->get() as $row)
-        @if($row->title!="Media Library" && $row->title!="Development")
-          @if(!empty($row->childs->first()->id))
-            <li class="px-nav-item px-nav-dropdown {{ $search($row->id,'px-open active') }}">
-          @else
-            <li class="px-nav-item {{ $search($row->id,'active') }}">
-          @endif
-          <a href="{{ ($row->controller != '#' ? urlBackend($row->slug.'/index') : '#') }}"><i class="px-nav-icon fa {{(!empty($row->icon)) ? $row->icon : 'fa-clone'}}"></i><span class="px-nav-label">{{ $row->title }}</span></a>
-          @if(!empty($row->childs->first()->id))
-          <ul class="px-nav-dropdown-menu">
-            @foreach($row->childs as $child)
-            <li class="px-nav-item {{ $search($child->id,'active','','child') }}"><a href="{{ urlBackend($child->slug.'/index') }}">
-              <span class="px-nav-label">{{ $child->title}} </span></a>
-            </li>
-            @endforeach
-          </ul>
-          @endif      
-        </li>
-      @endif
+        @if(!empty($row->childs->first()->id))
+          <li class="px-nav-item px-nav-dropdown {{ $search($row->id,'px-open active') }}">
+        @else
+          <li class="px-nav-item {{ $search($row->id,'active') }}">
+        @endif
+        <a href="{{ ($row->controller != '#' ? urlBackend($row->slug.'/index') : '#') }}"><i class="px-nav-icon fa {{(!empty($row->icon)) ? $row->icon : 'fa-clone'}}"></i><span class="px-nav-label">{{ $row->title }}</span></a>
+        @if(!empty($row->childs->first()->id))
+        <ul class="px-nav-dropdown-menu">
+          @foreach($row->childs as $child)
+          <li class="px-nav-item {{ $search($child->id,'active','','child') }}"><a href="{{ urlBackend($child->slug.'/index') }}">
+            <span class="px-nav-label">{{ $child->title}} </span></a>
+          </li>
+          @endforeach
+        </ul>
+        @endif      
+      </li>
       @endforeach
       <li class="px-nav-item">
         <a href="{{ url('/') }}" target="_blank"><i class="px-nav-icon ion-monitor"></i><span class="px-nav-label">Go to Web</span></a>

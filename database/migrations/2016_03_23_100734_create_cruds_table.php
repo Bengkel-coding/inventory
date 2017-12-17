@@ -17,7 +17,7 @@ class CreateCrudsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->enum('status',['y','n'])->default('n');
             $table->timestamps();
         

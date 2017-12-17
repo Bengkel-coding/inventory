@@ -5,207 +5,281 @@ use Illuminate\Database\Seeder;
 
 class MenuSeed extends Seeder
 {
+    /* example add menu
+        \trinata::addMenu([ 
+                'parent_id'     => null,
+                'title'         => 'Management product',
+                'controller'    => '#',
+                'slug'          => 'product',
+                'order'         => 1,
+            ],[]);
+
+                \trinata::addMenu([ 
+                    'parent_id'     => 'product',
+                    'title'         => 'Category',
+                    'controller'    => 'CategoryController',
+                    'slug'          => 'category',
+                    'order'         => '1'
+                ],['index','create','update','delete']
+            ); 
+
+    */
+   
+
          
     public function run()
     {
+        //
+        //
         \trinata::addMenu([ 
                 'parent_id'     => null,
-                'title'         => 'Event',
+                'title'         => 'Material',
                 'controller'    => '#',
-                'slug'          => 'event',
-                'order'         => 2,
-            ],[]);
-        
-        \trinata::addMenu([ 
-                    'parent_id'     => 'event',
-                    'title'         => 'Daftar Event',
-                    'controller'    => 'EventController',
-                    'slug'          => 'event-list',
-                    'order'         => 2,
-                ],['index','create','update','delete']
-        ); 
-
-        \trinata::addMenu([ 
-                'parent_id'     => null,
-                'title'         => 'Pengumuman',
-                'controller'    => '#',
-                'slug'          => 'pengumuman',
-                'order'         => 3,
+                'slug'          => 'material',
+                'order'         => 1,
             ],[]);
 
-        \trinata::addMenu([ 
-                'parent_id'     => 'pengumuman',
-                'title'         => 'Daftar Pengumuman',
-                'controller'    => 'PengumumanController',
-                'slug'          => 'pengumuman-list',
-                'order'         => 3,
-            ],['index','create','update','delete']
-        );
+                \trinata::addMenu([ 
+                    'parent_id'     => 'material',
+                    'title'         => 'MRO',
+                    'controller'    => 'Material\MaterialMroController',
+                    'slug'          => 'material-mro',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                \trinata::addMenu([ 
+                    'parent_id'     => 'material',
+                    'title'         => 'MRO - ABT',
+                    'controller'    => 'Material\MaterialMroAbtController',
+                    'slug'          => 'material-mro-abt',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'material',
+                    'title'         => 'Investasi',
+                    'controller'    => 'Material\MaterialInvestasiController',
+                    'slug'          => 'material-investasi',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'material',
+                    'title'         => 'Eks - Jaringan',
+                    'controller'    => 'Material\MaterialEksJaringanController',
+                    'slug'          => 'material-eks-jaringan',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'material',
+                    'title'         => 'Tercatat ',
+                    'controller'    => 'Material\MaterialTercatatController',
+                    'slug'          => 'material-tercatat',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
 
-        // \trinata::addMenu([ 
-        //         'parent_id'     => null,
-        //         'title'         => 'Forum Umum',
-        //         'controller'    => '#',
-        //         'slug'          => 'forum-umum',
-        //         'order'         => 4,
-        //     ],[]);
-
-
-        
         \trinata::addMenu([ 
                 'parent_id'     => null,
-                'title'         => 'Knowledge',
+                'title'         => 'Mutasi Gudang',
                 'controller'    => '#',
-                'slug'          => 'knowledge',
-                'order'         => 5,
+                'slug'          => 'mutasi',
+                'order'         => 1,
             ],[]);
-        
-        \trinata::addMenu([ 
-                    'parent_id'     => 'knowledge',
-                    'title'         => 'Daftar Knowledge',
-                    'controller'    => 'KnowledgeController',
-                    'slug'          => 'knowledge-list',
-                    'order'         => 5,
-                ],['index','create','update','delete']
-        );
 
+
+                \trinata::addMenu([ 
+                    'parent_id'     => 'mutasi',
+                    'title'         => 'MRO',
+                    'controller'    => 'Mutasi\MutasiMroController',
+                    'slug'          => 'mutasi-mro',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                \trinata::addMenu([ 
+                    'parent_id'     => 'mutasi',
+                    'title'         => 'MRO - ABT',
+                    'controller'    => 'Mutasi\MutasiMroAbtController',
+                    'slug'          => 'mutasi-mro-abt',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'mutasi',
+                    'title'         => 'Investasi',
+                    'controller'    => 'Mutasi\MutasiInvestasiController',
+                    'slug'          => 'mutasi-investasi',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'mutasi',
+                    'title'         => 'Eks - Jaringan',
+                    'controller'    => 'Mutasi\MutasiEksJaringanController',
+                    'slug'          => 'mutasi-eks-jaringan',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'mutasi',
+                    'title'         => 'Tercatat ',
+                    'controller'    => 'Mutasi\MutasiTercatatController',
+                    'slug'          => 'mutasi-tercatat',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
         \trinata::addMenu([ 
                 'parent_id'     => null,
-                'title'         => 'Tapkin',
-                'controller'    => 'TakpinController',
-                'slug'          => 'tapkin',
-                'order'         => 6,
-            ],['index','create','update','delete']
-        );
+                'title'         => 'Pemanfaatan',
+                'controller'    => '#',
+                'slug'          => 'pemanfaatan',
+                'order'         => 1,
+            ],[]);
 
+
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pemanfaatan',
+                    'title'         => 'MRO',
+                    'controller'    => 'Pemanfaatan\PemanfaatanMroController',
+                    'slug'          => 'pemanfaatan-mro',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pemanfaatan',
+                    'title'         => 'MRO - ABT',
+                    'controller'    => 'Pemanfaatan\PemanfaatanMroAbtController',
+                    'slug'          => 'pemanfaatan-mro-abt',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pemanfaatan',
+                    'title'         => 'Investasi',
+                    'controller'    => 'Pemanfaatan\PemanfaatanInvestasiController',
+                    'slug'          => 'pemanfaatan-investasi',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pemanfaatan',
+                    'title'         => 'Eks - Jaringan',
+                    'controller'    => 'Pemanfaatan\PemanfaatanEksJaringanController',
+                    'slug'          => 'pemanfaatan-eks-jaringan',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pemanfaatan',
+                    'title'         => 'Tercatat ',
+                    'controller'    => 'Pemanfaatan\PemanfaatanTercatatController',
+                    'slug'          => 'pemanfaatan-tercatat',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
         \trinata::addMenu([ 
                 'parent_id'     => null,
-                'title'         => 'Eksternal Link',
-                'controller'    => 'EksternalLinkController',
-                'slug'          => 'eksternal-link',
-                'order'         => 7,
-            ],['index','create','update','delete']
-        );
+                'title'         => 'Pengembalian',
+                'controller'    => '#',
+                'slug'          => 'pengembalian',
+                'order'         => 1,
+            ],[]);
 
-        
 
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pengembalian',
+                    'title'         => 'MRO',
+                    'controller'    => 'Pengembalian\PengembalianMroController',
+                    'slug'          => 'pengembalian-mro',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pengembalian',
+                    'title'         => 'MRO - ABT',
+                    'controller'    => 'Pengembalian\PengembalianMroAbtController',
+                    'slug'          => 'pengembalian-mro-abt',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'pengembalian',
+                    'title'         => 'Investasi',
+                    'controller'    => 'Pengembalian\PengembalianInvestasiController',
+                    'slug'          => 'pengembalian-investasi',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
         \trinata::addMenu([ 
                 'parent_id'     => null,
-                'title'         => 'Division',
-                'controller'    => 'DivisionController',
-                'slug'          => 'division',
-                'order'         => 15,
-            ],['index','create','update','delete']
-        );
-
-
-        \trinata::addMenu([ 
-                'parent_id'     => null,
-                'title'         => 'Inventaris',
+                'title'         => 'Inventarisasi Rekonsiliasi',
                 'controller'    => '#',
                 'slug'          => 'inventaris',
-                'order'         => 8,
-            ],['index','create','update','delete']
-        );
-
-        \trinata::addMenu([ 
-                    'parent_id'     => 'inventaris',
-                    'title'         => 'Daftar Barang Inventaris',
-                    'controller'    => 'InventarisController',
-                    'slug'          => 'inventaris-list',
-                    'order'         => '1'
-                ],['index','create','update','publish','delete']
-        ); 
-
-        \trinata::addMenu([ 
-                    'parent_id'     => 'inventaris',
-                    'title'         => 'Daftar Permintaan Peminjaman',
-                    'controller'    => 'PermintaanController',
-                    'slug'          => 'permintaan-list',
-                    'order'         => '1'
-                ],['index','create','update','delete']
-        ); 
-
-        \trinata::addMenu([ 
-                    'parent_id'     => 'inventaris',
-                    'title'         => 'Daftar Peminjaman',
-                    'controller'    => 'PeminjamanController',
-                    'slug'          => 'peminjaman-list',
-                    'order'         => '2'
-                ],['index','create','update','delete']
-        ); 
-		
-        \trinata::addMenu([ 
-                    'parent_id'     => 'inventaris',
-                    'title'         => 'Daftar Pengembalian',
-                    'controller'    => 'PengembalianController',
-                    'slug'          => 'pengembalian-list',
-                    'order'         => '3'
-                ],['index','create','update','delete']
-        );
-
-        \trinata::addMenu([ 
-                'parent_id'     => null,
-                'title'         => 'Forum Group',
-                'controller'    => '#',
-                'slug'          => 'forum-group',
-                'order'         => 9,
-            ],['index','create','update','delete']
-        );
-
-        \trinata::addMenu([ 
-                    'parent_id'     => 'forum-group',
-                    'title'         => 'Daftar Group',
-                    'controller'    => 'ForumGroupController',
-                    'slug'          => 'forum-group-list',
-                    'order'         => '1'
-                ],['index','create','update','delete']
-        );
-
-        \trinata::addMenu([ 
-                'parent_id'     => null,
-                'title'         => 'Berkas Digital',
-                'controller'    => '#',
-                'slug'          => 'berkas-digital',
-                'order'         => 7,
-            ],['index','create','update','delete']
-        );
-
-        \trinata::addMenu([ 
-                'parent_id'     => 'berkas-digital',
-                'title'         => 'Berkas Folder',
-                'controller'    => 'BerkasFolderController',
-                'slug'          => 'berkas-folder',
                 'order'         => 1,
-            ],['index','create','update','delete','publish']
-        );
+            ],[]);
 
-        \trinata::addMenu([ 
-                'parent_id'     => 'berkas-digital',
-                'title'         => 'Berkas Repo',
-                'controller'    => 'BerkasReposController',
-                'slug'          => 'berkas-repos',
-                'order'         => 1,
-            ],['index','create','update','delete','publish']
-        );
 
+                \trinata::addMenu([ 
+                    'parent_id'     => 'inventaris',
+                    'title'         => 'MRO',
+                    'controller'    => 'Inventaris\InventarisMroController',
+                    'slug'          => 'inventaris-mro',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                \trinata::addMenu([ 
+                    'parent_id'     => 'inventaris',
+                    'title'         => 'MRO - ABT',
+                    'controller'    => 'Inventaris\InventarisMroAbtController',
+                    'slug'          => 'inventaris-mro-abt',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'inventaris',
+                    'title'         => 'Investasi',
+                    'controller'    => 'Inventaris\InventarisInvestasiController',
+                    'slug'          => 'inventaris-investasi',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'inventaris',
+                    'title'         => 'Eks - Jaringan',
+                    'controller'    => 'Inventaris\InventarisEksJaringanController',
+                    'slug'          => 'inventaris-eks-jaringan',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
+                
+                \trinata::addMenu([ 
+                    'parent_id'     => 'inventaris',
+                    'title'         => 'Tercatat ',
+                    'controller'    => 'Inventaris\InventarisTercatatController',
+                    'slug'          => 'inventaris-tercatat',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
         \trinata::addMenu([ 
                 'parent_id'     => null,
-                'title'         => 'Forum Umum BSN',
+                'title'         => 'Laporan',
                 'controller'    => '#',
-                'slug'          => 'forum-bsn',
-                'order'         => 10,
-            ],['index','create','update','delete']
-        );
-
-        \trinata::addMenu([ 
-                    'parent_id'     => 'forum-bsn',
-                    'title'         => 'Daftar Thread',
-                    'controller'    => 'ForumUmumThreadController',
-                    'slug'          => 'forum-bsn-thread',
-                    'order'         => '1'
-                ],['index','create','update','delete']
-        );
-
+                'slug'          => 'laporan',
+                'order'         => 1,
+            ],[]);
     }
 }

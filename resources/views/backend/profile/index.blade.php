@@ -15,18 +15,7 @@
                     @include('backend.common.sweet_flashes')
 
                      {!! Form::model($model) !!} 
-                      <div class="form-group">
-                        <label>Role</label>
-                        {!! Form::select('role_id' , $roles ,null,['class' => 'form-control']) !!}
-                      </div>
-                      <div class="form-group">
-                        <label>Head</label>
-                        {!! Form::select('head_id' , $head ,null,['class' => 'form-control']) !!}
-                      </div>
-                      <div class="form-group">
-                        <label>Division</label>
-                        {!! Form::select('division_id' , $division ,null,['class' => 'form-control']) !!}
-                      </div>
+                        
                       <div class="form-group">
                         <label>Username</label>
                         {!! Form::text('username' , null ,['class' => 'form-control']) !!}
@@ -46,12 +35,12 @@
                         <label>Gender</label>
                         {!! Form::select('gender' , ['pria' => 'Pria','wanita'=>'Wanita'] , null ,['class' => 'form-control']) !!}
                       </div>
-                      {{--
+
                       <div class="form-group">
                         <label>Address</label>
                         {!! Form::textarea('address' , null ,['class' => 'form-control']) !!}
                       </div>
-                      --}}
+
                       <div class="form-group">
                         <label>Phone</label>
                         {!! Form::text('phone' , null ,['class' => 'form-control']) !!}

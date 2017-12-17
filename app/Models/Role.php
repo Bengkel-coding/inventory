@@ -26,11 +26,11 @@ class Role extends Model
 
     public function user()
     {
-    	return $this->belongsTo(new User,'role_id');
+    	return $this->belongsTo(User::class,'role_id');
     }
 
     public function menu_actions()
     {
-        return $this->belongsToMany(new MenuAction , 'rights')->withPivot('id');
+        return $this->belongsToMany(MenuAction::class , 'rights')->withPivot('id');
     }
 }

@@ -12,11 +12,11 @@ class Right extends Model
 
     public function menu_action()
     {
-    	return $this->belongsTo(new MenuAction);
+    	return $this->belongsTo(MenuAction::class);
     }
 
     public function role()
     {
-    	return $this->belongsTo(new Role);
+    	return $this->belongsTo(Role::class);
     }
 }

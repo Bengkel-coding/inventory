@@ -13,16 +13,16 @@ class MenuAction extends Model
 
     public function action()
     {
-    	return $this->belongsTo(new Action);
+    	return $this->belongsTo(Action::class);
     }
 
     public function menu()
     {
-    	return $this->belongsTo(new Menu);
+    	return $this->belongsTo(Menu::class);
     }
 
     public function roles()
     {
-    	return $this->belongsToMany(new Role,'rights');
+    	return $this->belongsToMany(Role::class,'rights');
     }
 }

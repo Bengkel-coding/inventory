@@ -53,7 +53,7 @@
   </style>
 @endpush
 @section('content') 
-           <div class="page-signin-modal modal">
+  <div class="page-signin-modal modal">
     <div class="modal-dialog">
       <div class="modal-content" style="margin-top: 150px">
         <div class="box m-a-0">
@@ -61,11 +61,12 @@
 
             <div class="box-cell col-md-5 bg-primary p-a-4">
               <div class="text-xs-center text-md-left">
-                <img src="{{ asset(null) }}backend/assets/images/logo.png" height="50px"/>
+                <div align="center">
+                <img src="{{ asset(null) }}backend/assets/images/logo.png" height="100px"/>
+                </div>
                 <br/>
                 <br/>
-                <span class="font-size-20 line-height-1">Cpanel Admin</span>
-                <div class="font-size-15 m-t-1 line-height-1">Simple. Flexible. Powerful.</div>
+                <span class="font-size-16 line-height-1">Panel Admin Inventory</span>
                 <div class="font-size-11 m-t-1 line-height-2">Copyright &copy; 2017 <a href="http://trinatateknologi.com/">Trinata Teknologi</a>. All Rights Reserved</div>
               </div>
             </div>

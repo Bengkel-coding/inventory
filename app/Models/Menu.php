@@ -11,18 +11,18 @@ class Menu extends Model
 
     public function actions()
     {
-        return $this->belongsToMany(new Action,'menu_actions')->withPivot('id');
+        return $this->belongsToMany(Action::class,'menu_actions')->withPivot('id');
 
     }
     
     public function parent()
     {
-    	return $this->belongsTo(new Menu,'parent_id');
+    	return $this->belongsTo(Menu::class,'parent_id');
     }
 
     public function childs()
     {
-    	return $this->hasMany(new Menu,'parent_id','id');
+    	return $this->hasMany(Menu::class,'parent_id','id');
     }
 
     public function rules($id="")
