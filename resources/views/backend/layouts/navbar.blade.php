@@ -1,16 +1,23 @@
 <nav class="navbar px-navbar">
     <!-- Header -->
     <div class="navbar-header">
-    <a class="navbar-brand px-demo-brand" href="{{ urlBackend('dashboard/index') }}">Home</a>
+    <a class="navbar-brand px-demo-brand" href="{{ urlBackend('dashboard/index') }}">CMS Panel </a>
     </div>
-
     <!-- Navbar togglers -->
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#px-demo-navbar-collapse" aria-expanded="false"><i class="navbar-toggle-icon"></i></button>
 
 <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="px-demo-navbar-collapse">
       <ul class="nav navbar-nav">
-
+    <li>   
+      <a href="{{ urlBackend('dashboard/index') }}">Home</a>  
+    </li>   
+    <li>   
+      <a href="{{ urlBackend('dashboard/index') }}">Pencarian Material</a>
+    </li>   
+    <li>   
+      <a  href="{{ urlBackend('dashboard/index') }}">Daftar Pengajuan</a>
+    </li>   
         
       </ul>
 
