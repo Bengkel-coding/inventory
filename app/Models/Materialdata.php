@@ -7,7 +7,7 @@ use App\Models\Warehouse;
 use App\Models\MaterialDetails;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Material extends Model
+class Materialdata extends Model
 {
     use SoftDeletes;
     protected $table = 'materials';

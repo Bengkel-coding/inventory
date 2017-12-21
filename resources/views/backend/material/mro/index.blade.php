@@ -34,12 +34,12 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Nama Material</th>
+                                <th>KOMAG</th>
+                                <th>Deskripsi Material</th>
+                                <th>Jumlah Material</th>
+                                <!-- <th>Lokasi</th> -->
                                 <th>Action</th>
-                            </tr>
-                            <tr>
-                                <td>Title</td>
-                                <td>Action</td>
                             </tr>
                         </thead>
                         
@@ -77,7 +77,10 @@
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
                     { data: 'name', name: 'name' },
-                    // { data: 'komag', name: 'komag' },
+                    { data: 'komag', name: 'komag' },
+                    { data: 'description', name: 'description' },
+                    { data: 'amount', name: 'amount' },
+                    // { data: 'warehouse_id', name: 'warehouse_id' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

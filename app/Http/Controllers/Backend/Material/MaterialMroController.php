@@ -28,7 +28,7 @@ class MaterialMroController extends TrinataController
 
     public function getData()
     {
-    	$model = $this->model->select('id','name','komag');
+    	$model = $this->model->select('id','name','komag','description','amount');
 
     	$data = Table::of($model)
     		->addColumn('action',function($model){
