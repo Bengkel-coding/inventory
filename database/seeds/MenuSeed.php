@@ -281,5 +281,23 @@ class MenuSeed extends Seeder
                 'slug'          => 'laporan',
                 'order'         => 1,
             ],[]);
+
+        \trinata::addMenu([ 
+                'parent_id'     => null,
+                'title'         => 'Gudang',
+                'controller'    => '#',
+                'slug'          => 'warehouse',
+                'order'         => 1,
+            ],[]);
+
+
+                \trinata::addMenu([ 
+                    'parent_id'     => 'warehouse',
+                    'title'         => 'Daftar Gudang',
+                    'controller'    => 'Warehouse\WarehouseController',
+                    'slug'          => 'warehouse-list',
+                    'order'         => '1'
+                ],['index','create','update','delete','publish']
+            ); 
     }
 }

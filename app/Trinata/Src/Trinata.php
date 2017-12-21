@@ -306,4 +306,28 @@ class Trinata
         
         return $image;                       
     }
+
+    public function globalUpload($request, $tmpname=false, $customPath=false, $sourceServer=false)
+    {
+        
+        if ($customPath) $folderPath = public_path('contents'). '/'.$customPath."/" ;
+        else $folderPath = public_path('contents/file'). "/" ;
+        
+        if (!\File::isDirectory($folderPath)) \File::makeDirectory($folderPath, 0775, true);
+        
+        if ($sourceServer) {
+            $tmpPath =  public_path() . str_replace("%20", " ", $request->file);
+            $ext = pathinfo($tmpPath, PATHINFO_EXTENSION);
+            $filename = ($tmpname) ? $tmpname . '.' .$ext : 'ori-'.rand() . ".".$ext ;
+            \File::copy($tmpPath, $folderPath . "/" . $filename);
+        } else {
+        	
+            $file = $request->file($tmpname);
+            $filename = rand(1,1000) . '-'. str_replace(' ', '_', $file->getClientOriginalName());
+            $saveFile = $request->file($tmpname)->move($folderPath, $filename);
+        }
+        
+        return array('filename'=>$filename);
+        
+    }
 }

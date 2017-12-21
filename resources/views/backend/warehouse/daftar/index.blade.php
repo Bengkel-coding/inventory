@@ -13,24 +13,7 @@
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     {!! trinata::buttonCreate() !!}
-                    <form method="get" action="">
-                      <!-- <div class="form-group">
-                        <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
-                      </div> -->
-                      <div class="form-group">
-                        <label>Lokasi Gudang</label>
-                        {!! Form::select('warehouse' , $warehouse , null ,['class' => 'form-control warehouse']) !!}
-                      </div>
                       
-                      
-                    <a href="#" class="btn btn-info">Lihat</a>
-                    <a href="#" class="btn btn-danger">Ekspor</a>
-                    
-                    <a href="javascript:void(0)" data="{{ urlBackendAction('import') }}" class="btn btn-success import">Import</a>
-                    </form>
-                    <p>&nbsp;</p>
-
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
@@ -57,14 +40,6 @@
     
     <script type="text/javascript">
         
-        $('.import').click(function(){
-            var link = $(this).attr('data');
-            var warehouse = $('.warehouse').val();
-            generateLink = link+'?warehouse='+warehouse;
-            // alert(generateLink);return false;
-            window.location.href=generateLink;
-        })
-
         $(document).ready(function(){
              $('#table thead td').each( function () {
                     var title = $(this).text();
@@ -77,7 +52,8 @@
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
                     { data: 'name', name: 'name' },
-                    // { data: 'komag', name: 'komag' },
+                    // { data: 'address', name: 'address' },
+                    // { data: 'phone', name: 'phone' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

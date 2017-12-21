@@ -161,6 +161,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Oblagio\Highcharts\Provider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -213,6 +214,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Chart' => Oblagio\Highcharts\Facade::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
