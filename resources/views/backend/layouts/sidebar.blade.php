@@ -36,8 +36,8 @@
         </li>
       @endif
       @endforeach
-      <li class="px-nav-item">
+    <!--   <li class="px-nav-item">
         <a href="{{ url('/') }}" target="_blank"><i class="px-nav-icon ion-monitor"></i><span class="px-nav-label">Go to Web</span></a>
-      </li>
+      </li> -->
     </ul>
   </nav>
