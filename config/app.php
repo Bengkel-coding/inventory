@@ -162,6 +162,7 @@ return [
         Oblagio\Highcharts\Provider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
     ],
 
     /*
@@ -215,6 +216,7 @@ return [
         'Chart' => Oblagio\Highcharts\Facade::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Cart'  => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];
