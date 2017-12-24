@@ -1,9 +1,4 @@
 
-<style type="text/css">
-  ul li.active{
-    background-color: #0C538F;
-  }
-</style>
 <nav class="navbar px-navbar">
     <!-- Header -->
     <div class="navbar-header">
