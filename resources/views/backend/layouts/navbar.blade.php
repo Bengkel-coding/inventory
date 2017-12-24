@@ -1,3 +1,9 @@
+
+<style type="text/css">
+  ul li.active{
+    background-color: #0C538F;
+  }
+</style>
 <nav class="navbar px-navbar">
     <!-- Header -->
     <div class="navbar-header">
@@ -15,10 +21,18 @@
     <li>   
       <a href="{{ urlBackend('dashboard/index') }}">Pencarian Material</a>
     </li>   
-    <li>   
-      <a  href="{{ urlBackend('dashboard/index') }}">Daftar Pengajuan</a>
-    </li>   
-        
+
+
+
+    @foreach($menuPengajuan->get() as $row)
+
+    @if(!empty($row->childs->first()))
+    <li  class="{{ searchMenu($row->id,'active') }}">   
+      <a  href="{{ urlBackend($row->childs->first()->slug.'/index') }}">{{$row->title}}</a>
+    </li> 
+    @endif      
+
+    @endforeach    
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

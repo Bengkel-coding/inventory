@@ -12,6 +12,15 @@ class TrinataController extends Controller
 	public function __construct()
 	{
 
+        $Role = injectModel('Role')->where('id',getUser()->role_id)->first();
+        $menuRole = arrayMenuRole($Role->role()->get());
+        $menuParentRole = arrayParentMenuRole($Role->role()->get());
+        $menuPengajuan = injectModel('Menu')->whereParentId(null)->where('slug','pengajuan')->orderBy('order','asc');
+        
+        view()->share('menuPengajuan', $menuPengajuan);
+        view()->share('Role', $Role);
+        view()->share('menuRole', $menuRole);
+        view()->share('menuParentRole', $menuParentRole);
 	}
 
     public function handleUpload($request,$model,$fieldName,$resize=[])

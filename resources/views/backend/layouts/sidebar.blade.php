@@ -1,26 +1,3 @@
-
-<?php
-    $search = function($eachId,$return,$else="",$status=""){
-        $menu = trinata::getMenu();
-
-        if($status == 'child')
-        {
-            $id = $menu->id;
-
-        }else{
-            if($menu->parent_id != null)
-            {
-                $id =  $menu->parent_id;
-            }else{
-                $id = $menu->id;
-            }
-        }
-               
-
-        return $eachId == $id ? $return : $else;
-    };
-?>
-
   <nav class="px-nav px-nav-left px-nav-fixed">
     <button type="button" class="px-nav-toggle" data-toggle="px-nav">
       <span class="px-nav-toggle-arrow"></span>
@@ -38,23 +15,26 @@
         </div>
       </li>
 
-      @foreach(injectModel('Menu')->whereParentId(null)->orderBy('order','asc')->get() as $row)
-        @if(!empty($row->childs->first()->id))
-          <li class="px-nav-item px-nav-dropdown {{ $search($row->id,'px-open active') }}">
-        @else
-          <li class="px-nav-item {{ $search($row->id,'active') }}">
-        @endif
-        <a href="{{ ($row->controller != '#' ? urlBackend($row->slug.'/index') : '#') }}"><i class="px-nav-icon fa {{(!empty($row->icon)) ? $row->icon : 'fa-clone'}}"></i><span class="px-nav-label">{{ $row->title }}</span></a>
-        @if(!empty($row->childs->first()->id))
-        <ul class="px-nav-dropdown-menu">
-          @foreach($row->childs as $child)
-          <li class="px-nav-item {{ $search($child->id,'active','','child') }}"><a href="{{ urlBackend($child->slug.'/index') }}">
-            <span class="px-nav-label">{{ $child->title}} </span></a>
-          </li>
-          @endforeach
-        </ul>
-        @endif      
-      </li>
+      @foreach(injectModel('Menu')->whereParentId(null)->where('slug','<>','pengajuan')->orderBy('order','asc')->get() as $row)
+
+      @if(in_array($row->id,$menuParentRole))
+          @if(!empty($row->childs->first()->id))
+            <li class="px-nav-item px-nav-dropdown {{ searchMenu($row->id,'px-open active') }}">
+          @else
+            <li class="px-nav-item {{ searchMenu($row->id,'active') }}">
+          @endif
+          <a href="{{ ($row->controller != '#' ? urlBackend($row->slug.'/index') : '#') }}"><i class="px-nav-icon fa {{(!empty($row->icon)) ? $row->icon : 'fa-clone'}}"></i><span class="px-nav-label">{{ $row->title }}</span></a>
+          @if(!empty($row->childs->first()->id))
+          <ul class="px-nav-dropdown-menu">
+            @foreach($row->childs as $child)
+            <li class="px-nav-item {{ searchMenu($child->id,'active','','child') }}"><a href="{{ urlBackend($child->slug.'/index') }}">
+              <span class="px-nav-label">{{ $child->title}} </span></a>
+            </li>
+            @endforeach
+          </ul>
+          @endif      
+        </li>
+      @endif
       @endforeach
       <li class="px-nav-item">
         <a href="{{ url('/') }}" target="_blank"><i class="px-nav-icon ion-monitor"></i><span class="px-nav-label">Go to Web</span></a>
