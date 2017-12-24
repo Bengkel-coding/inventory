@@ -8,26 +8,56 @@
           <div class="panel-heading">
             <span class="panel-title"><i class="panel-title-icon fa fa-list"></i>{{ trinata::titleActionForm() }}</span>
           </div>   
+            <div class="row p-a-3">
+                <div class="col-md-6 fadeIn animated"> 
+                  <div class="form-group">
+                    <label>No Pengeluaran Material</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Pengeluaran</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Kepada</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Dari</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Diharapkan Diterima Tanggal</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                </div>
+                <div class="col-md-6 fadeIn animated"> 
+                  <div class="form-group">
+                    <label>Dibukukan Oleh</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Perkiraan</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Dibukukan</label>
+                    {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan</label>
+                    {!! Form::textarea('title' , null ,['class' => 'form-control','rows'=>5]) !!}
+                  </div>
+                </div>
+            </div>
           
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                      <div class="form-group">
-                        <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
-                      </div>
-                      <div class="form-group">
-                        <label>Lokasi Gudang</label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
-                      </div>
-                      
-                    <a href="#" class="btn btn-success">Lihat</a>
 
-                    <p>&nbsp;</p>
-                      
-                    <a href="{{urlBackendAction('ajukan')}}" class="btn btn-info btn-large">Ajukan</a>
-                    <p>&nbsp;</p>
-                      
+                <a href="#" class="btn btn-success">Add more</a>
+                <a href="#" class="btn btn-info">Check Out</a>
+                  <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>
                         <thead>
