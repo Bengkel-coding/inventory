@@ -343,5 +343,22 @@ class MenuSeed extends Seeder
                         'order'         => '4'
                     ],['index','create','update','delete','publish']
                 ); 
+
+        \trinata::addMenu([ 
+                'parent_id'     => null,
+                'title'         => 'Pencarian Material',
+                'controller'    => '#',
+                'slug'          => 'pencarian',
+                'order'         => 1,
+            ],[]);
+
+        \trinata::addMenu([ 
+                'parent_id'     => 'pencarian',
+                'title'         => 'Pencarian Material',
+                'controller'    => 'PencarianController',
+                'slug'          => 'pencarian-material',
+                'order'         => 1,
+            ],['index']);
+
     }
 }

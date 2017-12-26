@@ -1,6 +1,5 @@
 @extends('backend.layouts.layout')
 @section('content')
-
   <div class="px-content">
     <div class="row">
       <div class="col-md-12 fadeIn animated">   

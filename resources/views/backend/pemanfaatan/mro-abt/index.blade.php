@@ -49,17 +49,17 @@
 
     </div>
   </div>
-@endsection
 
-@push('script-js')
     
     <script type="text/javascript">
         
+
         $(document).ready(function(){
              // $('#table thead td').each( function () {
              //        var title = $(this).text();
              //        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
              //    } );
+             
              
           var table =  $('#table').DataTable({
                 processing: true,
@@ -71,6 +71,36 @@
                 ]
             });
 
+        $('#table tbody').on('click','.checklist',function(){
+          var idRow = $(this).attr('data-id');
+          if(this.checked){
+            $('input#amounts'+idRow).attr('readonly','readonly');
+
+            var qty = $('input#amounts'+idRow).val();
+
+            $.get('{{urlBackendAction("addcart")}}/'+idRow+'/'+qty, function(d){ 
+                  
+                // // $('#city').html(dataHtml);
+                // if(d.status==true){
+                //   $('#row'+pinjam).remove();
+                //   $('#countJmlh').html(d.data);
+                // }
+            });       
+// alert('hapus');
+          }else{
+// alert('tambah');
+            $('input#amounts'+idRow).removeAttr('readonly');
+
+            $.get('{{urlBackendAction("removecart")}}/'+idRow, function(d){ 
+                  
+                // // $('#city').html(dataHtml);
+                // if(d.status==true){
+                //   $('#row'+pinjam).remove();
+                //   $('#countJmlh').html(d.data);
+                // }
+            });  
+          }
+        });
             // Apply the search
             // table.columns().every( function () {
             //     var that = this;
@@ -87,4 +117,4 @@
 
     </script>
 
-@endpush
+@endsection

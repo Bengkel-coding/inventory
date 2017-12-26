@@ -13,9 +13,14 @@
     <li>   
       <a href="{{ urlBackend('dashboard/index') }}">Home</a>  
     </li>   
-    <li>   
-      <a href="{{ urlBackend('dashboard/index') }}">Pencarian Material</a>
-    </li>   
+    @foreach($menuPencarian->get() as $row)
+
+    @if(!empty($row->childs->first()))
+    <li  class="{{ searchMenu($row->id,'active') }}">   
+      <a  href="{{ urlBackend($row->childs->first()->slug.'/index') }}">{{$row->title}}</a>
+    </li> 
+    @endif      
+    @endforeach    
 
 
 

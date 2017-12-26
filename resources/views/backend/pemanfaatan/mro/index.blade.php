@@ -35,10 +35,6 @@
                                 <th>Title</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td>Title</td>
-                                <td>Action</td>
-                            </tr> -->
                         </thead>
                         
                     </table>
