@@ -26,11 +26,12 @@ class MaterialMroController extends TrinataController
         $this->resource = "backend.material.mro.";
     }
 
-    public function getData()
+    public function getData(Request $request)
     {
 
     	$model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc');
-
+        
+        if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
 
     	$data = Table::of($model)
     		->addColumn('action',function($model){
@@ -42,12 +43,15 @@ class MaterialMroController extends TrinataController
     	return $data;
     }
 
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
         $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
 
-    	return view($this->resource.'index', compact('warehouse'));
+        $warehouse_id = 0;
+        if (isset($request->warehouse)) $warehouse_id = (int) $request->warehouse;
+
+    	return view($this->resource.'index', compact('warehouse','warehouse_id'));
     }
 
     public function getImport(Request $request)

@@ -24,7 +24,8 @@
                       </div>
                       
                       
-                    <a href="#" class="btn btn-info">Lihat</a>
+                    <!-- <a href="#" class="btn btn-info">Lihat</a> -->
+                    <button type="submit" class="btn btn-info">Lihat</button>
                     <a href="#" class="btn btn-danger">Ekspor</a>
                     
                     <a href="javascript:void(0)" data="{{ urlBackendAction('import') }}" class="btn btn-success import">Import</a>
@@ -70,6 +71,8 @@
     
     <script type="text/javascript">
         
+        var warehouse_id = {{$warehouse_id}};
+
         $('.import').click(function(){
 
             var link = $(this).attr('data');
@@ -90,10 +93,11 @@
                     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
                 } );
             
+    
           var table =  $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ urlBackendAction("data") }}',
+                ajax: '{{ urlBackendAction("data?warehouse=$warehouse_id") }}',
                 columns: [
                     { data: 'category', name: 'category' },
                     { data: 'name', name: 'name' },
