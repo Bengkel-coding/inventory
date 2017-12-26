@@ -15,7 +15,7 @@
         </div>
       </li>
 
-      @foreach(injectModel('Menu')->whereParentId(null)->where('slug','<>','pengajuan')->where('slug','<>','pencarian')->orderBy('order','asc')->get() as $row)
+      @foreach(injectModel('Menu')->whereParentId(null)->where('slug','<>','pengajuan')->where('slug','<>','pencarian')->where('slug','<>','development')->where('slug','<>','media-library')->orderBy('order','asc')->get() as $row)
 
       @if(in_array($row->id,$menuParentRole))
           @if(!empty($row->childs->first()->id))
