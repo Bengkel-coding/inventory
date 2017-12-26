@@ -28,9 +28,16 @@ class PemanfaatanMroController extends TrinataController
         $model = $this->model->select('id','title','status');
 
         $data = Table::of($model)
+            ->addColumn('title',function($model){
+                $title = '<input name="title" type="checkbox" class="checklist" data-id="'.$model->id.'" > '.$model->title;
+
+
+                return $title;
+
+            })
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+                $status = '<input class="form-control" name="title" type="text" id="amount'.$model->id.'" readonly="readonly"> <input name="title"  class="form-control"  type="text" id="amounts'.$model->id.'" readonly="readonly"> ';
+                return $status;
             })
             ->make(true);
 

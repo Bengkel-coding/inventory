@@ -33,6 +33,10 @@
 @endsection
 @push('script-js')
 <script type="text/javascript">
-  
+    $(document).ready(function() {
+        $('button[type="submit"]').click(function(){
+            $('div.panel-body').attr('class','panel-body form-loading form-loading-inverted');
+        })
+    })
 </script>
 @endpush

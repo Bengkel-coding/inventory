@@ -1,8 +1,5 @@
 <?php namespace App\Http\Controllers\Backend\Pemanfaatan;
 
-
- 
-
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,6 +8,8 @@ use App\Models\Crud;
 use Table;
 use Image;
 use trinata;
+use Cart;
+
 
 class PemanfaatanMroAbtController extends TrinataController
 {
@@ -26,15 +25,59 @@ class PemanfaatanMroAbtController extends TrinataController
     public function getData()
     {
         $model = $this->model->select('id','title','status');
-
+        $cart = Cart::content();
+        $keys = [];
+        foreach ($cart as $key => $value) {
+                $keys[$key]=$value->id;
+                $qty[$value->id]=$value->qty;
+        }
+        // dd($keys,$qty);
         $data = Table::of($model)
-            ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+            ->addColumn('title',function($model) use($keys){
+
+                if(in_array($model->id, $keys)){
+                    $checkbox = 'checked="checked"';
+                }else{
+                    $checkbox = '';
+
+                }
+                $title = '<input name="title" type="checkbox" class="checklist" data-id="'.$model->id.'" '.$checkbox.'> '.$model->title;
+
+
+                return $title;
+
+            })
+            ->addColumn('action',function($model)use($keys,$qty){
+
+                // $cartQty = Cart::content()->where('id',$model->id)->first();
+                if(in_array($model->id, $keys)){
+                    $readonly = 'readonly="readonly"';
+                    $qty = $qty[$model->id];
+                    // dd();
+                }else{
+                    $readonly = '';
+                    $qty = 0;
+                }
+
+                $status = '<input class="form-control" name="title" type="text" id="amount'.$model->id.'" value="'.$model->id.'" readonly="readonly"> <input name="title"  class="form-control"  type="text" value="'.$qty.'" id="amounts'.$model->id.'" '.$readonly.'> ';
+                return $status;
             })
             ->make(true);
 
         return $data;
+    }
+    public function getCartcontent($id){
+        $cart = Cart::content()->where('id',$id)->first();
+
+        dd($cart,$id);
+
+        return $cart;
+    }
+    public function getDatas()
+    {
+        
+        $cart = Cart::content();
+        dd($cart);
     }
 
     public function getIndex()
@@ -42,44 +85,31 @@ class PemanfaatanMroAbtController extends TrinataController
         return view($this->resource.'index');
     }
 
-    public function getCreate()
+    public function getRemovecart($id)
     {
-        $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
+
+        // dd($request->all(),$request['item']);
+        // $rowId = $request['item'];
+        $cartQty = Cart::content()->where('id',$id)->first();
+        Cart::remove($cartQty->rowid);
+
+        $cart = Cart::content();
+        $jumlah = count($cart);
+
+        return response()->json(['response' => 'This is get method','data' =>$jumlah,'status'=>true]);
     }
+    public function getAddcart($id,$qty=0)
+    {        
 
-   public function postCreate(Requests\Backend\CrudRequest $request)
-    {
-        $model = $this->model;
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
+        Cart::add(array('id' => $id, 'name' => $id, 'qty' => $qty ,'price'=>0, 'options' => [
+                            'gambar' => $id,
+                            ]));
 
-    public function getUpdate($id)
-    {
-        $model = $this->model->findOrFail($id);
+        $cart = Cart::content();
+        $jumlah = count($cart);
+        // dd($cart);
 
-        return view($this->resource.'_form',compact('model'));
-    }
-
-    public function postUpdate(Requests\Backend\CrudRequest $request,$id)
-    {
-        $model = $this->model->findOrFail($id);
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
-
-    public function getDelete($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->delete($model,[$model->image]);
-    }
-
-    public function getPublish($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->publish($model);
+        return response()->json(['response' => 'This is get method','data' =>$jumlah,'status'=>true]);
+        // return view('frontend.inventaris.cart', compact('cart'));
     }
 }
