@@ -29,6 +29,21 @@ class Material extends Model
         return $this->hasOne(\App\Models\MaterialMro::class,'material_id', 'id');
     }
 
+    public function mroabt()
+    {
+        return $this->hasOne(\App\Models\MaterialMroabt::class,'material_id', 'id');
+    }
+
+    public function investasi()
+    {
+        return $this->hasOne(\App\Models\MaterialInvestasi::class,'material_id', 'id');
+    }
+
+    public function jaringan()
+    {
+        return $this->hasOne(\App\Models\MaterialEksjar::class,'material_id', 'id');
+    }
+
     public function categoryAttribute($value)
     {
         $category = ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'];

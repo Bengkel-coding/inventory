@@ -16,23 +16,23 @@
 
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
 
 
                       <div class="form-group">
                         <label>Nama Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('name' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>KOMAG</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('komag' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Kode MI</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div>
                       
                       <div class="form-group">
@@ -42,47 +42,42 @@
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('status' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Tahun Perolehan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('year_acquisition' , null ,['class' => 'form-control']) !!}
                       </div>
 
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Harga Satuan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Harga Total</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('unit_price' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Surplus Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('surplus_material' , isset($model->id) ? $model->investasi->surplus_material : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Status</label>
-                        {!! Form::select('status' , ['' => '-', 'merah' => 'Merah' , 'kuning' => 'Kuning' , 'hijau' => 'Hijau' , 'hijaumuda' => 'Hijau Muda'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['' => '-', 'merah' => 'Merah' , 'kuning' => 'Kuning' , 'hijau' => 'Hijau' , 'hijaumuda' => 'Hijau Muda'] , isset($model->id) ? $model->investasi->status : null ,['class' => 'form-control']) !!}
                       </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Keterangan</label>
                         {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
+                      </div> -->
 
                       <div class="form-group">
                         <label>Lokasi </label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('warehouse_id' , $warehouse , null ,['class' => 'form-control']) !!}
                       </div>
                       
 

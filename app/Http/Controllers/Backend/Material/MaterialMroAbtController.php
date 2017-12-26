@@ -152,7 +152,7 @@ class MaterialMroAbtController extends TrinataController
         $model->warehouse_id = $request->warehouse_id;
         
         if ($model->save()) {
-            $mro = \App\Models\MaterialMro::whereMaterialId($model->id)->first();
+            $mro = \App\Models\MaterialMroabt::whereMaterialId($model->id)->first();
             // $mro->material_id = $model->id;
             $mro->min_stock_level = $request->min_stock_level;
             $mro->max_stock_level = $request->max_stock_level;
