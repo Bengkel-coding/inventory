@@ -30,10 +30,10 @@
                         {!! Form::text('komag' , null ,['class' => 'form-control']) !!}
                       </div>
 
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Kode MRO</label>
                         {!! Form::text('code' , null ,['class' => 'form-control']) !!}
-                      </div>
+                      </div> -->
                       
                       <div class="form-group">
                         <label>Description Material</label>
