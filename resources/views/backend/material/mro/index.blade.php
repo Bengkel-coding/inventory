@@ -14,10 +14,10 @@
                   @include('backend.common.flashes')
                     {!! trinata::buttonCreate() !!}
                     <form method="get" action="">
-                      <!-- <div class="form-group">
-                        <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
-                      </div> -->
+                      <div class="form-group">
+                        <label>Kategori Material</label>
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
+                      </div>
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
                         {!! Form::select('warehouse' , $warehouse , null ,['class' => 'form-control warehouse']) !!}
@@ -47,11 +47,12 @@
                             </tr>
                             <!-- <tr>
                                 <td>Category</td>
-                                <td>Title</td>
+                                <td>Nama</td>
                                 <td>Komag</td>
-                                <th>Tahun Perolehan</th>
-                                <th>Jumlah</th>
-                                <th>Harga Unit</th>
+                                <td>Tahun Perolehan</td>
+                                <td>Jumlah</td>
+                                <td>Satuan</td>
+                                <td>Harga Unit</td>
                                 <td>Action</td>
                             </tr> -->
 
@@ -71,8 +72,6 @@
     
     <script type="text/javascript">
         
-        var warehouse_id = {{$warehouse_id}};
-
         $('.import').click(function(){
 
             var link = $(this).attr('data');
@@ -88,19 +87,19 @@
         })
 
         $(document).ready(function(){
-             $('#table thead td').each( function () {
-                    var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-                } );
+             // $('#table thead td').each( function () {
+             //        var title = $(this).text();
+             //        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+             //    } );
             
-    
+             
           var table =  $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ urlBackendAction("data?warehouse=$warehouse_id") }}',
+                ajax: '{!! urlBackendAction($urlAjax) !!}',
                 columns: [
                     { data: 'category', name: 'category' },
-                    { data: 'name', name: 'name' },
+                    { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
                     { data: 'year_acquisition', name: 'year_acquisition' },
                     { data: 'amount', name: 'amount' },
@@ -112,17 +111,17 @@
             });
 
             // Apply the search
-            table.columns().every( function () {
-                var that = this;
+            // table.columns().every( function () {
+            //     var that = this;
          
-                $( 'input', this.footer() ).on( 'keyup change', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                            .search( this.value )
-                            .draw();
-                    }
-                } );
-            } );
+            //     $( 'input', this.footer() ).on( 'keyup change', function () {
+            //         if ( that.search() !== this.value ) {
+            //             that
+            //                 .search( this.value )
+            //                 .draw();
+            //         }
+            //     } );
+            // } );
         });
 
     </script>

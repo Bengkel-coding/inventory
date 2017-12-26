@@ -30,8 +30,9 @@ class MaterialMroController extends TrinataController
     {
 
     	$model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc');
-        
+
         if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
+        if (isset($request->category) && $request->category) $model->where('category', $request->category);
 
     	$data = Table::of($model)
     		->addColumn('action',function($model){
@@ -48,10 +49,9 @@ class MaterialMroController extends TrinataController
         $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
         $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
 
-        $warehouse_id = 0;
-        if (isset($request->warehouse)) $warehouse_id = (int) $request->warehouse;
-
-    	return view($this->resource.'index', compact('warehouse','warehouse_id'));
+        $urlAjax = 'data?warehouse='.(int) $request->warehouse.'&category='.(string) $request->category;
+        
+    	return view($this->resource.'index', compact('warehouse','urlAjax'));
     }
 
     public function getImport(Request $request)
