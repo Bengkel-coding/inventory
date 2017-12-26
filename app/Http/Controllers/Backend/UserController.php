@@ -13,6 +13,7 @@ class UserController extends TrinataController
 {
 	public function __construct(User $model,Role $role)
 	{
+        parent::__construct();
 		$this->model = $model;
 		$this->role = $role;
 	}
