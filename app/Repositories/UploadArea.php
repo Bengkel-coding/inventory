@@ -26,7 +26,7 @@ class UploadArea
     		
     		$parent = null;
     		$satuan = ['mtr'=>'meter','pcs'=>'pieces','bh'=>'buah', 'roll'=>'roll','liter'=>'liter','unit'=>'unit'];
-    		$code = ['TUBULAR GOOD'=>'tubular','INSTRUMENT'=>'instrument','COCK & VALVE' =>'cock','FITTING & FLANGE'=>'fitting','BAHAN KIMIA & PERALATAN'=>'kimia'];
+    		$code = ['TUBULAR GOOD'=>'tubular','INSTRUMENT'=>'instrument','COCK & VALVE' =>'cock','FITTING & FLANGE'=>'fitting','BAHAN KIMIA & PERALATAN'=>'bahankimia', 'LAIN-LAIN'=>'lainlain'];
 
     		foreach ($results as $key => $value) {
     			
@@ -75,7 +75,7 @@ class UploadArea
 					$model->{$field} = $value[$field];
 				}
 
-				if (! $this->isDataExist($value['category'], $value['komag'])) continue;
+				if (! $this->isDataExist($value['category'], $value['komag'], $value['warehouse_id'])) continue;
 				
 				$model->save();
 			}
@@ -85,12 +85,18 @@ class UploadArea
 		if (env('CONSOLE_DUPLICATE', false)) \Artisan::call('trinata:duplicate-data');
 	}
 
-	public function isDataExist($category=false, $komag=false)
+	public function isDataExist($category=false, $komag=false, $warehouse=false, $current_komag=false)
 	{
-		if (!$category && !$komag) return false;
+		if (!$category && !$komag && !$warehouse) return false;
 
-		$model = $this->material->whereKomag($komag)->whereCategory($category)->count();
-		if ($model > 0) return false;
+		if ($current_komag) {
+			$model = $this->material->whereKomag($komag)->whereCategory($category)->whereWarehouseId($warehouse)->whereNotIn('id', [$current_komag])->count();
+			if ($model > 0) return false;
+		} else {
+			$model = $this->material->whereKomag($komag)->whereCategory($category)->whereWarehouseId($warehouse)->count();
+			if ($model > 0) return false;	
+		}
+		
 		return true;
 	}
 }

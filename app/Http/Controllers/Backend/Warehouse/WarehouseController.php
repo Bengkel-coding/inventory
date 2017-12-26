@@ -25,7 +25,7 @@ class WarehouseController extends TrinataController
 
     public function getData()
     {
-        $model = $this->model->select('id','name','address','phone');
+        $model = $this->model->join('users','users.id','=','warehouses.head_office_id')->select('warehouses.id','warehouses.name','warehouses.address','warehouses.phone','users.name as officer');
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
@@ -39,13 +39,16 @@ class WarehouseController extends TrinataController
 
     public function getIndex()
     {
+        
         return view($this->resource.'index');
     }
 
     public function getCreate()
     {
         $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
+        $officer = \App\User::whereNotIn('role_id',[1])->lists('name','id');
+
+        return view($this->resource.'_form',compact('model', 'officer'));
     }
 
    public function postCreate(Request $request)
@@ -63,22 +66,22 @@ class WarehouseController extends TrinataController
     public function getUpdate($id)
     {
         $model = $this->model->findOrFail($id);
-
-        return view($this->resource.'_form',compact('model'));
+        $officer = \App\User::whereNotIn('role_id',[1])->lists('name','id');
+        return view($this->resource.'_form',compact('model', 'officer'));
     }
 
-    public function postUpdate(Requests\Backend\CrudRequest $request,$id)
+    public function postUpdate(Request $request,$id)
     {
         $model = $this->model->findOrFail($id);
         $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
+        // $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
         return $this->insertOrUpdate($model,$inputs);
     }
 
     public function getDelete($id)
     {
         $model = $this->model->findOrFail($id);
-        return $this->delete($model,[$model->image]);
+        return $this->delete($model);
     }
 
     public function getPublish($id)

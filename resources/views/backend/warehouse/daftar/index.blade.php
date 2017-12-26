@@ -17,13 +17,16 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Telp</th>
+                                <th>Penanggung Jawab</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>Title</td>
                                 <td>Action</td>
-                            </tr>
+                            </tr> -->
                         </thead>
                         
                     </table>
@@ -38,6 +41,7 @@
 
 @push('script-js')
     
+
     <script type="text/javascript">
         
         $(document).ready(function(){
@@ -52,8 +56,9 @@
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
                     { data: 'name', name: 'name' },
-                    // { data: 'address', name: 'address' },
-                    // { data: 'phone', name: 'phone' },
+                    { data: 'address', name: 'address' },
+                    { data: 'phone', name: 'phone' },
+                    { data: 'officer', name: 'users.name' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

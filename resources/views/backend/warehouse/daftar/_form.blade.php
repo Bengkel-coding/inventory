@@ -30,7 +30,11 @@
                         {!! Form::text('phone' , null ,['class' => 'form-control']) !!}
                       </div>
 
-                      
+                      <div class="form-group">
+                        <label>Penanggung Jawab</label>
+                        {!! Form::select('head_office_id' , $officer, null ,['class' => 'form-control']) !!}
+                      </div>
+
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     
                     {!! Form::close() !!}

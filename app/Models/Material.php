@@ -24,4 +24,8 @@ class Material extends Model
     	return $this->hasMany(MaterialDetail::class,'material_id', 'id');
     }
 
+    public function mro()
+    {
+        return $this->hasOne(\App\Models\MaterialMro::class,'material_id', 'id');
+    }
 }

@@ -29,7 +29,7 @@ class MaterialMroController extends TrinataController
     public function getData()
     {
 
-    	$model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit');
+    	$model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc');
 
 
     	$data = Table::of($model)
@@ -76,30 +76,83 @@ class MaterialMroController extends TrinataController
     public function getCreate()
     {
     	$model = $this->model;
-        return view($this->resource.'_form',compact('model'));
+        $warehouse = \App\Models\Warehouse::lists('name','id');
+        // $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
+        return view($this->resource.'_form',compact('model', 'warehouse'));
     }
 
-   public function postCreate(Requests\Backend\CrudRequest $request)
+   public function postCreate(Request $request)
     {
         $model = $this->model;
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
+        
+        if (!$this->uploadArea->isDataExist($request->category, $request->komag, $request->warehouse_id)) {
+            return redirect(urlBackendAction('index'))->with('danger','Gagal, Komag Sudah Ada');
+        }
+
+        $model->name = $request->name;
+        $model->komag = $request->komag;
+        $model->code = $request->code;
+        $model->unit = $request->unit;
+        $model->year_acquisition = $request->year_acquisition;
+        $model->amount = $request->amount;
+        $model->unit_price = $request->unit_price;
+        $model->type = 'mro';
+        $model->category = $request->category;
+        $model->description = $request->description;
+        $model->warehouse_id = $request->warehouse_id;
+        
+        if ($model->save()) {
+            $mro = new \App\Models\MaterialMro;
+            $mro->material_id = $model->id;
+            $mro->min_stock_level = $request->min_stock_level;
+            $mro->max_stock_level = $request->max_stock_level;
+            $mro->excess_stock = $request->excess_stock;
+            $mro->status = $request->status;
+            $mro->save();
+        }
+
+        return redirect(urlBackendAction('index'))->with('success','Data Has Been Inserted');
     }
 
     public function getUpdate($id)
     {
         $model = $this->model->findOrFail($id);
 
-        return view($this->resource.'_form',compact('model'));
+        $warehouse = \App\Models\Warehouse::lists('name','id');
+
+        return view($this->resource.'_form',compact('model','warehouse'));
     }
 
-    public function postUpdate(Requests\Backend\CrudRequest $request,$id)
+    public function postUpdate(Request $request,$id)
     {
         $model = $this->model->findOrFail($id);
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
+        if (!$this->uploadArea->isDataExist($request->category, $request->komag, $request->warehouse_id, $model->id)) {
+            return redirect(urlBackendAction('index'))->with('danger','Gagal, Komag Sudah Ada');
+        }
+
+        $model->name = $request->name;
+        $model->komag = $request->komag;
+        $model->code = $request->code;
+        $model->unit = $request->unit;
+        $model->year_acquisition = $request->year_acquisition;
+        $model->amount = $request->amount;
+        $model->unit_price = $request->unit_price;
+        $model->type = 'mro';
+        $model->category = $request->category;
+        $model->description = $request->description;
+        $model->warehouse_id = $request->warehouse_id;
+        
+        if ($model->save()) {
+            $mro = \App\Models\MaterialMro::whereMaterialId($model->id)->first();
+            // $mro->material_id = $model->id;
+            $mro->min_stock_level = $request->min_stock_level;
+            $mro->max_stock_level = $request->max_stock_level;
+            $mro->excess_stock = $request->excess_stock;
+            $mro->status = $request->status;
+            $mro->save();
+        }
+
+        return redirect(urlBackendAction('index'))->with('success','Data Has Been Updated');
     }
 
     public function getDelete($id)

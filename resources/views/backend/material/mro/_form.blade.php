@@ -22,17 +22,17 @@
 
                       <div class="form-group">
                         <label>Nama Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('name' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>KOMAG</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('komag' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Kode MRO</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div>
                       
                       <div class="form-group">
@@ -42,58 +42,53 @@
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('satuan' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Tahun Perolehan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('year_acquisition' , null ,['class' => 'form-control']) !!}
                       </div>
 
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Harga Satuan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Harga Total</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('unit_price' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Tingkat Persedian Minimal(min)</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('min_stock_level' , isset($model->id) ? $model->mro->min_stock_level : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Tingkat Persedian Maksimal(maks)</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('max_stock_level' , isset($model->id) ? $model->mro->max_stock_level : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Excess Stock</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('excess_stock' , isset($model->id) ? $model->mro->excess_stock : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Status</label>
-                        {!! Form::select('status' , ['ds' => 'DS', 'fm' => 'FM' , 'pds' => 'PDS' , 'sm' => 'SM'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['ds' => 'DS', 'fm' => 'FM' , 'pds' => 'PDS' , 'sm' => 'SM'] , isset($model->id) ? $model->mro->status : null ,['class' => 'form-control']) !!}
                       </div>
                       
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Keterangan</label>
                         {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
+                      </div> -->
 
                       <div class="form-group">
                         <label>Lokasi </label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('warehouse_id' , $warehouse , null ,['class' => 'form-control']) !!}
                       </div>
                       
 
