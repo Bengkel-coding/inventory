@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Warehouse;
-use App\MaterialDetails;
+use App\Models\Warehouse;
+use App\Models\MaterialDetail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Material extends Model
@@ -21,7 +21,7 @@ class Material extends Model
 
     public function details()
     {
-    	return $this->hasMany(MaterialDetails::class,'material_id', 'id');
+    	return $this->hasMany(MaterialDetail::class,'material_id', 'id');
     }
 
 }

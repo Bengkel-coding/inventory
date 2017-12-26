@@ -34,13 +34,24 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Kategori</th>
+                                <th>Nama</th>
+                                <th>Komag</th>
+                                <th>Tahun Perolehan</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
+                                <th>Harga Unit</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
+                            <!-- <tr>
+                                <td>Category</td>
                                 <td>Title</td>
+                                <td>Komag</td>
+                                <th>Tahun Perolehan</th>
+                                <th>Jumlah</th>
+                                <th>Harga Unit</th>
                                 <td>Action</td>
-                            </tr>
+                            </tr> -->
                         </thead>
                         
                     </table>
@@ -76,8 +87,13 @@
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
+                    { data: 'category', name: 'category' },
                     { data: 'name', name: 'name' },
-                    // { data: 'komag', name: 'komag' },
+                    { data: 'komag', name: 'komag' },
+                    { data: 'year_acquisition', name: 'year_acquisition' },
+                    { data: 'amount', name: 'amount' },
+                    { data: 'unit', name: 'unit' },
+                    { data: 'unit_price', name: 'unit_price' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

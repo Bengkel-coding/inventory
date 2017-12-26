@@ -25,8 +25,8 @@ class UploadArea
     		$index = 1;
     		
     		$parent = null;
-    		$satuan = ['mtr'=>'meter','pcs'=>'pieces'];
-    		$code = ['TUBULAR GOOD'=>'tubular','INSTRUMENT'=>'instrument'];
+    		$satuan = ['mtr'=>'meter','pcs'=>'pieces','bh'=>'buah', 'roll'=>'roll','liter'=>'liter','unit'=>'unit'];
+    		$code = ['TUBULAR GOOD'=>'tubular','INSTRUMENT'=>'instrument','COCK & VALVE' =>'cock','FITTING & FLANGE'=>'fitting','BAHAN KIMIA & PERALATAN'=>'kimia'];
 
     		foreach ($results as $key => $value) {
     			
@@ -40,7 +40,7 @@ class UploadArea
 
     			$mro[$parent][$index]['name'] = $value->nama_material;
     			$mro[$parent][$index]['komag'] = $value->komag;
-    			$mro[$parent][$index]['unit'] = $satuan[strtolower($value->satuan)];
+    			$mro[$parent][$index]['unit'] = $satuan[strtolower(trim($value->satuan))];
     			$mro[$parent][$index]['year_acquisition'] = $value->tahun_perolehan;
     			$mro[$parent][$index]['amount'] = $value->saldo_awal_jumlah_material;
     			$mro[$parent][$index]['unit_price'] = $value->saldo_awal_harga_satuan;
@@ -51,7 +51,7 @@ class UploadArea
 
     			$index++;
     		}
-
+    		
     		if (is_array($mro)) {
     			$saveDataMro = $this->saveDataMro($mro);
     		}
@@ -64,19 +64,33 @@ class UploadArea
 	public function saveDataMro($data)
 	{
 		$fields = ['name','komag','description','unit','year_acquisition','amount','unit_price','type','category','warehouse_id'];
-		// dd($data);
+		
 		foreach ($data as $parent) {
 			
 			foreach ($parent as $key => $value) {
 				
 				$model = new \App\Models\Material;
 				foreach ($fields as $field) {
+					
 					$model->{$field} = $value[$field];
 				}
-				// dd($model);
+
+				if (! $this->isDataExist($value['category'], $value['komag'])) continue;
+				
 				$model->save();
 			}
 			
 		}
+
+		if (env('CONSOLE_DUPLICATE', false)) \Artisan::call('trinata:duplicate-data');
+	}
+
+	public function isDataExist($category=false, $komag=false)
+	{
+		if (!$category && !$komag) return false;
+
+		$model = $this->material->whereKomag($komag)->whereCategory($category)->count();
+		if ($model > 0) return false;
+		return true;
 	}
 }

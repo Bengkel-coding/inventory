@@ -28,7 +28,7 @@ class MaterialMroController extends TrinataController
 
     public function getData()
     {
-    	$model = $this->model->select('id','name','komag');
+    	$model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit');
 
     	$data = Table::of($model)
     		->addColumn('action',function($model){
@@ -102,7 +102,7 @@ class MaterialMroController extends TrinataController
     public function getDelete($id)
     {
         $model = $this->model->findOrFail($id);
-        return $this->delete($model,[$model->image]);
+        return $this->delete($model);
     }
 
     public function getPublish($id)
