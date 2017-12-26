@@ -15,7 +15,7 @@
         </div>
       </li>
 
-      @foreach(injectModel('Menu')->whereParentId(null)->where('slug','<>','pengajuan')->where('slug','<>','pencarian')->orderBy('order','asc')->get() as $row)
+      @foreach(injectModel('Menu')->whereParentId(null)->where('slug','<>','pengajuan')->where('slug','<>','pencarian')->where('slug','<>','development')->where('slug','<>','media-library')->orderBy('order','asc')->get() as $row)
 
       @if(in_array($row->id,$menuParentRole))
           @if(!empty($row->childs->first()->id))
@@ -23,7 +23,7 @@
           @else
             <li class="px-nav-item {{ searchMenu($row->id,'active') }}">
           @endif
-          <a href="{{ ($row->controller != '#' ? urlBackend($row->slug.'/index') : '#') }}"><i class="px-nav-icon fa {{(!empty($row->icon)) ? $row->icon : 'fa-clone'}}"></i><span class="px-nav-label">{{ $row->title }}</span></a>
+          <a href="{{ ($row->controller != '#' ? urlBackend($row->slug.'/index') : '#') }}"><i class="px-nav-icon fa {{(!empty($row->icon)) ? $row->icon : iconMenu($row->slug) }}"></i><span class="px-nav-label">{{ $row->title }}</span></a>
           @if(!empty($row->childs->first()->id))
           <ul class="px-nav-dropdown-menu">
             @foreach($row->childs as $child)

@@ -11,13 +11,13 @@
     <div class="collapse navbar-collapse" id="px-demo-navbar-collapse">
       <ul class="nav navbar-nav">
     <li>   
-      <a href="{{ urlBackend('dashboard/index') }}">Home</a>  
+      <a href="{{ urlBackend('dashboard/index') }}"><i class="fa fa-home"></i> Home</a>  
     </li>   
     @foreach($menuPencarian->get() as $row)
 
     @if(!empty($row->childs->first()))
-    <li  class="{{ searchMenu($row->id,'active') }}">   
-      <a  href="{{ urlBackend($row->childs->first()->slug.'/index') }}">{{$row->title}}</a>
+    <li  class="{{ searchMenu($row->id,'active') }}">
+      <a  href="{{ urlBackend($row->childs->first()->slug.'/index') }}"><i class="fa  {{iconMenu($row->slug)}} "></i> {{$row->title}}</a>
     </li> 
     @endif      
     @endforeach    
@@ -28,7 +28,7 @@
 
     @if(!empty($row->childs->first()))
     <li  class="{{ searchMenu($row->id,'active') }}">   
-      <a  href="{{ urlBackend($row->childs->first()->slug.'/index') }}">{{$row->title}}</a>
+      <a  href="{{ urlBackend($row->childs->first()->slug.'/index') }}"><i class="fa  {{iconMenu($row->slug)}} "></i> {{$row->title}}</a>
     </li> 
     @endif      
 

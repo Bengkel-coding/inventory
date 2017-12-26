@@ -88,3 +88,38 @@ function searchMenu($eachId,$return,$else="",$status=""){
 
         return $eachId == $id ? $return : $else;
     };
+
+function iconMenu($slug=false)
+{
+    if($slug=="dashboard"){
+        $icon = "fa-desktop";
+
+    }elseif($slug=="material"){
+        $icon = "fa-cubes";
+
+    }elseif($slug=="mutasi"){
+        $icon = "fa-refresh";
+
+    }elseif($slug=="pengembalian"){
+        $icon = "fa-undo";
+
+    }elseif($slug=="pemanfaatan"){
+        $icon = "fa-gavel";
+
+    }elseif($slug=="user"){
+        $icon = "fa-users";
+
+    }elseif($slug=="warehouse"){
+        $icon = "fa-hospital-o";
+
+    }elseif($slug=="pencarian"){
+        $icon = "fa-search";
+
+    }elseif($slug=="pengajuan"){
+        $icon = "fa-list";
+
+    }else{
+        $icon = "fa-clone";
+    }
+    return $icon;
+}
