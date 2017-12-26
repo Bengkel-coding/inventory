@@ -29,10 +29,17 @@ class MaterialMroController extends TrinataController
     public function getData(Request $request)
     {
 
-    	$model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc');
+    	$model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->whereType('mro')->orderBy('created_at','desc');
 
         if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
         if (isset($request->category) && $request->category) $model->where('category', $request->category);
+
+        $model = $model->get();
+        foreach ($model as $key => $value) {
+            $value->categoryAttribute($value->category);
+            $value->unitAttribute($value->unit);
+            // $value->unitPriceAttribute($value->unit_price);
+        }
 
     	$data = Table::of($model)
     		->addColumn('action',function($model){
@@ -67,9 +74,9 @@ class MaterialMroController extends TrinataController
         
         if ($request->file) {
             
-            $fileTemplate = \Trinata::globalUpload($request, 'file', 'excel/penelitian');
+            $fileTemplate = \Trinata::globalUpload($request, 'file', 'excel/material');
             
-            $path = public_path('contents/excel/penelitian'). '/'.$fileTemplate['filename'];
+            $path = public_path('contents/excel/material'). '/'.$fileTemplate['filename'];
             
             $savePenelitian = $this->uploadArea->parseMro($path, $request);
             
@@ -95,7 +102,7 @@ class MaterialMroController extends TrinataController
 
         $model->name = $request->name;
         $model->komag = $request->komag;
-        $model->code = $request->code;
+        // $model->code = $request->code;
         $model->unit = $request->unit;
         $model->year_acquisition = $request->year_acquisition;
         $model->amount = $request->amount;
@@ -136,12 +143,12 @@ class MaterialMroController extends TrinataController
 
         $model->name = $request->name;
         $model->komag = $request->komag;
-        $model->code = $request->code;
+        // $model->code = $request->code;
         $model->unit = $request->unit;
         $model->year_acquisition = $request->year_acquisition;
         $model->amount = $request->amount;
         $model->unit_price = $request->unit_price;
-        $model->type = 'mro';
+        // $model->type = 'mro';
         $model->category = $request->category;
         $model->description = $request->description;
         $model->warehouse_id = $request->warehouse_id;
