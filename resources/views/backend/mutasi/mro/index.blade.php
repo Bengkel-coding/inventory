@@ -15,7 +15,7 @@
                     {!! trinata::buttonCreate() !!}
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['y' => 'All Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
                       </div>
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
@@ -28,12 +28,12 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Nama Material</th>
+                                <th>KOMAG</th>
+                                <th>Deskripsi Material</th>
+                                <th>Jumlah Material</th>
+                                <!-- <th>Lokasi</th> -->
                                 <th>Action</th>
-                            </tr>
-                            <tr>
-                                <td>Title</td>
-                                <td>Action</td>
                             </tr>
                         </thead>
                         
@@ -54,15 +54,20 @@
         $(document).ready(function(){
              $('#table thead td').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    $(this).html( '<input type="text" placeholder="Search '+name+'" />' );
                 } );
-             
-          var table =  $('#table').DataTable({
+          
+          // var table =  $('#table').DataTable({
+            $('#table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
-                    { data: 'title', name: 'title' },
+                    { data: 'name', name: 'name' },
+                    { data: 'komag', name: 'komag' },
+                    { data: 'description', name: 'description' },
+                    { data: 'amount', name: 'amount' },
+                    // { data: 'warehouse_id', name: 'warehouse_id' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

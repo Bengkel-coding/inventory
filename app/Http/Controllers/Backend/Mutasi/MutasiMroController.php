@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers\Backend\Mutasi;
 
-
- 
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Crud;
+use App\Models\Materialdata;
+use App\Models\MaterialMro;
+use App\Models\Mutation;
+use App\Models\Warehouse;
 use Table;
 use Image;
 use trinata;
@@ -15,17 +15,19 @@ use trinata;
 class MutasiMroController extends TrinataController
 {
   
-    public function __construct(Crud $model)
+    public function __construct(Materialdata $model, Mutation $mutation)
     {
         parent::__construct();
         $this->model = $model;
-
+        // $this->mutation = $mutation;
+        
         $this->resource = "backend.mutasi.mro.";
     }
 
-    public function getData()
+    public function getData(Request $request)
     {
-        $model = $this->model->select('id','title','status');
+
+        $model = $this->model->select('id','name','komag','description','amount');
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
@@ -37,15 +39,28 @@ class MutasiMroController extends TrinataController
         return $data;
     }
 
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        return view($this->resource.'index');
+        
+        $model = $this->model;
+        $url = 'data';
+        $data = ['warehouse'=> Warehouse::get()];
+
+        return view($this->resource.'index', compact('model', 'url', 'request'));
     }
 
     public function getCreate()
     {
         $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
+        $data = ['ware'=> Warehouse::lists('name','id')];
+
+        // $status = false;
+        // if (\Auth::user()->role_id == 1) $status = true;
+        
+        // dd($status);
+        $disabled = '';
+
+        return view($this->resource.'_form',compact('model', 'data', 'disabled'));
     }
 
    public function postCreate(Requests\Backend\CrudRequest $request)
@@ -59,8 +74,11 @@ class MutasiMroController extends TrinataController
     public function getUpdate($id)
     {
         $model = $this->model->findOrFail($id);
+        $data = [
+                    'ware' => Warehouse::lists('name','id'),
+                ];
 
-        return view($this->resource.'_form',compact('model'));
+        return view($this->resource.'_form',compact('model', 'data', 'disabled'));
     }
 
     public function postUpdate(Requests\Backend\CrudRequest $request,$id)

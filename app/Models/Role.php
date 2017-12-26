@@ -33,4 +33,9 @@ class Role extends Model
     {
         return $this->belongsToMany(MenuAction::class , 'rights')->withPivot('id');
     }
+    
+    public function role()
+    {
+        return $this->hasMany(Right::class, 'role_id');
+    }
 }

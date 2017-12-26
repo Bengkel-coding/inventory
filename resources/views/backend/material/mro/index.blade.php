@@ -34,6 +34,7 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
+<<<<<<< HEAD
                                 <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>Komag</th>
@@ -52,6 +53,15 @@
                                 <th>Harga Unit</th>
                                 <td>Action</td>
                             </tr> -->
+=======
+                                <th>Nama Material</th>
+                                <th>KOMAG</th>
+                                <th>Deskripsi Material</th>
+                                <th>Jumlah Material</th>
+                                <!-- <th>Lokasi</th> -->
+                                <th>Action</th>
+                            </tr>
+>>>>>>> 39204940a332f252b21474220d315ef43a6c2298
                         </thead>
                         
                     </table>
@@ -94,6 +104,7 @@
                     { data: 'amount', name: 'amount' },
                     { data: 'unit', name: 'unit' },
                     { data: 'unit_price', name: 'unit_price' },
+
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

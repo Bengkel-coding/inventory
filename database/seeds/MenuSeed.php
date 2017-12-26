@@ -299,5 +299,49 @@ class MenuSeed extends Seeder
                     'order'         => '1'
                 ],['index','create','update','delete','publish']
             ); 
+
+        \trinata::addMenu([ 
+                'parent_id'     => null,
+                'title'         => 'Daftar Pengajuan',
+                'controller'    => '#',
+                'slug'          => 'pengajuan',
+                'order'         => 1,
+            ],[]);
+
+             \trinata::addMenu([ 
+                        'parent_id'     => 'pengajuan',
+                        'title'         => 'Pengajuan Mutasi Gudang',
+                        'controller'    => 'Pengajuan\PengajuanMutasiController',
+                        'slug'          => 'pengajuan-mutasi',
+                        'order'         => '1'
+                    ],['index','create','update','delete','publish']
+                ); 
+
+            \trinata::addMenu([ 
+                        'parent_id'     => 'pengajuan',
+                        'title'         => 'Pengajuan Pemanfataan',
+                        'controller'    => 'Pengajuan\PengajuanPemanfataanController',
+                        'slug'          => 'pengajuan-pemanfaatan',
+                        'order'         => '2'
+                    ],['index','create','update','delete','publish']
+                ); 
+
+            \trinata::addMenu([ 
+                        'parent_id'     => 'pengajuan',
+                        'title'         => 'Pengajuan Pengembalian',
+                        'controller'    => 'Pengajuan\PengajuanPengembalianController',
+                        'slug'          => 'pengajuan-pengembalian',
+                        'order'         => '3'
+                    ],['index','create','update','delete','publish']
+                ); 
+
+            \trinata::addMenu([ 
+                        'parent_id'     => 'pengajuan',
+                        'title'         => 'Pengajuan Inventarisasi',
+                        'controller'    => 'Pengajuan\PengajuanInventarisasiController',
+                        'slug'          => 'pengajuan-inventarisasi',
+                        'order'         => '4'
+                    ],['index','create','update','delete','publish']
+                ); 
     }
 }

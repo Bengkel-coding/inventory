@@ -16,7 +16,7 @@
 
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
                       </div>
 
 
@@ -31,18 +31,13 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Kode MRO-ABT</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
-                      
-                      <div class="form-group">
                         <label>Description Material</label>
                         {!! Form::textarea('description' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('status' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['y' => 'M' , 'n' => 'Liter'] , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
@@ -67,33 +62,15 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Tingkat Persedian Minimal(min)</label>
+                        <label>Kuantitas Inventarisasi</label>
                         {!! Form::text('title' , null ,['class' => 'form-control']) !!}
                       </div>
-
                       <div class="form-group">
-                        <label>Tingkat Persedian Maksimal(maks)</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        <label>Kondisi Barang </label>
+                        {!! Form::select('status' , ['y' => 'Rusak-usulan pengahpusan' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
                       </div>
 
-                      <div class="form-group">
-                        <label>Excess Stock</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
 
-                      <div class="form-group">
-                        <label>Status</label>
-                        {!! Form::select('status' , ['ds' => 'DS', 'fm' => 'FM' , 'pds' => 'PDS' , 'sm' => 'SM'] , null ,['class' => 'form-control']) !!}
-                      </div>
-                      <div class="form-group">
-                        <label>Keterangan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Lokasi </label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
-                      </div>
                       
 
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>

@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Backend\Pengembalian;
+<?php namespace App\Http\Controllers\Backend\Pengajuan;
 
 
  
@@ -12,15 +12,15 @@ use Table;
 use Image;
 use trinata;
 
-class PengembalianMroController extends TrinataController
-{ 
+class PengajuanInventarisasiController extends TrinataController
+{
   
     public function __construct(Crud $model)
     {
         parent::__construct();
         $this->model = $model;
 
-        $this->resource = "backend.pengembalian.mro.";
+        $this->resource = "backend.pengajuan.inventarisasi.";
     }
 
     public function getData()
@@ -40,11 +40,6 @@ class PengembalianMroController extends TrinataController
     public function getIndex()
     {
         return view($this->resource.'index');
-    }
-
-    public function getAjukan()
-    {
-        return view($this->resource.'ajukan');
     }
 
     public function getCreate()

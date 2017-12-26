@@ -7,7 +7,7 @@ use App\Models\Warehouse;
 use App\Models\MaterialDetails;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Material extends Model
+class Materialdata extends Model
 {
     use SoftDeletes;
     protected $table = 'materials';
@@ -21,7 +21,7 @@ class Material extends Model
 
     public function details()
     {
-    	return $this->hasMany(MaterialDetail::class,'material_id', 'id');
+    	return $this->hasMany(MaterialDetails::class,'material_id', 'id');
     }
 
 }

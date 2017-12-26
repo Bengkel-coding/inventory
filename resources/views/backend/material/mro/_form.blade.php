@@ -16,7 +16,7 @@
 
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
 
 
@@ -42,7 +42,7 @@
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('status' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('satuan' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
@@ -83,8 +83,9 @@
 
                       <div class="form-group">
                         <label>Status</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['ds' => 'DS', 'fm' => 'FM' , 'pds' => 'PDS' , 'sm' => 'SM'] , null ,['class' => 'form-control']) !!}
                       </div>
+                      
                       <div class="form-group">
                         <label>Keterangan</label>
                         {!! Form::text('title' , null ,['class' => 'form-control']) !!}

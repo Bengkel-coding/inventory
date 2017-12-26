@@ -12,8 +12,22 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                    {!! trinata::buttonCreate() !!}
+                      <div class="form-group">
+                        <label>Kategori Barang</label>
+                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
+                      </div>
+                      <div class="form-group">
+                        <label>Lokasi Gudang</label>
+                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                      </div>
+                      
+                    <a href="#" class="btn btn-success">Lihat</a>
+
                     <p>&nbsp;</p>
+                      
+                    <a href="{{urlBackendAction('ajukan')}}" class="btn btn-info btn-large">Ajukan</a>
+                    <p>&nbsp;</p>
+                      
 
                     <table class = 'table' id = 'table'>
                         <thead>
@@ -21,10 +35,10 @@
                                 <th>Title</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>Title</td>
                                 <td>Action</td>
-                            </tr>
+                            </tr> -->
                         </thead>
                         
                     </table>
@@ -42,10 +56,10 @@
     <script type="text/javascript">
         
         $(document).ready(function(){
-             $('#table thead td').each( function () {
-                    var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-                } );
+             // $('#table thead td').each( function () {
+             //        var title = $(this).text();
+             //        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+             //    } );
              
           var table =  $('#table').DataTable({
                 processing: true,
@@ -58,17 +72,17 @@
             });
 
             // Apply the search
-            table.columns().every( function () {
-                var that = this;
+            // table.columns().every( function () {
+            //     var that = this;
          
-                $( 'input', this.footer() ).on( 'keyup change', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                            .search( this.value )
-                            .draw();
-                    }
-                } );
-            } );
+            //     $( 'input', this.footer() ).on( 'keyup change', function () {
+            //         if ( that.search() !== this.value ) {
+            //             that
+            //                 .search( this.value )
+            //                 .draw();
+            //         }
+            //     } );
+            // } );
         });
 
     </script>

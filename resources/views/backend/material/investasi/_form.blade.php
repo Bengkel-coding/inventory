@@ -73,7 +73,7 @@
 
                       <div class="form-group">
                         <label>Status</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['' => '-', 'merah' => 'Merah' , 'kuning' => 'Kuning' , 'hijau' => 'Hijau' , 'hijaumuda' => 'Hijau Muda'] , null ,['class' => 'form-control']) !!}
                       </div>
                       <div class="form-group">
                         <label>Keterangan</label>

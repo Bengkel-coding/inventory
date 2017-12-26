@@ -42,6 +42,12 @@ class PemanfaatanMroController extends TrinataController
         return view($this->resource.'index');
     }
 
+
+    public function getAjukan()
+    {
+        return view($this->resource.'ajukan');
+    }
+
     public function getCreate()
     {
         $model = $this->model;
