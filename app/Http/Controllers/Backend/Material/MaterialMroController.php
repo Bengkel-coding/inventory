@@ -44,8 +44,9 @@ class MaterialMroController extends TrinataController
 
     public function getIndex()
     {
-        $warehouse = \App\Models\Warehouse::lists('name','id');
-        
+        $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
+        $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
+
     	return view($this->resource.'index', compact('warehouse'));
     }
 

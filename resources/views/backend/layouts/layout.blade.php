@@ -21,5 +21,6 @@
 
 @endif
 @include('backend.layouts.footer')
+
 @stack('script-js')
 </html>

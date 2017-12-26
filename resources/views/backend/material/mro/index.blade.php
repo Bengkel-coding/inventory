@@ -34,7 +34,7 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-<<<<<<< HEAD
+
                                 <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>Komag</th>
@@ -53,15 +53,7 @@
                                 <th>Harga Unit</th>
                                 <td>Action</td>
                             </tr> -->
-=======
-                                <th>Nama Material</th>
-                                <th>KOMAG</th>
-                                <th>Deskripsi Material</th>
-                                <th>Jumlah Material</th>
-                                <!-- <th>Lokasi</th> -->
-                                <th>Action</th>
-                            </tr>
->>>>>>> 39204940a332f252b21474220d315ef43a6c2298
+
                         </thead>
                         
                     </table>
@@ -79,8 +71,14 @@
     <script type="text/javascript">
         
         $('.import').click(function(){
+
             var link = $(this).attr('data');
-            var warehouse = $('.warehouse').val();
+            var warehouse = $('.warehouse').val() || 0;
+            if (warehouse == 0) {
+                alert('Pilih Gudang Terlebih Dahulu');
+                return false;  
+            } 
+            
             generateLink = link+'?warehouse='+warehouse;
             // alert(generateLink);return false;
             window.location.href=generateLink;
@@ -91,7 +89,7 @@
                     var title = $(this).text();
                     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
                 } );
-             
+            
           var table =  $('#table').DataTable({
                 processing: true,
                 serverSide: true,
