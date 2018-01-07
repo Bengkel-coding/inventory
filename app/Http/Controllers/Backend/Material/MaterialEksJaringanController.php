@@ -112,9 +112,11 @@ class MaterialEksJaringanController extends TrinataController
         
         if ($model->save()) {
             $mro = new \App\Models\MaterialEksjar;
-            $mro->material_id = $model->id;
-            $mro->surplus_material = $request->surplus_material;
-            $mro->status = $request->status;
+            $mro->merk = $request->merk;
+            $mro->specification = $request->specification;
+            $mro->year_production = $request->year_production;
+            $mro->previous_location = $request->previous_location;
+            $mro->note = $request->note;
             $mro->save();
         }
 
@@ -125,6 +127,7 @@ class MaterialEksJaringanController extends TrinataController
     {
         $model = $this->model->findOrFail($id);
         $warehouse = \App\Models\Warehouse::lists('name','id');
+
 
         return view($this->resource.'_form',compact('model', 'warehouse'));
     }
@@ -139,7 +142,7 @@ class MaterialEksJaringanController extends TrinataController
         $model->name = $request->name;
         $model->komag = $request->komag;
         $model->code = $request->code;
-        $model->unit = $request->unit;
+        // $model->unit = $request->unit;
         $model->year_acquisition = $request->year_acquisition;
         $model->amount = $request->amount;
         $model->unit_price = $request->unit_price;
@@ -150,14 +153,17 @@ class MaterialEksJaringanController extends TrinataController
         
         if ($model->save()) {
             $mro = \App\Models\MaterialEksjar::whereMaterialId($model->id)->first();
-            $mro->surplus_material = $request->surplus_material;
-            $mro->status = $request->status;
+            $mro->merk = $request->merk;
+            $mro->specification = $request->specification;
+            $mro->year_production = $request->year_production;
+            $mro->previous_location = $request->previous_location;
+            $mro->note = $request->note;
             // dd($mro);
             $mro->save();
         }
 
         return redirect(urlBackendAction('index'))->with('success','Data Has Been Updated');
-        return $this->insertOrUpdate($model,$inputs);
+        // return $this->insertOrUpdate($model,$inputs);
     }
 
     public function getDelete($id)

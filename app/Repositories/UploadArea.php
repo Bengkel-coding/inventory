@@ -170,6 +170,110 @@ class UploadArea
 		return true;
 	}
 
+	public function parseJaringan($path, $request)
+	{
+		$countData = 0;
+
+		Excel::selectSheets('Sheet1')->load($path, function($reader) use($request) {
+    		
+    		$results = $reader->get();
+    		
+    		$mro = [];
+    		$index = 1;
+    		
+    		$parent = null;
+    		$satuan = ['meter'=>'meter','mtr'=>'meter','pcs'=>'pieces','bh'=>'buah', 'roll'=>'roll','liter'=>'liter','unit'=>'unit'];
+    		$code = ['TUBULAR GOOD'=>'tubular','INSTRUMENT'=>'instrument','COCK & VALVE' =>'cock','FITTING & FLANGE'=>'fitting','BAHAN KIMIA & PERALATAN'=>'bahankimia', 'LAIN-LAIN'=>'lainlain'];
+
+    		foreach ($results as $key => $value) {
+    			
+    			if (!$value->nama_material) {
+    				$parent = $value->no;
+    				$index = 0;
+    				continue;	
+    			} 
+
+    			if (!in_array($parent, array_keys($code))) continue;
+    			// if (!in_array(strtolower(trim($value->satuan)), array_keys($satuan))) continue;
+
+    			$mro[$parent][$index]['name'] = $value->nama_material;
+    			$mro[$parent][$index]['komag'] = $value->komag;
+    			$mro[$parent][$index]['code'] = $value->kode_mro_abtkode_mi;
+    			$mro[$parent][$index]['description'] = $value->deskripsi_material;
+    			$mro[$parent][$index]['unit'] = $satuan[strtolower(trim('pcs'))];
+    			$mro[$parent][$index]['year_acquisition'] = $value->tahun_pembuatanperolehan;
+    			$mro[$parent][$index]['amount'] = $value->saldo_awal_jumlah_material;
+    			$mro[$parent][$index]['type'] = 'eksjar';
+    			$mro[$parent][$index]['category'] = $code[strtoupper($parent)];
+    			$mro[$parent][$index]['warehouse_id'] = $request->warehouse;
+    			$mro[$parent][$index]['merk'] = $value->merek;
+    			$mro[$parent][$index]['specification'] = $value->spesifikasi;
+    			$mro[$parent][$index]['year_production'] = $value->tahun_pembuatanperolehan;
+    			$mro[$parent][$index]['previous_location'] = $value->lokasi_awal;
+    			$mro[$parent][$index]['note'] = $value->keterangan;
+
+    			$index++;
+    		}
+    		// dd($);
+    		if (is_array($mro)) {
+    			$saveDataMro = $this->saveDataJaringan($mro);
+    		}
+    		
+		})->get();
+
+		return true;
+	}
+
+	public function parseTercatat($path, $request)
+	{
+		$countData = 0;
+
+		Excel::selectSheets('Sheet1')->load($path, function($reader) use($request) {
+    		
+    		$results = $reader->get();
+    		
+    		$mro = [];
+    		$index = 1;
+    		
+    		$parent = null;
+    		$satuan = ['meter'=>'meter','mtr'=>'meter','pcs'=>'pieces','bh'=>'buah', 'roll'=>'roll','liter'=>'liter','unit'=>'unit'];
+    		$code = ['TUBULAR GOOD'=>'tubular','INSTRUMENT'=>'instrument','COCK & VALVE' =>'cock','FITTING & FLANGE'=>'fitting','BAHAN KIMIA & PERALATAN'=>'bahankimia', 'LAIN-LAIN'=>'lainlain'];
+
+    		foreach ($results as $key => $value) {
+    			
+    			if (!$value->nama_material) {
+    				$parent = $value->no;
+    				$index = 0;
+    				continue;	
+    			} 
+
+    			if (!in_array($parent, array_keys($code))) continue;
+    			// if (!in_array(strtolower(trim($value->satuan)), array_keys($satuan))) continue;
+
+    			$mro[$parent][$index]['name'] = $value->nama_material;
+    			$mro[$parent][$index]['komag'] = $value->komag;
+    			$mro[$parent][$index]['code'] = $value->kode_mi;
+    			$mro[$parent][$index]['description'] = $value->deskripsi_material;
+    			$mro[$parent][$index]['unit'] = $satuan[strtolower(trim($value->satuan))];
+    			$mro[$parent][$index]['year_acquisition'] = $value->tahun_perolehan;
+    			$mro[$parent][$index]['amount'] = $value->saldo_awal_jumlah_material;
+    			$mro[$parent][$index]['type'] = 'tercatat';
+    			$mro[$parent][$index]['category'] = $code[strtoupper($parent)];
+    			$mro[$parent][$index]['note'] = $value->keterangan;
+    			$mro[$parent][$index]['warehouse_id'] = $request->warehouse;
+    			
+    			$index++;
+    		}
+    		// dd($mro);
+    		if (is_array($mro)) {
+    			$saveDataMro = $this->saveDataTercatat($mro);
+    		}
+    		
+		})->get();
+
+		return true;
+	}
+
 	public function saveDataMro($data)
 	{
 		$fields = ['name','komag','description','unit','year_acquisition','amount','unit_price','type','category','warehouse_id'];
@@ -278,6 +382,75 @@ class UploadArea
 		if (env('CONSOLE_DUPLICATE', false)) \Artisan::call('trinata:duplicate-data');
 	}
 
+	public function saveDataJaringan($data)
+	{
+		$fields = ['name','komag','code','description','unit','year_acquisition','amount','type','category','warehouse_id'];
+		
+		$fieldRef = ['merk','specification','year_production','previous_location','note'];
+
+		
+		foreach ($data as $parent) {
+			
+			foreach ($parent as $key => $value) {
+				
+				$model = new \App\Models\Material;
+				foreach ($fields as $field) {
+					
+					$model->{$field} = $value[$field];
+				}
+
+				if (!$model->komag) $model->komag = rand();
+				
+				if (! $this->isDataExist($value['category'], $model->komag, $value['warehouse_id'])) continue;
+				// dd($model);
+				if ($model->save()) {
+
+					$ref = new \App\Models\MaterialEksjar;
+					$ref->material_id = $model->id;
+
+					foreach ($fieldRef as $field) {
+					
+						$ref->{$field} = $value[$field];
+					}
+					
+					$ref->save();
+				}
+			}
+			
+		}
+
+		if (env('CONSOLE_DUPLICATE', false)) \Artisan::call('trinata:duplicate-data');
+	}
+
+	public function saveDataTercatat($data)
+	{
+		$fields = ['name','komag','code','description','unit','year_acquisition','amount','type','category','warehouse_id','note'];
+		
+		// $fieldRef = ['merk','specification','year_production','previous_location','note'];
+
+		
+		foreach ($data as $parent) {
+			
+			foreach ($parent as $key => $value) {
+				
+				$model = new \App\Models\Material;
+				foreach ($fields as $field) {
+					
+					$model->{$field} = $value[$field];
+				}
+
+				if (!$model->komag) $model->komag = rand();
+				
+				if (! $this->isDataExist($value['category'], $model->komag, $value['warehouse_id'])) continue;
+				
+				$model->save();
+				
+			}
+			
+		}
+
+		if (env('CONSOLE_DUPLICATE', false)) \Artisan::call('trinata:duplicate-data');
+	}
 
 	public function isDataExist($category=false, $komag=false, $warehouse=false, $current_komag=false)
 	{

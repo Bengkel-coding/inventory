@@ -16,23 +16,23 @@
 
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
 
 
                       <div class="form-group">
                         <label>Nama Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('name' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>KOMAG</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('komag' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Kode MRO-ABT / Kode MI</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div>
                       
                       <div class="form-group">
@@ -42,43 +42,43 @@
 
                       <div class="form-group">
                         <label>Merk</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('merk' , isset($model->id) ? $model->jaringan->merk : null ,['class' => 'form-control']) !!}
                       </div>
 
 
                       <div class="form-group">
                         <label>Spesifikasi</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('specification' , isset($model->id) ? $model->jaringan->specification : null ,['class' => 'form-control']) !!}
                       </div>
 
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Serial Number</label>
                         {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
+                      </div> -->
 
                       <div class="form-group">
                         <label>Tahun Pembuatan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('year_production' , isset($model->id) ? $model->jaringan->year_production : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Lokasi Awal</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('previous_location' , isset($model->id) ? $model->jaringan->previous_location : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Keterangan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('note' , isset($model->id) ? $model->jaringan->note : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Lokasi Penyimpanan</label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('warehouse_id' , $warehouse , null ,['class' => 'form-control']) !!}
                       </div>
                       
 

@@ -41,8 +41,8 @@
                                 <th>Komag</th>
                                 <th>Tahun Perolehan</th>
                                 <th>Jumlah</th>
-                                <th>Satuan</th>
-                                <th>Harga Unit</th>
+                                <!-- <th>Satuan</th> -->
+                                <!-- <th>Harga Unit</th> -->
                                 <th>Action</th>
                             </tr>
                             <!-- <tr>
@@ -103,8 +103,8 @@
                     { data: 'komag', name: 'komag' },
                     { data: 'year_acquisition', name: 'year_acquisition' },
                     { data: 'amount', name: 'amount' },
-                    { data: 'unit', name: 'unit' },
-                    { data: 'unit_price', name: 'unit_price' },
+                    // { data: 'unit', name: 'unit' },
+                    // { data: 'unit_price', name: 'unit_price' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]
