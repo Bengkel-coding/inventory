@@ -27,7 +27,7 @@ class MaterialEksJaringanController extends TrinataController
 
     public function getData(Request $request)
     {
-        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->whereType('eksjar')->orderBy('created_at','desc');
+        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->whereType('eksjar')->whereStatus(0)->orderBy('created_at','desc');
 
         if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
         if (isset($request->category) && $request->category) $model->where('category', $request->category);
