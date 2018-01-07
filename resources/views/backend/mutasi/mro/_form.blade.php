@@ -77,12 +77,12 @@
 
                       <div class="form-group">
                         <label>Usulan Mutasi </label>
-                        {!! Form::select('warehouse_id' , $data['ware'] , null ,['class' => 'form-control', (!empty($model->id))]) !!}
+                        {!! Form::select('proposed_warehouse_id' , $data['ware'] , null ,['class' => 'form-control', (!empty($model->id))]) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Kuantitas Mutasi</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('proposed_amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       

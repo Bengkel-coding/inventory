@@ -14,8 +14,8 @@
                   @include('backend.common.flashes')
                     {!! trinata::buttonCreate() !!}
                       <div class="form-group">
-                        <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'All Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
+                        <label>Kategori Material</label>
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
