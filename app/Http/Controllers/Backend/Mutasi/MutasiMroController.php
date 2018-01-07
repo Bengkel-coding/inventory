@@ -28,7 +28,7 @@ class MutasiMroController extends TrinataController
     public function getData(Request $request)
     {
 
-        $model = $this->model->select('id','name','komag','description','amount')->orderBy('created_at','desc')->whereStatus(0);
+        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0);
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
@@ -116,13 +116,22 @@ class MutasiMroController extends TrinataController
                     // Material::find($id)->replicate()->save();
                     // $modelnew = Material::find($id);
 
-                    $task = Material::find($id);
-                    $modelnew = $task->replicate();
+                    $taskmaterial = Material::find($id);
+                    $modelnew = $taskmaterial->replicate();
                     // dd($modelnew);
                     $modelnew->amount = $mutation->proposed_amount;
                     $modelnew->warehouse_id = $mutation->proposed_warehouse_id;
                     $modelnew->status = $mutation->status;
                     $modelnew->save();
+
+                    $mat_id = $model->id;
+                    $matnew_id = $modelnew->id;
+                    // dd($mat_id, $matnew_id);
+                    $taskmro = MaterialMro::where('material_id', '=', $model->id)->first();
+                    $modelmro = $taskmro->replicate();
+                    // dd($modelmro);
+                    $modelmro->material_id = $modelnew->id;
+                    $modelmro->save();
 
                 }else{
                     $model->amount = $model->amount + $model->proposed_amount;
