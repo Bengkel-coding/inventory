@@ -127,7 +127,7 @@ class MaterialMroAbtController extends TrinataController
     public function getUpdate($id)
     {
         $model = $this->model->findOrFail($id);
-
+        
         $warehouse = \App\Models\Warehouse::lists('name','id');
 
         return view($this->resource.'_form',compact('model','warehouse'));
