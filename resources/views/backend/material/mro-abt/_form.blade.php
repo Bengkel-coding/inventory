@@ -63,22 +63,22 @@
 
                       <div class="form-group">
                         <label>Tingkat Persedian Minimal(min)</label>
-                        {!! Form::text('min_stock_level' , isset($model->id) ? $model->mro->min_stock_level : null ,['class' => 'form-control']) !!}
+                        {!! Form::text('min_stock_level' , isset($model->id) ? $model->mroabt->min_stock_level : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Tingkat Persedian Maksimal(maks)</label>
-                        {!! Form::text('max_stock_level' , isset($model->id) ? $model->mro->max_stock_level : null ,['class' => 'form-control']) !!}
+                        {!! Form::text('max_stock_level' , isset($model->id) ? $model->mroabt->max_stock_level : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Excess Stock</label>
-                        {!! Form::text('excess_stock' , isset($model->id) ? $model->mro->excess_stock : null ,['class' => 'form-control']) !!}
+                        {!! Form::text('excess_stock' , isset($model->id) ? $model->mroabt->excess_stock : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Status</label>
-                        {!! Form::select('status' , ['ds' => 'DS', 'fm' => 'FM' , 'pds' => 'PDS' , 'sm' => 'SM'] , isset($model->id) ? $model->mro->status : null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['ds' => 'DS', 'fm' => 'FM' , 'pds' => 'PDS' , 'sm' => 'SM'] , isset($model->id) ? $model->mroabt->status : null ,['class' => 'form-control']) !!}
                       </div>
                       
                       <!-- <div class="form-group">
