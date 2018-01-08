@@ -27,9 +27,12 @@ class MutasiMroController extends TrinataController
 
     public function getData(Request $request)
     {
+        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('mro');
 
-        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0);
+        if (isset($request->category) && $request->category) $model->where('category', $request->category);
 
+        $model = $model->get();
+        
         $data = Table::of($model)
             ->addColumn('action',function($model){
                 $status = $model->status == 'y' ? true : false;
@@ -58,7 +61,7 @@ class MutasiMroController extends TrinataController
         // if (\Auth::user()->role_id == 1) $status = true;
         
         // dd($status);
-        $disabled = '';
+        
 
         return view($this->resource.'_form',compact('model', 'data'));
     }
@@ -124,8 +127,8 @@ class MutasiMroController extends TrinataController
                     $modelnew->status = $mutation->status;
                     $modelnew->save();
 
-                    $mat_id = $model->id;
-                    $matnew_id = $modelnew->id;
+                    // $mat_id = $model->id;
+                    // $matnew_id = $modelnew->id;
                     // dd($mat_id, $matnew_id);
                     $taskmro = MaterialMro::where('material_id', '=', $model->id)->first();
                     $modelmro = $taskmro->replicate();

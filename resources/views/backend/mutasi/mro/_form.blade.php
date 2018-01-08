@@ -28,6 +28,11 @@
                       </div>
 
                       <div class="form-group">
+                        <label>Nomor Kartu</label>
+                        {!! Form::text('cardnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                      </div>
+                      
+                      <div class="form-group">
                         <label>KOMAG</label>
                         {!! Form::text('komag' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>

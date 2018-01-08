@@ -12,7 +12,8 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                    {!! trinata::buttonCreate() !!}
+
+                    <form method="get" action="">
                       <div class="form-group">
                         <label>Kategori Material</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
@@ -22,7 +23,10 @@
                         {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
                       </div>
                       
+
                     <a href="#" class="btn btn-info">Lihat</a>
+                    <!-- <button type="submit" class="btn btn-info">Lihat</button> -->
+                    </form>
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>

@@ -16,18 +16,18 @@
 
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
 
 
                       <div class="form-group">
                         <label>Nama Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('name' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>KOMAG</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('komag' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
@@ -37,12 +37,12 @@
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('status' , ['y' => 'M' , 'n' => 'Liter'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('satuan' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Tahun Perolehan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('year_acquisition' , null ,['class' => 'form-control']) !!}
                       </div>
 
 
