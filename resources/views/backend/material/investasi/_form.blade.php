@@ -34,6 +34,10 @@
                         <label>Kode MI</label>
                         {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div>
+                      <div class="form-group">
+                        <label>Nomor Kartu</label>
+                        {!! Form::text('cardnumber' , null ,['class' => 'form-control']) !!}
+                      </div>
                       
                       <div class="form-group">
                         <label>Description Material</label>

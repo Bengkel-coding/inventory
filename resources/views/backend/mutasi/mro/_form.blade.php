@@ -25,16 +25,16 @@
                       <div class="form-group">
                         <label>Nama Material</label>
                         {!! Form::text('name' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Nomor Kartu</label>
-                        {!! Form::text('cardnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
-                      </div>
+                      </div>                  
                       
                       <div class="form-group">
                         <label>KOMAG</label>
                         {!! Form::text('komag' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>Nomor Kartu</label>
+                        {!! Form::text('cardnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
                       
                       <!-- 
@@ -77,7 +77,6 @@
                       <div class="form-group">
                         <label>Lokasi </label>
                         {!! Form::select('warehouse_id' , $data['ware'] , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
-                       
                       </div>
 
                       <div class="form-group">
