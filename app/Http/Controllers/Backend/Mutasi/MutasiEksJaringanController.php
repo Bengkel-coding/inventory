@@ -15,11 +15,12 @@ use trinata;
 class MutasiEksJaringanController extends TrinataController
 {
   
-    public function __construct(Material $model, Mutation $mutation)
+    public function __construct(Material $model, Mutation $mutation, MaterialEksjar $eksjar)
     {
         parent::__construct();
         $this->middleware('auth');
         $this->model = $model;
+        $this->eksjar = $eksjar;
         $this->mutation = $mutation;
 
         $this->resource = "backend.mutasi.eks-jaringan.";
@@ -75,7 +76,12 @@ class MutasiEksJaringanController extends TrinataController
     public function getUpdate($id)
     {
         $model = $this->model->findOrFail($id);
-        $data = ['ware' => Warehouse::lists('name','id')];
+        
+        $data = [
+                    'ware' => Warehouse::lists('name','id'),
+                    'spec' => MaterialEksjar::lists('specification', 'id')
+                ];
+
 
         return view($this->resource.'_form',compact('model', 'data'));
     }

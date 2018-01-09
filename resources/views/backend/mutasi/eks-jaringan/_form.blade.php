@@ -58,6 +58,7 @@
                       <div class="form-group">
                         <label>Spesifikasi</label>
                         {!! Form::text('specification' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                        <!-- {!! Form::text('specification' , $data['spec'] , null ,['class' => 'form-control', (!empty($model->id))]) !!} -->
                       </div>
 
                       <div class="form-group">
