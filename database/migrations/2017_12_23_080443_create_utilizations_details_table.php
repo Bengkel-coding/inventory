@@ -19,6 +19,8 @@ class CreateUtilizationsDetailsTable extends Migration
             $table->decimal('real_amount', 8, 2);
             $table->decimal('proposed_amount', 8, 2);
             $table->timestamps();
+            
+            $table->softDeletes();
         });
     }
 
