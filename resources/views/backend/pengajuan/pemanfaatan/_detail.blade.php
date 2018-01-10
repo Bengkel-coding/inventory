@@ -17,47 +17,43 @@
                 <div class="col-md-6 fadeIn animated"> 
                   <div class="form-group">
                     <label>No Pengeluaran Material</label>
-                    {!! Form::text('no_utilization' , null ,['class' => 'form-control' ,'required'=>'required']) !!}
+                    {!! Form::text('no_utilization' , null ,['class' => 'form-control' ,'readonly'=>'readonly']) !!}
                   </div>
                   <div class="form-group">
                     <label>Tanggal Pengeluaran</label>
-                    {!! Form::text('date_utilization' , null ,['class' => 'form-control datepicker','required'=>'required']) !!}
+                    {!! Form::text('date_utilization' , null ,['class' => 'form-control datepicker','readonly'=>'readonly']) !!}
                   </div>
                   <div class="form-group">
                     <label>Kepada</label>
-                    {!! Form::text('to' , null ,['class' => 'form-control','required'=>'required']) !!}
+                    {!! Form::text('to' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
                   </div>
                   <div class="form-group">
                     <label>Dari</label>
-                    {!! Form::text('from' , null ,['class' => 'form-control','required'=>'required']) !!}
+                    {!! Form::text('from' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
                   </div>
                   <div class="form-group">
                     <label>Diharapkan Diterima Tanggal</label>
-                    {!! Form::text('expected_receive_date' , null ,['class' => 'form-control datepicker','required'=>'required']) !!}
+                    {!! Form::text('expected_receive_date' , null ,['class' => 'form-control datepicker','readonly'=>'readonly']) !!}
                   </div>
                 </div>
                 <div class="col-md-6 fadeIn animated"> 
                   <div class="form-group">
                     <label>Dibukukan Oleh</label>
-                    {!! Form::text('booked_by' , null ,['class' => 'form-control','required'=>'required']) !!}
+                    {!! Form::text('booked_by' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
                   </div>
                   <div class="form-group">
                     <label>Kode Perkiraan</label>
-                    {!! Form::text('estimation_code' , null ,['class' => 'form-control','required'=>'required']) !!}
+                    {!! Form::text('estimation_code' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
                   </div>
                   <div class="form-group">
                     <label>Tanggal Dibukukan</label>
-                    {!! Form::text('date_booked' , null ,['class' => 'form-control datepicker','required'=>'required']) !!}
+                    {!! Form::text('date_booked' , null ,['class' => 'form-control datepicker','readonly'=>'readonly']) !!}
                   </div>
                   <div class="form-group">
                     <label>Keterangan</label>
-                    {!! Form::textarea('details' , null ,['class' => 'form-control','rows'=>'5','required'=>'required']) !!}
+                    {!! Form::textarea('details' , null ,['class' => 'form-control','rows'=>'5','readonly'=>'readonly']) !!}
                   </div>
                 </div>
-            </div>
-            <div class="row p-a-3">              
-                <a href="{{urlBackendAction('index')}}" class="btn btn-success">Add more</a>
-                <button type="submit" class="btn btn-info">Ajukan</button>
             </div>
             {!! Form::close() !!}
             <div class="row p-a-3">
@@ -77,23 +73,10 @@
                                 <th>Jumlah Barang</th>
                                 <th>Jumlah Diusulkan</th>
                                 <th>Satuan</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                          @foreach($cart as $item)
-                            <tr>                              
-                                <td>{{$item->options['category']}}</td>
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->options['komag']}}</td>
-                                <td>{{$item->options['year_acquisition']}}</td>
-                                <td>{{$item->price}}</td>
-                                <td><input type="text" class="form-control" value="{{$item->options['amount']}}" readonly="readonly"></td>
-                                <td><input type="text" class="form-control" value="{{$item->qty}}" readonly="readonly"></td>
-                                <td>{{$item->options['unit']}}</td>
-                                <td><a href="{{urlBackendAction('deletecart/'.$item->id)}}"><i class="fa fa-close"></i></a></td>
-                            </tr>
-                          @endforeach
+                        
                         </tbody>
                         
                     </table>

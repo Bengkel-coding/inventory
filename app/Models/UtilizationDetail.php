@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Material;
-use App\Models\UtilizationDetail;
+use App\Models\Utilization;
 use App\Models\Warehouse;
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Utilization extends Model
+class UtilizationDetail extends Model
 {
     use SoftDeletes;
-    protected $table = 'utilizations';
+    protected $table = 'utilization_details';
 
     public $guarded = [];
 
@@ -26,13 +26,14 @@ class Utilization extends Model
         return $this->belongsTo(Warehouse::class,'warehouse_id');
     }
 
+    public function utilization()
+    {
+        return $this->belongsTo(Utilization::class,'utilization_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function utilizationDetail()
-    {
-        return $this->hasMany(UtilizationDetail::class, 'utilization_id');
-    }
 }

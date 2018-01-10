@@ -7,8 +7,8 @@
 
 
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
-  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="{{ asset(null) }}backend/assets/css/ionicons.min.css" rel="stylesheet" type="text/css">
+  <link href="{{ asset(null) }}backend/assets/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <link href="{{ asset(null) }}backend/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" class="px-demo-stylesheet-bs">
   <link href="{{ asset(null) }}backend/assets/css/admin.min.css" rel="stylesheet" type="text/css" class="px-demo-stylesheet-core">
@@ -22,10 +22,12 @@
   <link href="{{ asset(null) }}backend/assets/css/style.css" rel="stylesheet" type="text/css">
   <link href="{{ asset(null) }}backend/assets/css/animate.css" rel="stylesheet" type="text/css">
 
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/holder/2.9.0/holder.js"></script>
+  <script type="text/javascript" src="{{ asset(null) }}backend/assets/js/holder.js"></script>
+
+  <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/holder/2.9.0/holder.js"></script> -->
 <link rel="stylesheet" type="text/css" media="screen" href="{{ asset(null) }}backend//elfinder/css/elfinder.min.css">
 
-<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="{{ asset(null) }}backend/assets/css/jquery-ui.css">
 
   <!-- Pace.js -->
   <script src="{{ asset(null) }}backend/assets/pace/pace.min.js"></script>
@@ -39,9 +41,9 @@
   =============================================================================== -->
 
   <!-- jQuery -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script  type="text/javascript" src="{{ asset(null) }}backend/assets/js/jquery.min.js"></script>
 
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ asset(null) }}backend/assets/js/jquery-ui.min.js"></script>
   <script src="{{ asset(null) }}backend/assets/js/bootstrap.min.js"></script>
   <script src="{{ asset(null) }}backend/assets/js/admin.min.js"></script>
 <script type="text/javascript" src="{{ asset(null) }}backend/elfinder/js/elfinder.min.js"></script>
@@ -87,7 +89,6 @@
       $('#threads').perfectScrollbar();
     });
   </script>
-
   <!-- Custom styling -->
   <style>
     .page-header-form .input-group-addon,

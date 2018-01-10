@@ -12,7 +12,7 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                      <div class="form-group">
+                     <!--  <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
                       </div>
@@ -22,7 +22,7 @@
                       </div>
                       
                     <a href="#" class="btn btn-success">Lihat</a>
-
+ -->
                     <p>&nbsp;</p>
                       
                     <a href="{{urlBackendAction('ajukan')}}" class="btn btn-info btn-large">Ajukan</a>
@@ -32,12 +32,24 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Action</th>
+                                <th>&nbsp;</th>
+                                <th>Kategori</th>
+                                <th>Nama</th>
+                                <th>Komag</th>
+                                <th>Tahun Perolehan</th>
+                                <th>Harga Unit</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
                             </tr>
                             <!-- <tr>
-                                <td>Title</td>
-                                <td>Action</td>
+                                <td>&nbsp;</td>
+                                <td>Kategori</td>
+                                <td>Nama</td>
+                                <td>Komag</td>
+                                <td>Tahun Perolehan</td>
+                                <td>Harga Unit</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
                             </tr> -->
                         </thead>
                         
@@ -49,48 +61,81 @@
 
     </div>
   </div>
+@endsection
 
+@push('script-js')
     
     <script type="text/javascript">
         
-
         $(document).ready(function(){
+
              // $('#table thead td').each( function () {
              //        var title = $(this).text();
-             //        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+             //        if(title=="Kategori" || title=="Nama" || title=="Komag"  || title=="Tahun Perolehan"  || title=="Harga Unit"){
+             //          $(this).html( '<input type="text" placeholder="'+title+'" />' );
+             //        }else{
+             //          return "";
+             //        }
              //    } );
-             
              
           var table =  $('#table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
-                    { data: 'title', name: 'title' },
-                    { data: 'action', name: 'action' , searchable: false},
+                    { data: 'id', name: 'id' , searchable: false , bSortable: false},
+                    { data: 'category', name: 'category'  , bSortable: false},
+                    { data: 'name', name: 'name' , bSortable: false},
+                    { data: 'komag', name: 'komag'  , bSortable: false},
+                    { data: 'year_acquisition', name: 'year_acquisition' , bSortable: false },
+                    { data: 'unit_price', name: 'unit_price'  , bSortable: false},
+
+                    { data: 'action', name: 'action' , searchable: false , bSortable: false},
+                    { data: 'unit', name: 'unit'  , bSortable: false},
                 ]
+                
             });
 
         $('#table tbody').on('click','.checklist',function(){
           var idRow = $(this).attr('data-id');
           if(this.checked){
-            $('input#amounts'+idRow).attr('readonly','readonly');
 
             var qty = $('input#amounts'+idRow).val();
+            var amount = parseInt($('input#amount'+idRow).val());
 
-            $.get('{{urlBackendAction("addcart")}}/'+idRow+'/'+qty, function(d){ 
-                  
-                // // $('#city').html(dataHtml);
-                // if(d.status==true){
-                //   $('#row'+pinjam).remove();
-                //   $('#countJmlh').html(d.data);
-                // }
-            });       
+            if(qty>amount){
+              $('input#amounts'+idRow).val(amount);
+              var qtyProposed = amount;
+            }else{
+              var qtyProposed = qty;
+
+            }
+            if(qty!=0){
+
+              $('input#amounts'+idRow).attr('readonly','readonly');
+
+            $('div#table_wrapper').attr('class','dataTables_wrapper form-inline dt-bootstrap no-footer form-loading form-loading-inverted');
+              $.get('{{urlBackendAction("addcart")}}/'+idRow+'/'+qtyProposed, function(d){ 
+                    
+                  // // $('#city').html(dataHtml);
+                  // if(d.status==true){
+                  //   $('#row'+pinjam).remove();
+                  //   $('#countJmlh').html(d.data);
+                  // }
+
+                  $('div#table_wrapper').attr('class','dataTables_wrapper form-inline dt-bootstrap no-footer');
+              }); 
+            }else{
+              alert('Sory, value empty');
+              return false;
+            }     
+
 // alert('hapus');
           }else{
 // alert('tambah');
             $('input#amounts'+idRow).removeAttr('readonly');
 
+            $('div#table_wrapper').attr('class','dataTables_wrapper form-inline dt-bootstrap no-footer form-loading form-loading-inverted');
             $.get('{{urlBackendAction("removecart")}}/'+idRow, function(d){ 
                   
                 // // $('#city').html(dataHtml);
@@ -98,10 +143,13 @@
                 //   $('#row'+pinjam).remove();
                 //   $('#countJmlh').html(d.data);
                 // }
+
+              $('div#table_wrapper').attr('class','dataTables_wrapper form-inline dt-bootstrap no-footer');
             });  
+
           }
         });
-            // Apply the search
+            //Apply the search
             // table.columns().every( function () {
             //     var that = this;
          
@@ -117,4 +165,4 @@
 
     </script>
 
-@endsection
+@endpush
