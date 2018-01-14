@@ -7,7 +7,8 @@
 			foreach(injectModel('Menu')->where('controller','!=','#')->get() as $row)
 			{	
 				$path = app_path('Http/Controllers/Backend/'.$row->controller.'.php');
-
+				$path = str_replace('\\', '/', $path);
+				
 				if(file_exists($path))
 				{
 					Route::controller($row->slug,'Backend\\'.$row->controller);
