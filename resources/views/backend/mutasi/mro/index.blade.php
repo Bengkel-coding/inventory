@@ -20,12 +20,12 @@
                       </div>
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('warehouse' , $warehouse , null ,['class' => 'form-control warehouse']) !!}
                       </div>
                       
 
-                    <a href="#" class="btn btn-info">Lihat</a>
-                    <!-- <button type="submit" class="btn btn-info">Lihat</button> -->
+                    <!-- <a href="#" class="btn btn-info">Lihat</a> -->
+                    <button type="submit" class="btn btn-info">Lihat</button>
                     </form>
                     <p>&nbsp;</p>
 

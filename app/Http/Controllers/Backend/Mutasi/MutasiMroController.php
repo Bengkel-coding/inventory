@@ -29,9 +29,15 @@ class MutasiMroController extends TrinataController
     {
         $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('mro');
 
+        if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
         if (isset($request->category) && $request->category) $model->where('category', $request->category);
 
         $model = $model->get();
+        foreach ($model as $key => $value) {
+            $value->categoryAttribute($value->category);
+            $value->unitAttribute($value->unit);
+            // $value->unitPriceAttribute($value->unit_price);
+        }
         
         $data = Table::of($model)
             ->addColumn('action',function($model){
@@ -45,11 +51,15 @@ class MutasiMroController extends TrinataController
 
     public function getIndex(Request $request)
     {
-        
+        $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
+        $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
+
+        $urlAjax = 'data?warehouse='.(int) $request->warehouse.'&category='.(string) $request->category;
+
         $model = $this->model;
         $data = ['ware'=> Warehouse::lists('name','id')];
 
-        return view($this->resource.'index', compact('model', 'request'));
+        return view($this->resource.'index', compact('model', 'request','warehouse','urlAjax'));
     }
 
     public function getCreate()
