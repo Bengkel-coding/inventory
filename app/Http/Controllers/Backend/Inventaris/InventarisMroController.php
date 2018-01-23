@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers\Backend\Inventaris;
 
-
- 
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Crud;
+use App\Models\Material;
+use App\Models\MaterialMro;
+use App\Models\Assessment;
+use App\Models\Warehouse;
 use Table;
 use Image;
 use trinata;
@@ -15,7 +15,7 @@ use trinata;
 class InventarisMroController extends TrinataController
 {
   
-    public function __construct(Crud $model)
+    public function __construct(Material $model)
     {
         parent::__construct();
         $this->model = $model;
@@ -23,9 +23,9 @@ class InventarisMroController extends TrinataController
         $this->resource = "backend.inventaris.mro.";
     }
 
-    public function getData()
+    public function getData(Request $request)
     {
-        $model = $this->model->select('id','title','status');
+        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('mro');
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
@@ -37,9 +37,10 @@ class InventarisMroController extends TrinataController
         return $data;
     }
 
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        return view($this->resource.'index');
+        $model = $this->model;
+        return view($this->resource.'index', compact('model', 'request'));
     }
 
     public function getCreate()

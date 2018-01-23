@@ -12,7 +12,7 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                    {!! trinata::buttonCreate() !!}
+                    
                       <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
@@ -28,13 +28,27 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
+
+                                <th>Kategori</th>
+                                <th>Nama</th>
+                                <th>Komag</th>
+                                <th>Tahun Perolehan</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
+                                <th>Harga Unit</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
-                                <td>Title</td>
+                            <!-- <tr>
+                                <td>Category</td>
+                                <td>Nama</td>
+                                <td>Komag</td>
+                                <td>Tahun Perolehan</td>
+                                <td>Jumlah</td>
+                                <td>Satuan</td>
+                                <td>Harga Unit</td>
                                 <td>Action</td>
-                            </tr>
+                            </tr> -->
+
                         </thead>
                         
                     </table>
@@ -62,7 +76,14 @@
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
-                    { data: 'title', name: 'title' },
+                    { data: 'category', name: 'category' },
+                    { data: 'name', name: 'name'},
+                    { data: 'komag', name: 'komag' },
+                    { data: 'year_acquisition', name: 'year_acquisition' },
+                    { data: 'amount', name: 'amount' },
+                    { data: 'unit', name: 'unit' },
+                    { data: 'unit_price', name: 'unit_price' },
+
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });
