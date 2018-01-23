@@ -56,4 +56,4 @@
 
     </script>
 
-@endsection
+@endpush
