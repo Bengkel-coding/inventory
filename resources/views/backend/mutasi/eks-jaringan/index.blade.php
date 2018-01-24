@@ -13,7 +13,7 @@
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     
-                      <form method="get" action="">
+                      <!-- <form method="get" action="">
                       <div class="form-group">
                         <label>Kategori Material</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
@@ -24,7 +24,7 @@
                         {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
                       </div>
                       
-                    <a href="#" class="btn btn-info">Lihat</a>
+                    <a href="#" class="btn btn-info">Lihat</a> -->
                     <!-- <button type="submit" class="btn btn-info">Lihat</button> -->
                     </form>
                     <p>&nbsp;</p>
@@ -32,27 +32,15 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-
+                                <th>Kategori</th>
                                 <th>Nama</th>
-                                <th>KOMAG</th>
-                                <th>Kode MRO/MI</th>
+                                <th>Komag</th>
                                 <th>Deskripsi</th>
-                                <th>Merk</th>
-                                <th>Spesifikasi</th>
-                                <th>Lokasi Awal</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
+                                <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td>Category</td>
-                                <td>Nama</td>
-                                <td>Komag</td>
-                                <td>Tahun Perolehan</td>
-                                <td>Jumlah</td>
-                                <td>Satuan</td>
-                                <td>Harga Unit</td>
-                                <td>Action</td>
-                            </tr> -->
-
                         </thead>
                         
                     </table>
@@ -80,13 +68,13 @@
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
-                    { data: 'name', name: 'name' },
-                    { data: 'komag', name: 'komag'},
-                    { data: 'code', name: 'code' },
+                    { data: 'category', name: 'category' },
+                    { data: 'name', name: 'name'},
+                    { data: 'komag', name: 'komag' },
                     { data: 'description', name: 'description' },
-                    { data: 'merk', name: 'material_eksjars.merk' },
-                    { data: 'specification', name: 'material_eksjars.specification' },
-                    { data: 'previous_location', name: 'material_eksjars.previous_location' },
+                    { data: 'amount', name: 'amount' },
+                    { data: 'unit', name: 'unit' },
+                    { data: 'warehouse_id', name: 'warehouse_id' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]

@@ -34,9 +34,8 @@ class PengajuanMutasiController extends TrinataController
         $model = 
                     // \DB::table('materials')
                     $this->model
+                    ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'materials.category', 'mutations.amount', 'mutations.proposed_amount', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status','mutations.created_at')
                     ->join('mutations', 'materials.id', '=', 'mutations.material_id')
-                    // ->join('warehouses', 'mutations.warehouse_id', '=', 'warehouses.id')
-                    ->select('materials.id', 'materials.name', 'materials.komag', 'materials.description', 'materials.category', 'mutations.amount', 'mutations.proposed_amount', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status','mutations.created_at')
                     ->where('mutations.status', '=', 1)
                     ->orderBy('created_at','desc')
                     ;

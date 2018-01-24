@@ -45,7 +45,7 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-
+                                <th>Tipe Material</th>
                                 <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>KOMAG</th>
@@ -96,6 +96,7 @@
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
+                    { data: 'type', name: 'type' },
                     { data: 'category', name: 'category' },
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },

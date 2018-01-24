@@ -58,7 +58,6 @@
                       <div class="form-group">
                         <label>Spesifikasi</label>
                         {!! Form::text('specification' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
-                        <!-- {!! Form::text('specification' , $data['spec'] , null ,['class' => 'form-control', (!empty($model->id))]) !!} -->
                       </div>
 
                       <div class="form-group">
@@ -68,7 +67,7 @@
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('amount' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                        {!! Form::text('real_amount' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
                       <!-- <div class="form-group">
