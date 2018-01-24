@@ -48,7 +48,7 @@
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('satuan' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
@@ -59,7 +59,7 @@
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('amount' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                        {!! Form::text('real_amount' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
                       <div class="form-group">

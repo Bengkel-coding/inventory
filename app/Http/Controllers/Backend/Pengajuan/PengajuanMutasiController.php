@@ -7,6 +7,7 @@ use App\Models\Crud;
 use App\Models\Material;
 use App\Models\Mutation;
 use App\Models\Warehouse;
+use App\User;
 use Table;
 use Image;
 use trinata;
@@ -14,11 +15,12 @@ use trinata;
 class PengajuanMutasiController extends TrinataController
 {
   
-    public function __construct(Material $model, Mutation $mutation)
+    public function __construct(Material $model, Mutation $mutation, User $user)
     {
         parent::__construct();
         $this->model = $model;
         $this->mutation = $mutation;
+        $this->user = $user;
 
         $this->resource = "backend.pengajuan.mutasi.";
     }
@@ -34,11 +36,14 @@ class PengajuanMutasiController extends TrinataController
                     $this->model
                     ->join('mutations', 'materials.id', '=', 'mutations.material_id')
                     // ->join('warehouses', 'mutations.warehouse_id', '=', 'warehouses.id')
-                    ->select('materials.id', 'materials.name', 'materials.komag', 'materials.category', 'mutations.amount', 'mutations.proposed_amount', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status')
-                    ->where('materials.status', '=', 0)
+                    ->select('materials.id', 'materials.name', 'materials.komag', 'materials.description', 'materials.category', 'mutations.amount', 'mutations.proposed_amount', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status','mutations.created_at')
+                    ->where('mutations.status', '=', 1)
+                    ->orderBy('created_at','desc')
                     ;
         
         // dd($model->toSql());
+
+
         $data = Table::of($model)
             ->addColumn('warehouse_id',function($model){
                 // dd(
@@ -80,9 +85,14 @@ class PengajuanMutasiController extends TrinataController
 
     public function getUpdate($id)
     {
-        $model = $this->model->findOrFail($id);
+        $model = $this->model
+                            ->select('mutations.proposed_amount','mutations.amount','mutations.warehouse_id','mutations.proposed_warehouse_id', 'materials.category', 'materials.name', 'materials.komag', 'materials.cardnumber', 'materials.description', 'materials.unit', 'materials.year_acquisition', 'materials.unit_price')
+                            ->join('mutations', 'mutations.material_id', '=', 'materials.id')
+                            ->where('materials.id', $id)->first();
+        // dd($model);
+        $data = ['ware' => Warehouse::lists('name','id')];
 
-        return view($this->resource.'_form',compact('model'));
+        return view($this->resource.'_form',compact('model', 'data'));
     }
 
     public function postUpdate(Requests\Backend\CrudRequest $request,$id)

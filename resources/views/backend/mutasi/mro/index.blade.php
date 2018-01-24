@@ -14,45 +14,35 @@
                   @include('backend.common.flashes')
 
                     <form method="get" action="">
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Kategori Material</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
                         {!! Form::select('warehouse' , $warehouse , null ,['class' => 'form-control warehouse']) !!}
-                      </div>
+                      </div> -->
                       
 
                     <!-- <a href="#" class="btn btn-info">Lihat</a> -->
-                    <button type="submit" class="btn btn-info">Lihat</button>
+                    <!-- <button type="submit" class="btn btn-info">Lihat</button> -->
                     </form>
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-
                                 <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>Komag</th>
+                                <th>Deskripsi</th>
                                 <th>Tahun Perolehan</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
                                 <th>Harga Unit</th>
+                                <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td>Category</td>
-                                <td>Nama</td>
-                                <td>Komag</td>
-                                <td>Tahun Perolehan</td>
-                                <td>Jumlah</td>
-                                <td>Satuan</td>
-                                <td>Harga Unit</td>
-                                <td>Action</td>
-                            </tr> -->
-
                         </thead>
                         
                     </table>
@@ -84,10 +74,12 @@
                     { data: 'category', name: 'category' },
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
+                    { data: 'description', name: 'description' },
                     { data: 'year_acquisition', name: 'year_acquisition' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit', name: 'unit' },
                     { data: 'unit_price', name: 'unit_price' },
+                    { data: 'warehouse_id', name: 'warehouse_id' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]

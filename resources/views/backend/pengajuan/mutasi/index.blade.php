@@ -30,7 +30,7 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Kategori Material</label>
                         {!! Form::select('type' , ['mro' => 'MRO' , 'mroabt' => 'MRO-ABT' , 'investasi' => 'Investasi' , 'eksjar' => 'Eks-Jaringan' , 'tercatat' => 'Tercatat'] , null ,['class' => 'form-control']) !!}
                       </div>
@@ -39,7 +39,7 @@
                         {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
                       </div>
                       
-                    <a href="#" class="btn btn-info">Lihat</a>
+                    <a href="#" class="btn btn-info">Lihat</a> -->
 
                     <p>&nbsp;</p>
                     <table class = 'table' id = 'table'>
@@ -49,10 +49,12 @@
                                 <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>KOMAG</th>
+                                <th>Deskripsi</th>
                                 <th>Jumlah Material</th>
                                 <th>Gudang Asal</th>
                                 <th>Kuantitas Mutasi</th>
                                 <th>Gudang Mutasi</th>
+                                <th>Tanggal Pengajuan</th>
                                 <th>Action</th>
                             </tr>
                             <!-- <tr>
@@ -97,10 +99,12 @@
                     { data: 'category', name: 'category' },
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
+                    { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     { data: 'warehouse_id', name: 'warehouse_id' },
                     { data: 'proposed_amount', name: 'mutations.proposed_amount' },
                     { data: 'proposed_warehouse_id', name: 'mutations.proposed_warehouse_id' },
+                    { data: 'created_at', name: 'mutations.created_at' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]

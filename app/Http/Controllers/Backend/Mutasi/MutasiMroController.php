@@ -27,19 +27,19 @@ class MutasiMroController extends TrinataController
 
     public function getData(Request $request)
     {
-        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('mro');
+        $model = $this->model
+                        ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
+                        ->groupBy('komag')
+                        ->orderBy('created_at','desc')
+                        ->whereType('mro');
 
-        if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
-        if (isset($request->category) && $request->category) $model->where('category', $request->category);
-
-        $model = $model->get();
-        foreach ($model as $key => $value) {
-            $value->categoryAttribute($value->category);
-            $value->unitAttribute($value->unit);
-            // $value->unitPriceAttribute($value->unit_price);
-        }
+        // dd($model);
         
         $data = Table::of($model)
+            ->addColumn('warehouse_id',function($model){
+                // dd(
+                return $model->warehouse()->first()->name;
+            })
             ->addColumn('action',function($model){
                 $status = $model->status == 'y' ? true : false;
                 return trinata::buttons($model->id , [] , $status);
@@ -51,10 +51,10 @@ class MutasiMroController extends TrinataController
 
     public function getIndex(Request $request)
     {
-        $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
-        $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
+        // $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
+        // $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
 
-        $urlAjax = 'data?warehouse='.(int) $request->warehouse.'&category='.(string) $request->category;
+        // $urlAjax = 'data?warehouse='.(int) $request->warehouse.'&category='.(string) $request->category;
 
         $model = $this->model;
         $data = ['ware'=> Warehouse::lists('name','id')];
@@ -66,12 +66,6 @@ class MutasiMroController extends TrinataController
     {
         $model = $this->model;
         $data = ['ware'=> Warehouse::lists('name','id')];
-
-        // $status = false;
-        // if (\Auth::user()->role_id == 1) $status = true;
-        
-        // dd($status);
-        
 
         return view($this->resource.'_form',compact('model', 'data'));
     }
@@ -89,6 +83,7 @@ class MutasiMroController extends TrinataController
         $model = $this->model->findOrFail($id);
         $data = ['ware' => Warehouse::lists('name','id')];
         $model['total_price'] = $model['amount'] * $model['unit_price'];
+        $model['real_amount'] = $model['amount'] - $model['total_proposed_amount'];
 
         return view($this->resource.'_form',compact('model', 'data'));
     }
@@ -99,7 +94,7 @@ class MutasiMroController extends TrinataController
 
         //check proposed_amout <= amount
 
-        //update amount material = amount - proposed_amount
+        //update total_proposed_amount material = total_proposed_amount + proposed_amount
 
         //insert data mutation
 
@@ -107,51 +102,30 @@ class MutasiMroController extends TrinataController
         //jika tidak berhasil, rollback data amount = amount + proposed_amount 
 
         
-        if ((($request->proposed_amount) <= ($request->amount)) && (($request->proposed_amount) > 0) && (($request->warehouse_id) != ($request->proposed_warehouse_id))){
+        if ((($request->proposed_amount) <= ($request->real_amount)) && (($request->proposed_amount) > 0) && (($request->warehouse_id) != ($request->proposed_warehouse_id))){
             $model = $this->model->findOrFail($id);
-            $model->amount = $request->amount - $request->proposed_amount;
+            // $model->amount = $request->amount - $request->proposed_amount;
+            $model->total_proposed_amount = $model->total_proposed_amount + $request->proposed_amount;
+            $model->status = '1';
 
             // dd($model);
 
             if($model->save()){
                 $mutation = new \App\Models\Mutation;
                 $mutation->material_id = $model->id;
-                $mutation->amount = $request->amount;
+                $mutation->amount = $model->amount;
                 $mutation->proposed_amount = $request->proposed_amount;
                 $mutation->warehouse_id = $request->warehouse_id;
                 $mutation->proposed_warehouse_id = $request->proposed_warehouse_id;
                 $mutation->user_id = \Auth::user()->id;
                 $mutation->status = '1';
+                // $model->save();
+                $mutation->save();
 
-                // dd($mutation);
-                
-                if($mutation->save()){
-                    // Material::find($id)->replicate()->save();
-                    // $modelnew = Material::find($id);
-
-                    $taskmaterial = Material::find($id);
-                    $modelnew = $taskmaterial->replicate();
-                    // dd($modelnew);
-                    $modelnew->amount = $mutation->proposed_amount;
-                    $modelnew->warehouse_id = $mutation->proposed_warehouse_id;
-                    $modelnew->status = $mutation->status;
-                    $modelnew->save();
-
-                    // $mat_id = $model->id;
-                    // $matnew_id = $modelnew->id;
-                    // dd($mat_id, $matnew_id);
-                    $taskmro = MaterialMro::where('material_id', '=', $model->id)->first();
-                    $modelmro = $taskmro->replicate();
-                    // dd($modelmro);
-                    $modelmro->material_id = $modelnew->id;
-                    $modelmro->save();
-
-                }else{
-                    $model->amount = $model->amount + $model->proposed_amount;
-                    $model->save();
-
-                    return back()->with('info','Saving failed');
-                }
+            }else{
+                $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                $model->save();
+                return back()->with('info','Saving failed');
             }
         }else{
             return back()->with('info','Check your mutation data');
