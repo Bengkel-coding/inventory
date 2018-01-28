@@ -37,6 +37,7 @@ class PengajuanMutasiController extends TrinataController
                     ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'materials.category', 'mutations.amount', 'mutations.proposed_amount', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status','mutations.created_at')
                     ->join('mutations', 'materials.id', '=', 'mutations.material_id')
                     ->where('mutations.status', '=', 1)
+                    ->where('user_id', '=', \Auth::User()->id)
                     ->orderBy('created_at','desc')
                     ;
         
