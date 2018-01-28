@@ -133,7 +133,7 @@ class MutasiMroController extends TrinataController
         }
 
         // return $this->insertOrUpdate($model);
-        return redirect(urlBackendAction('index'))->with('success','Data Has Been Inserted');
+        return redirect(urlBackendAction('pengejuan-mutasi/index'))->with('success','Data Has Been Inserted');
     }
 
     public function getDelete($id)
