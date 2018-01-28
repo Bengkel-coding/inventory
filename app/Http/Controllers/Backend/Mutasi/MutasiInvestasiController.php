@@ -41,8 +41,8 @@ class MutasiInvestasiController extends TrinataController
                 return $model->warehouse()->first()->name;
             })
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan Mutasi</a>";
+                return $button;
             })
             ->make(true);
 
@@ -73,10 +73,11 @@ class MutasiInvestasiController extends TrinataController
         return $this->insertOrUpdate($model,$inputs);
     }
 
-    public function getUpdate($id)
+    public function getDetail($id)
     {
         $model = $this->model->findOrFail($id);
         $data = ['ware' => Warehouse::lists('name','id')];
+        $data['not_warehouse'] = Warehouse::whereNotIn('id', [$model->warehouse_id])->lists('name','id');
         $model['total_price'] = $model['amount'] * $model['unit_price'];
         $model['real_amount'] = $model['amount'] - $model['total_proposed_amount'];
 

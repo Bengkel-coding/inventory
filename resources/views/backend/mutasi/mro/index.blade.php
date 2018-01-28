@@ -22,10 +22,8 @@
                                 <th>Nama</th>
                                 <th>Komag</th>
                                 <th>Deskripsi</th>
-                                <th>Tahun Perolehan</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
-                                <th>Harga Unit</th>
                                 <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
@@ -61,10 +59,8 @@
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
                     { data: 'description', name: 'description' },
-                    { data: 'year_acquisition', name: 'year_acquisition' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit', name: 'unit' },
-                    { data: 'unit_price', name: 'unit_price' },
                     { data: 'warehouse_id', name: 'warehouse_id' },
 
                     { data: 'action', name: 'action' , searchable: false},

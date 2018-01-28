@@ -13,7 +13,7 @@
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
@@ -22,7 +22,7 @@
                         {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
                       </div>
                       
-                    <a href="#" class="btn btn-info">Lihat</a>
+                    <a href="#" class="btn btn-info">Lihat</a> -->
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>
@@ -32,10 +32,8 @@
                                 <th>Nama</th>
                                 <th>Komag</th>
                                 <th>Deskripsi</th>
-                                <th>Tahun Perolehan</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
-                                <th>Harga Unit</th>
                                 <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
@@ -70,10 +68,8 @@
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
                     { data: 'description', name: 'description' },
-                    { data: 'year_acquisition', name: 'year_acquisition' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit', name: 'unit' },
-                    { data: 'unit_price', name: 'unit_price' },
                     { data: 'warehouse_id', name: 'warehouse_id' },
 
                     { data: 'action', name: 'action' , searchable: false},

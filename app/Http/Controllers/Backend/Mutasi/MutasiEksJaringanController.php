@@ -28,17 +28,6 @@ class MutasiEksJaringanController extends TrinataController
 
     public function getData(Request $request)
     {
-        // $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('eksjar');
-
-         // $model =   
-         //            $this->model
-         //            ->join('material_eksjars', 'materials.id', '=', 'material_eksjars.material_id')
-         //            ->select('materials.id','materials.name','materials.komag','materials.code', 'materials.description','material_eksjars.merk','material_eksjars.specification','material_eksjars.previous_location')
-         //            // ->orderBy('created_at','desc')
-         //            ->where('materials.status', '=', 0)
-         //            // ->whereType('eksjar')
-         //            ;
-
         $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('komag')
@@ -51,8 +40,8 @@ class MutasiEksJaringanController extends TrinataController
                 return $model->warehouse()->first()->name;
             })
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan Mutasi</a>";
+                return $button;
             })
             ->make(true);
 
@@ -83,7 +72,7 @@ class MutasiEksJaringanController extends TrinataController
         return $this->insertOrUpdate($model,$inputs);
     }
 
-    public function getUpdate($id)
+    public function getDetail($id)
     {
         $model = $this->model
                             ->select('materials.*', 'material_eksjars.*')
@@ -93,6 +82,7 @@ class MutasiEksJaringanController extends TrinataController
                             // ->findOrFail($id);
         
         $data = ['ware' => Warehouse::lists('name','id')];
+        $data['not_warehouse'] = Warehouse::whereNotIn('id', [$model->warehouse_id])->lists('name','id');
         $model['real_amount'] = $model['amount'] - $model['total_proposed_amount'];
 
 
