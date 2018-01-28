@@ -34,11 +34,11 @@ class PengajuanMutasiController extends TrinataController
         $model = 
                     // \DB::table('materials')
                     $this->model
-                    ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'materials.category', 'mutations.amount', 'mutations.proposed_amount', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status','mutations.created_at')
+                    ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status')
                     ->join('mutations', 'materials.id', '=', 'mutations.material_id')
                     ->where('mutations.status', '=', 1)
                     ->where('user_id', '=', \Auth::User()->id)
-                    ->orderBy('created_at','desc')
+                    // ->orderBy('created_at','desc')
                     ;
         
         // dd($model->toSql());
@@ -54,8 +54,8 @@ class PengajuanMutasiController extends TrinataController
                 return $proposed_warehouse->name;
             })
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>View Detail</a>";
+                return $button;
             })
             ->make(true);
 
@@ -82,6 +82,20 @@ class PengajuanMutasiController extends TrinataController
         $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
         return $this->insertOrUpdate($model,$inputs);
     }
+
+    public function getDetail($id)
+    {
+        $model = $this->model
+                            ->select('mutations.proposed_amount','mutations.amount','mutations.warehouse_id','mutations.proposed_warehouse_id', 'materials.category', 'materials.name', 'materials.komag', 'materials.cardnumber', 'materials.description', 'materials.unit', 'materials.year_acquisition', 'materials.unit_price')
+                            ->join('mutations', 'mutations.material_id', '=', 'materials.id')
+                            ->where('materials.id', $id)->first();
+        // dd($model);
+        $data = ['ware' => Warehouse::lists('name','id')];
+
+        return view($this->resource.'_detail',compact('model', 'data'));
+        // dd($detail);
+    }
+       
 
     public function getUpdate($id)
     {

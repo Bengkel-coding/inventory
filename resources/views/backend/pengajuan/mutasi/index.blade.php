@@ -46,15 +46,12 @@
                         <thead>
                             <tr>
                                 <th>Tipe Material</th>
-                                <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>KOMAG</th>
                                 <th>Deskripsi</th>
-                                <th>Jumlah Material</th>
                                 <th>Gudang Asal</th>
-                                <th>Kuantitas Mutasi</th>
                                 <th>Gudang Mutasi</th>
-                                <th>Tanggal Pengajuan</th>
+                                <th>Status Pengajuan</th>
                                 <th>Action</th>
                             </tr>
                             <!-- <tr>
@@ -97,15 +94,12 @@
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
                     { data: 'type', name: 'type' },
-                    { data: 'category', name: 'category' },
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
                     { data: 'description', name: 'description' },
-                    { data: 'amount', name: 'amount' },
                     { data: 'warehouse_id', name: 'warehouse_id' },
-                    { data: 'proposed_amount', name: 'mutations.proposed_amount' },
                     { data: 'proposed_warehouse_id', name: 'mutations.proposed_warehouse_id' },
-                    { data: 'created_at', name: 'mutations.created_at' },
+                    { data: 'status', name: 'mutations.status' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]
