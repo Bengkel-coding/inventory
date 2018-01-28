@@ -16,7 +16,7 @@
                     <form method="get" action="">
                       <div class="form-group">
                         <label>Kategori Material</label>
-                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('category' , [''=>'Pilih Kategori','tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control category']) !!}
                       </div>
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
@@ -26,7 +26,7 @@
                       
                     <!-- <a href="#" class="btn btn-info">Lihat</a> -->
                     <button type="submit" class="btn btn-info">Lihat</button>
-                    <a href="#" class="btn btn-danger">Ekspor</a>
+                    <a href="javascript:void(0)" class="btn btn-danger export" data="{{ urlBackendAction('export') }}">Ekspor</a>
                     
                     <a href="javascript:void(0)" data="{{ urlBackendAction('import') }}" class="btn btn-success import">Import</a>
                     </form>
@@ -82,6 +82,17 @@
             } 
             
             generateLink = link+'?warehouse='+warehouse;
+            // alert(generateLink);return false;
+            window.location.href=generateLink;
+        })
+
+        $('.export').click(function(){
+
+            var link = $(this).attr('data');
+            var warehouse = $('.warehouse').val() || 0;
+            var category = $('.category').val() || 0;
+            
+            generateLink = link+'?warehouse='+warehouse+'&category='+category;
             // alert(generateLink);return false;
             window.location.href=generateLink;
         })

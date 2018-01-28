@@ -9,10 +9,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Material;
 use App\Repositories\UploadArea;
-
 use Table;
 use Image;
 use trinata;
+use Excel;
 
 class MaterialMroController extends TrinataController
 {
@@ -67,6 +67,36 @@ class MaterialMroController extends TrinataController
         $warehouse = $request->warehouse;
 
         return view($this->resource.'import',compact('model','warehouse'));
+    }
+
+    public function getExport(Request $request)
+    {
+
+        $data = []; 
+        
+        $model = $this->model->whereType('mro');
+        if ($request->warehouse) $model->where('warehouse_id', $request->warehouse);
+        if ($request->category) $model->where('category', $request->category);
+
+        $data['rows'] = $model->take(1)->get();
+        $data['column'] = ['Nama Material',
+                        'KOMAG','Tahun Perolehan', 'Jumlah Material', 'Harga Satuan', 'Harga Total'];
+        
+        $filename = 'export-material-mro-'.date('Ymdhis');
+        
+        Excel::create($filename, function($excel) use($data) {
+            $sheetname = 'Sheet 1';
+            $excel->sheet($sheetname, function($sheet) use($data) {
+                $sheet->setAllBorders('thin');
+                $sheet->row(1, $data['column']); //header
+                $baris = 2;
+                foreach($data['rows'] as $value){
+                    
+                    $sheet->row($baris++, [$value->name, $value->komag, $value->year_acquisition, $value->amount, $value->unit_price, 1111]);
+                }
+            });
+        })->export('xls');
+
     }
 
     public function postImport(Request $request)

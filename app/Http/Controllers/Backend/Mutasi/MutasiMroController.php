@@ -81,7 +81,7 @@ class MutasiMroController extends TrinataController
     public function getUpdate($id)
     {
         $model = $this->model->findOrFail($id);
-        $data = ['ware' => Warehouse::lists('name','id')];
+        $data = ['ware' => Warehouse::whereNotIn('id', [$model->warehouse_id])->lists('name','id')];
         $model['total_price'] = $model['amount'] * $model['unit_price'];
         $model['real_amount'] = $model['amount'] - $model['total_proposed_amount'];
 
