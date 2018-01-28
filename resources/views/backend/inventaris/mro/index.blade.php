@@ -13,7 +13,7 @@
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
                       </div>
@@ -22,33 +22,20 @@
                         {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
                       </div>
                       
-                    <a href="#" class="btn btn-info">Lihat</a>
+                    <a href="#" class="btn btn-info">Lihat</a> -->
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-
                                 <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>Komag</th>
-                                <th>Tahun Perolehan</th>
+                                <th>Deskripsi</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
-                                <th>Harga Unit</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td>Category</td>
-                                <td>Nama</td>
-                                <td>Komag</td>
-                                <td>Tahun Perolehan</td>
-                                <td>Jumlah</td>
-                                <td>Satuan</td>
-                                <td>Harga Unit</td>
-                                <td>Action</td>
-                            </tr> -->
-
                         </thead>
                         
                     </table>
@@ -79,10 +66,9 @@
                     { data: 'category', name: 'category' },
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
-                    { data: 'year_acquisition', name: 'year_acquisition' },
+                    { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit', name: 'unit' },
-                    { data: 'unit_price', name: 'unit_price' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]

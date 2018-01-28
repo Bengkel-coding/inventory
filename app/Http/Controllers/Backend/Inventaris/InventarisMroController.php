@@ -25,12 +25,19 @@ class InventarisMroController extends TrinataController
 
     public function getData(Request $request)
     {
-        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('mro');
+        // $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('mro');
+
+        $model = $this->model
+                        ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit')
+                        ->groupBy('komag')
+                        ->where('warehouse_id', '=', \Auth::User()->warehouse_id)
+                        // ->orderBy('created_at','desc')
+                        ->whereType('mro');
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan</a>";
+                return $button;
             })
             ->make(true);
 

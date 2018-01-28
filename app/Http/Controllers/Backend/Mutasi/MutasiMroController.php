@@ -30,6 +30,7 @@ class MutasiMroController extends TrinataController
         $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('komag')
+                        ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
                         ->orderBy('created_at','desc')
                         ->whereType('mro');
 
@@ -41,7 +42,7 @@ class MutasiMroController extends TrinataController
                 return $model->warehouse()->first()->name;
             })
             ->addColumn('action',function($model){
-                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan Mutasi</a>";
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan</a>";
                 return $button;
             })
             ->make(true);
@@ -89,7 +90,7 @@ class MutasiMroController extends TrinataController
         return view($this->resource.'_form',compact('model', 'data'));
     }
 
-    public function postUpdate(Request $request,$id)
+    public function postDetail(Request $request,$id)
     {
         // dd($id);
 
@@ -132,8 +133,8 @@ class MutasiMroController extends TrinataController
             return back()->with('info','Check your mutation data');
         }
 
-        // return $this->insertOrUpdate($model);
-        return redirect(urlBackendAction('pengejuan-mutasi/index'))->with('success','Data Has Been Inserted');
+        // dd(urlBackendAction('pengajuan-mutasi/index'));
+        return redirect(urlBackend('pengajuan-mutasi/index'))->with('success','Data Has Been Inserted');
     }
 
     public function getDelete($id)

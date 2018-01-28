@@ -82,7 +82,7 @@
                         {!! Form::text('proposed_amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
-                      
+                      {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}
 
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     

@@ -41,7 +41,7 @@ class MutasiInvestasiController extends TrinataController
                 return $model->warehouse()->first()->name;
             })
             ->addColumn('action',function($model){
-                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan Mutasi</a>";
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan</a>";
                 return $button;
             })
             ->make(true);
