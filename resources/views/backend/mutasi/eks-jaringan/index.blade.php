@@ -34,7 +34,7 @@
                             <tr>
                                 <th>Kategori</th>
                                 <th>Nama</th>
-                                <th>Komag</th>
+                                <!-- <th>Komag</th> -->
                                 <th>Deskripsi</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
@@ -70,7 +70,7 @@
                 columns: [
                     { data: 'category', name: 'category' },
                     { data: 'name', name: 'name'},
-                    { data: 'komag', name: 'komag' },
+                    // { data: 'komag', name: 'komag' },
                     { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit', name: 'unit' },

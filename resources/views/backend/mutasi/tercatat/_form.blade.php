@@ -16,8 +16,7 @@
 
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
-                        <!-- {!! Form::text('category' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!} -->
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
 
                       <div class="form-group">
@@ -32,12 +31,12 @@
 
                       <div class="form-group">
                         <label>Description Material</label>
-                        {!! Form::textarea('description' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                        {!! Form::textarea('description' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '', 'rows'=>'5']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
 
                       <div class="form-group">
@@ -51,24 +50,14 @@
                         {!! Form::text('real_amount' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
-                      <!-- <div class="form-group">
-                        <label>Harga Satuan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Harga Total</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div> -->
-
                       <div class="form-group">
                         <label>Lokasi Penyimpanan</label>
-                        {!! Form::select('warehouse_id' , $data['ware'] , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                        {!! Form::select('warehouse_id' , $data['ware'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
 
                       <div class="form-group">
-                        <label>Usulan Mutasi </label>
-                        {!! Form::select('proposed_warehouse_id' , $data['ware'] , null ,['class' => 'form-control', (!empty($model->id))]) !!}
+                        <label>Usulan Lokasi Mutasi </label>
+                        {!! Form::select('proposed_warehouse_id' , $data['not_warehouse'] , null ,['class' => 'form-control', (!empty($model->id))]) !!}
                       </div>
 
                       <div class="form-group">

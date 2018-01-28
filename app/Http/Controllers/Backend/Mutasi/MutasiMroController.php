@@ -28,7 +28,7 @@ class MutasiMroController extends TrinataController
     public function getData(Request $request)
     {
         $model = $this->model
-                        ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
+                        ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('komag')
                         ->orderBy('created_at','desc')
                         ->whereType('mro');
@@ -41,8 +41,8 @@ class MutasiMroController extends TrinataController
                 return $model->warehouse()->first()->name;
             })
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan Mutasi</a>";
+                return $button;
             })
             ->make(true);
 
@@ -78,7 +78,7 @@ class MutasiMroController extends TrinataController
         return $this->insertOrUpdate($model,$inputs);
     }
 
-    public function getUpdate($id)
+    public function getDetail($id)
     {
         $model = $this->model->findOrFail($id);
         $data['ware'] = Warehouse::lists('name','id');

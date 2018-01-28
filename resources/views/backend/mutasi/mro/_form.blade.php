@@ -38,7 +38,7 @@
                       
                       <div class="form-group">
                         <label>Deskripsi Material</label>
-                        {!! Form::textarea('description' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                        {!! Form::textarea('description' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '', 'rows'=>'5']) !!}
                       </div>
 
                       <div class="form-group">
@@ -68,12 +68,12 @@
                       </div>
                     
                       <div class="form-group">
-                        <label>Lokasi Asal</label>
+                        <label>Lokasi Penyimpanan</label>
                         {!! Form::select('warehouse_id' , $data['ware'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
 
                       <div class="form-group">
-                        <label>Usulan Mutasi </label>
+                        <label>Usulan Lokasi Mutasi </label>
                         {!! Form::select('proposed_warehouse_id' , $data['not_warehouse'] , null ,['class' => 'form-control', (!empty($model->id))]) !!}
                       </div>
 
