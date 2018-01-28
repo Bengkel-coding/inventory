@@ -27,13 +27,8 @@ class PengajuanMutasiController extends TrinataController
 
     public function getData(Request $request)
     {
-        // if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
-
-        // if (isset($request->type) && $request->type) $model->where('type', $request->type);
-
-        $model = 
-                    // \DB::table('materials')
-                    $this->model
+        
+        $model = $this->model
                     ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status')
                     ->join('mutations', 'materials.id', '=', 'mutations.material_id')
                     ->where('mutations.status', '=', 1)
@@ -41,12 +36,14 @@ class PengajuanMutasiController extends TrinataController
                     // ->orderBy('created_at','desc')
                     ;
         
-        // dd($model->toSql());
+        $model = $model->get();
 
+        foreach ($model as $key => $value) {
+            $value->setStatusLabel($value->status);
+        }
 
         $data = Table::of($model)
             ->addColumn('warehouse_id',function($model){
-                // dd(
                 return $model->warehouse()->first()->name;
             })
             ->addColumn('proposed_warehouse_id',function($model){
@@ -89,11 +86,11 @@ class PengajuanMutasiController extends TrinataController
                             ->select('mutations.proposed_amount','mutations.amount','mutations.warehouse_id','mutations.proposed_warehouse_id', 'materials.category', 'materials.name', 'materials.komag', 'materials.cardnumber', 'materials.description', 'materials.unit', 'materials.year_acquisition', 'materials.unit_price')
                             ->join('mutations', 'mutations.material_id', '=', 'materials.id')
                             ->where('materials.id', $id)->first();
-        // dd($model);
+        
         $data = ['ware' => Warehouse::lists('name','id')];
 
         return view($this->resource.'_detail',compact('model', 'data'));
-        // dd($detail);
+        
     }
        
 
@@ -103,7 +100,7 @@ class PengajuanMutasiController extends TrinataController
                             ->select('mutations.proposed_amount','mutations.amount','mutations.warehouse_id','mutations.proposed_warehouse_id', 'materials.category', 'materials.name', 'materials.komag', 'materials.cardnumber', 'materials.description', 'materials.unit', 'materials.year_acquisition', 'materials.unit_price')
                             ->join('mutations', 'mutations.material_id', '=', 'materials.id')
                             ->where('materials.id', $id)->first();
-        // dd($model);
+        
         $data = ['ware' => Warehouse::lists('name','id')];
 
         return view($this->resource.'_form',compact('model', 'data'));

@@ -48,18 +48,26 @@ class UserController extends TrinataController
 
     public function handleInsert($request)
     {
-    	$inputs = $request->all();
+    	
+        $inputs = $request->all();
 
-    	$inputs['password'] = \Hash::make($request->password);
+        if ($request->password) {
+            $request->password = \Hash::make($request->password);    
+        } else {
+            $inputs = $request->except(['password','verify_password']);
+        }
 
-    	return $inputs;
+        return $inputs;
     }
 
     public function getCreate()
     {
         $model = $this->model;
         $roles = $this->roles();
-        return view('backend.user._form',compact('model','roles'));
+        $warehouse = \App\Models\Warehouse::lists('name','id');
+        $head = [0=>'Pilih Pimpinan'] + $this->model->whereNotIn('role_id', [1])->lists('name', 'id')->toArray();
+
+        return view('backend.user._form',compact('model','roles','warehouse', 'head'));
     }
 
     public function postCreate(Request $request)
@@ -77,7 +85,10 @@ class UserController extends TrinataController
     {
         $model = $this->model->findOrFail($id);
         $roles = $this->roles();
-        return view('backend.user._form',compact('model','roles'));
+        $warehouse = \App\Models\Warehouse::lists('name','id');
+        $head = [0=>'Pilih Pimpinan'] + $this->model->whereNotIn('role_id', [1])->lists('name', 'id')->toArray();
+        
+        return view('backend.user._form',compact('model','roles', 'warehouse', 'head'));
     }
 
     public function postUpdate(Request $request,$id)

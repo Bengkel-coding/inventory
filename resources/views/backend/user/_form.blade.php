@@ -34,7 +34,14 @@
                         <label>Email</label>
                         {!! Form::text('email' , null ,['class' => 'form-control']) !!}
                       </div>
-
+                      <div class="form-group">
+                        <label>Gudang</label>
+                        {!! Form::select('warehouse_id' , $warehouse, null ,['class' => 'form-control']) !!}
+                      </div>
+                      <div class="form-group">
+                        <label>Pimpinan</label>
+                        {!! Form::select('head_id' , $head , null, ['class' => 'form-control']) !!}
+                      </div>
                     <div class="form-group">
                         <label>Password</label>
                         {!! Form::password('password',['class' => 'form-control']) !!}

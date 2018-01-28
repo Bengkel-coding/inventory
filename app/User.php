@@ -42,15 +42,18 @@ class User extends Authenticatable
         }else{
             $email = '';
             $username = '';
+            $rule['password'] = 'required';
+            $rule['verify_password'] = 'required|same:password';
         }
 
-        return [
+        $rule = [
             'name'      => 'required|max:200',
             'email'     => 'required|email|unique:users'.$email,
-            'password'  => 'required',
-            'verify_password'   => 'required|same:password',
-            //'role_id'   => 'required',
+            'role_id'   => 'required',
             'username'  => 'required|unique:users'.$username,
         ];
+        
+        return $rule;
+        
     }
 }

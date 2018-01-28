@@ -35,4 +35,17 @@ class Mutation extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function setStatusLabel($value)
+    {
+        $statusLabel = [0 => 'Pengajuan Ditolak',
+                        1 => 'Menunggu persetujuan kepala gudang',
+                        2 => 'Menunggu konfirmasi admin BUI',
+                        3 => 'Menunggu verifikasi admin gudang tujuan',
+                        4 => 'menunggu persetujuan verifikasi kepala gudang',
+                        5 => 'Pengajuan disetujui'
+                        ];
+
+        $this->attributes['status'] = $statusLabel[$value];
+        
+    }
 }
