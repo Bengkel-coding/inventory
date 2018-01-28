@@ -52,11 +52,12 @@ class UserController extends TrinataController
         $inputs = $request->all();
 
         if ($request->password) {
-            $request->password = \Hash::make($request->password);    
+            $inputs = $request->except(['verify_password']);
+            $inputs['password'] = \Hash::make($request->password);    
         } else {
             $inputs = $request->except(['password','verify_password']);
         }
-
+        
         return $inputs;
     }
 
