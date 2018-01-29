@@ -27,13 +27,21 @@ class MutasiInvestasiController extends TrinataController
 
     public function getData(Request $request)
     {
-        // $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('investasi');
-
-        $model = $this->model
+        if(\Auth::User()->user_id != 1){
+                $model = $this->model
+                        ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
+                        ->groupBy('komag')
+                        ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
+                        ->orderBy('created_at','desc')
+                        ->whereType('investasi');
+        }else{
+            $model = $this->model
                         ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
                         ->groupBy('komag')
                         ->orderBy('created_at','desc')
                         ->whereType('investasi');
+        }
+        
 
         $data = Table::of($model)
             ->addColumn('warehouse_id',function($model){

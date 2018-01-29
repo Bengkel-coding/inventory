@@ -27,13 +27,21 @@ class MutasiMroAbtController extends TrinataController
 
     public function getData(Request $request)
     {
-        // $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->orderBy('created_at','desc')->whereStatus(0)->whereType('mroabt');
-
-        $model = $this->model
+        if(\Auth::User()->role_id != 1){
+            $model = $this->model
+                        ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
+                        ->groupBy('komag')
+                        ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
+                        ->orderBy('created_at','desc')
+                        ->whereType('mroabt');
+        }else{
+            $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('komag')
                         ->orderBy('created_at','desc')
                         ->whereType('mroabt');
+        }
+        
 
         $data = Table::of($model)
             ->addColumn('warehouse_id',function($model){

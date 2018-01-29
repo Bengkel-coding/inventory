@@ -27,12 +27,21 @@ class MutasiMroController extends TrinataController
 
     public function getData(Request $request)
     {
-        $model = $this->model
+        if(\Auth::User()->role_id != 1){
+            $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('komag')
+                        // ini ada masalah pada saat mengeluarkan data, jadi dengan komag yg sama dengan warehouse berbeda tidak keluar datanya
                         ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
                         ->orderBy('created_at','desc')
                         ->whereType('mro');
+        }else{
+            $model = $this->model
+                        ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
+                        ->groupBy('komag')
+                        ->orderBy('created_at','desc')
+                        ->whereType('mro');
+        }        
 
         // dd($model);
         
