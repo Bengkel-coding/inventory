@@ -8,6 +8,7 @@ use App\Models\Material;
 use App\Models\MaterialMro;
 use App\Models\Assessment;
 use App\Models\Warehouse;
+use App\User;
 use Table;
 use Image;
 use trinata;
@@ -27,7 +28,7 @@ class InventarisMroController extends TrinataController
 
     public function getData(Request $request)
     {
-        if(\Auth::User()->role_id != 1){
+        if((\Auth::User()->head_id == 0) && (\Auth::User()->warehouse_id > 0)){
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('id')
@@ -46,7 +47,6 @@ class InventarisMroController extends TrinataController
 
         $data = Table::of($model)
             ->addColumn('warehouse_id',function($model){
-                // dd(
                 return $model->warehouse()->first()->name;
             })
             ->addColumn('action',function($model){
@@ -64,28 +64,12 @@ class InventarisMroController extends TrinataController
         return view($this->resource.'index', compact('model', 'request'));
     }
 
-    public function getCreate()
-    {
-        $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
-    }
-
-   public function postCreate(Requests\Backend\CrudRequest $request)
-    {
-        $model = $this->model;
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
-
     public function getDetail($id)
     {
         $model = $this->model->findOrFail($id);
         $data['ware'] = Warehouse::lists('name','id');
         $model['total_price'] = $model['amount'] * $model['unit_price'];
         $model['real_amount'] = $model['amount'] - $model['total_proposed_amount'];
-
-         // dd($model);
 
         return view($this->resource.'_form',compact('model', 'data'));
     }
@@ -96,8 +80,6 @@ class InventarisMroController extends TrinataController
             $model = $this->model->findOrFail($id);
             $model->total_proposed_amount = $model->total_proposed_amount + $request->proposed_amount;
             $model->status = '1';
-
-            // dd($model);
 
             if($model->save()){
                 $assessment = new \App\Models\Assessment;
@@ -110,8 +92,6 @@ class InventarisMroController extends TrinataController
                 $assessment->status = 1;
                 $assessment->save();
 
-            // dd($assessment);
-
             }else{
                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                 $model->save();
@@ -121,19 +101,7 @@ class InventarisMroController extends TrinataController
             return back()->with('info','Jumlah pengajuan anda harus lebih kecil');
         }
 
-        // dd(urlBackendAction('pengajuan-mutasi/index'));
         return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Data Has Been Inserted');
     }
 
-    public function getDelete($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->delete($model,[$model->image]);
-    }
-
-    public function getPublish($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->publish($model);
-    }
 }
