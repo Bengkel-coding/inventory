@@ -63,7 +63,7 @@ class Material extends Model
         $this->attributes['unit_price'] = number_format($value);
     }
 
-    public function setStatusLabel($value)
+    public function setStatusLabelMutation($value)
     {
         $statusLabel = [0 => 'Pengajuan Ditolak',
                         1 => 'Menunggu persetujuan kepala gudang',
@@ -71,6 +71,18 @@ class Material extends Model
                         3 => 'Menunggu verifikasi admin gudang tujuan',
                         4 => 'menunggu persetujuan verifikasi kepala gudang',
                         5 => 'Pengajuan disetujui'
+                        ];
+
+        $this->attributes['status'] = $statusLabel[$value];
+        
+    }
+
+    public function setStatusLabelAssessment($value)
+    {
+        $statusLabel = [0 => 'Pengajuan Ditolak',
+                        1 => 'Menunggu persetujuan kepala gudang',
+                        2 => 'Menunggu konfirmasi admin BUI',
+                        3 => 'Pengajuan disetujui'
                         ];
 
         $this->attributes['status'] = $statusLabel[$value];

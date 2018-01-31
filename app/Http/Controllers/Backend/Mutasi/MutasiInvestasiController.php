@@ -30,14 +30,14 @@ class MutasiInvestasiController extends TrinataController
         if(\Auth::User()->user_id != 1){
                 $model = $this->model
                         ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
-                        ->groupBy('komag')
+                        ->groupBy('id')
                         ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
                         ->orderBy('created_at','desc')
                         ->whereType('investasi');
         }else{
             $model = $this->model
                         ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
-                        ->groupBy('komag')
+                        ->groupBy('id')
                         ->orderBy('created_at','desc')
                         ->whereType('investasi');
         }

@@ -54,17 +54,6 @@
                                 <th>Status Pengajuan</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td>Category</td>
-                                <td>Nama</td>
-                                <td>Komag</td>
-                                <td>Tahun Perolehan</td>
-                                <td>Jumlah</td>
-                                <td>Satuan</td>
-                                <td>Harga Unit</td>
-                                <td>Action</td>
-                            </tr> -->
-
                         </thead>
                         
                     </table>

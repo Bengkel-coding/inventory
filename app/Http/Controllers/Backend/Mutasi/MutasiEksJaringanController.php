@@ -31,14 +31,14 @@ class MutasiEksJaringanController extends TrinataController
         if(\Auth::User()->role_id != 1){
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
-                        ->groupBy('komag')
+                        ->groupBy('id')
                         ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
                         ->orderBy('created_at','desc')
                         ->whereType('eksjar');
         }else{
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
-                        ->groupBy('komag')
+                        ->groupBy('id')
                         ->orderBy('created_at','desc')
                         ->whereType('eksjar');
         }

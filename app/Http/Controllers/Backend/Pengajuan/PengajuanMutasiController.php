@@ -33,13 +33,13 @@ class PengajuanMutasiController extends TrinataController
                     ->join('mutations', 'materials.id', '=', 'mutations.material_id')
                     ->where('mutations.status', '=', 1)
                     ->where('user_id', '=', \Auth::User()->id)
-                    // ->orderBy('created_at','desc')
+                    ->get()
                     ;
         
-        $model = $model->get();
+        // $model = $model->get();
 
         foreach ($model as $key => $value) {
-            $value->setStatusLabel($value->status);
+            $value->setStatusLabelMutation($value->status);
         }
 
         $data = Table::of($model)

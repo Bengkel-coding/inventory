@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Material;
-use App\Warehouse;
+use App\Models\Material;
+use App\Models\Warehouse;
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,6 +28,20 @@ class Assessment extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function setStatusLabel($value)
+    {
+        $statusLabel = [0 => 'Pengajuan Ditolak',
+                        1 => 'Menunggu persetujuan kepala gudang',
+                        2 => 'Menunggu konfirmasi admin BUI',
+                        3 => 'Menunggu verifikasi admin gudang tujuan dfadfsaa',
+                        4 => 'menunggu persetujuan verifikasi kepala gudang',
+                        5 => 'Pengajuan disetujui'
+                        ];
+
+        $this->attributes['status'] = $statusLabelAssessment[$value];
+        
     }
 
 }

@@ -30,17 +30,17 @@ class MutasiMroController extends TrinataController
         if(\Auth::User()->role_id != 1){
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
-                        ->groupBy('komag')
-                        // ini ada masalah pada saat mengeluarkan data, jadi dengan komag yg sama dengan warehouse berbeda tidak keluar datanya
+                        ->groupBy('id')
                         ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
                         ->orderBy('created_at','desc')
                         ->whereType('mro');
         }else{
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
-                        ->groupBy('komag')
+                        ->groupBy('id')
                         ->orderBy('created_at','desc')
-                        ->whereType('mro');
+                        ->whereType('mro')
+                        ->get();
         }        
 
         // dd($model);
@@ -115,7 +115,6 @@ class MutasiMroController extends TrinataController
         
         if ((($request->proposed_amount) <= ($request->real_amount)) && (($request->proposed_amount) > 0) && (($request->warehouse_id) != ($request->proposed_warehouse_id))){
             $model = $this->model->findOrFail($id);
-            // $model->amount = $request->amount - $request->proposed_amount;
             $model->total_proposed_amount = $model->total_proposed_amount + $request->proposed_amount;
             $model->status = '1';
 
@@ -130,7 +129,6 @@ class MutasiMroController extends TrinataController
                 $mutation->proposed_warehouse_id = $request->proposed_warehouse_id;
                 $mutation->user_id = \Auth::user()->id;
                 $mutation->status = '1';
-                // $model->save();
                 $mutation->save();
 
             }else{
@@ -142,7 +140,6 @@ class MutasiMroController extends TrinataController
             return back()->with('info','Check your mutation data');
         }
 
-        // dd(urlBackendAction('pengajuan-mutasi/index'));
         return redirect(urlBackend('pengajuan-mutasi/index'))->with('success','Data Has Been Inserted');
     }
 
