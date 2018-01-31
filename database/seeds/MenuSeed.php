@@ -360,5 +360,21 @@ class MenuSeed extends Seeder
                 'order'         => 1,
             ],['index']);
 
+        \trinata::addMenu([ 
+                'parent_id'     => null,
+                'title'         => 'Laporan',
+                'controller'    => '#',
+                'slug'          => 'laporan',
+                'order'         => 1,
+            ],[]);
+
+        \trinata::addMenu([ 
+                'parent_id'     => 'laporan',
+                'title'         => 'Laporan Material',
+                'controller'    => 'LaporanController',
+                'slug'          => 'laporan-material',
+                'order'         => 1,
+            ],['index','create','update','delete','publish']);
+
     }
 }

@@ -25,7 +25,9 @@ class WarehouseController extends TrinataController
 
     public function getData()
     {
-        $model = $this->model->join('users','users.id','=','warehouses.head_office_id')->select('warehouses.id','warehouses.name','warehouses.address','warehouses.phone','users.name as officer');
+        $model = $this->model
+                ->join('users','users.id','=','warehouses.head_office_id')
+                ->select('warehouses.id','warehouses.name','warehouses.address','warehouses.phone','users.name as officer');
 
         $data = Table::of($model)
             ->addColumn('action',function($model){

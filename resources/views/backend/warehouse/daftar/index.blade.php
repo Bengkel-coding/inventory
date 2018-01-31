@@ -17,16 +17,20 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
+                                <td>Nama</td>
+                                <td>Alamat</td>
+                                <td>Telp</td>
+                                <td>Penanggung Jawab</td>
+                                <th>&nbsp;</th>
+                            </tr>
+                            <tr>     
                                 <th>Nama</th>
                                 <th>Alamat</th>
                                 <th>Telp</th>
                                 <th>Penanggung Jawab</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td>Title</td>
-                                <td>Action</td>
-                            </tr> -->
+                       
                         </thead>
                         
                     </table>
@@ -47,7 +51,9 @@
         $(document).ready(function(){
              $('#table thead td').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    if(title!="Action"){
+                        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+                    }
                 } );
              
           var table =  $('#table').DataTable({
@@ -55,9 +61,9 @@
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
-                    { data: 'name', name: 'name' },
-                    { data: 'address', name: 'address' },
-                    { data: 'phone', name: 'phone' },
+                    { data: 'name', name: 'warehouses.name' },
+                    { data: 'address', name: 'warehouses.address' },
+                    { data: 'phone', name: 'warehouses.phone' },
                     { data: 'officer', name: 'users.name' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
