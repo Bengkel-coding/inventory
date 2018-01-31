@@ -74,16 +74,16 @@
                         <label>Kuantitas Inventarisasi</label>
                         {!! Form::text('proposed_amount' , null ,['class' => 'form-control', 'readonly'=>'readonly']) !!}
                       </div>
-                      
+                      @if($actionAllow)
                       <div class="form-group">
                         <label>Persetujuan</label>
-                        {!! Form::select('status' , ['1' => 'Disetujui' , '0' => 'Ditolak'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , $status , null ,['class' => 'form-control']) !!}
                       </div> 
 
                       {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}                      
 
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
-                    
+                      @endif
                     {!! Form::close() !!}
 
           </div>

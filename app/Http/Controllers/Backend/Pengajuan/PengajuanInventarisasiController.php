@@ -28,7 +28,7 @@ class PengajuanInventarisasiController extends TrinataController
 
     public function getData(Request $request)
     {
-        if((\Auth::User()->head_id != 0) && (\Auth::User()->warehouse_id != 0)){
+        if(\Auth::User()->warehouse_id != 0){
             $model = $this->model
                     ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'assessments.warehouse_id', 'assessments.status')
                     ->join('assessments', 'materials.id', '=', 'assessments.material_id')
@@ -38,9 +38,11 @@ class PengajuanInventarisasiController extends TrinataController
                     ->get()
                     ;
         }else{
+
             $model = $this->model
                     ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'assessments.warehouse_id', 'assessments.status')
                     ->join('assessments', 'materials.id', '=', 'assessments.material_id')
+                    // ->where('assessments.status',2)
                     ->get()
                     ;
         }
@@ -85,21 +87,84 @@ class PengajuanInventarisasiController extends TrinataController
 
     public function getDetail($id)
     {
+        $status = [1 => 'Disetujui', 0 => 'Ditolak'];
+
         $model = $this->model
-                            ->select('materials.id','materials.name','materials.komag','materials.description','materials.unit','materials.year_acquisition','materials.unit_price', 'assessments.amount', 'assessments.proposed_amount', 'assessments.status')
+                            ->select('materials.id','materials.name','materials.komag','materials.description','materials.unit','materials.year_acquisition','materials.unit_price', 'assessments.amount', 'assessments.proposed_amount', 'assessments.status','assessments.user_id')
                             ->join('assessments', 'assessments.material_id', '=', 'materials.id')
                             ->where('materials.id', $id)->first();
         $model['total_price'] = $model['unit_price'] * $model['amount'];
 
-         $data = ['ware' => Warehouse::lists('name','id')];
+        $data = ['ware' => Warehouse::lists('name','id')];
 
-        return view($this->resource.'_form',compact('model','data'));
+        if ($model->status == 1 && \Auth::user()->id == $model->user_id && \Auth::user()->head_id > 0){
+            $status = [0 => 'Batalkan Usulan'];
+        }
+
+        $actionAllow = true;
+        switch ($model->status) {
+            case '1': // jangan ijinkan bui jika data belum di validasi kepala gudang
+                if (\Auth::user()->head_id == 0 && \Auth::user()->warehouse_id == 0) $actionAllow = false;
+                break;
+            case '2': // jangan ijinkan admin jika data sudah divalidasi kepala gudang
+                if (\Auth::user()->head_id > 0 && \Auth::user()->warehouse_id != 0) $actionAllow = false;
+                break;
+            case '3': // jangan ijinkan aksi apapun jika data sudah berhasil inventarisasi
+                $actionAllow = false;
+                break;
+            default: // jangan ijinkan aksi apapun termasuk ditolak
+                $actionAllow = false;
+                break;
+        }
+
+        return view($this->resource.'_form',compact('model','data', 'status', 'actionAllow'));
     }
+
 
     public function postDetail(Request $request,$id)
     {
         $model = $this->model->findOrFail($id);
-        if(($request->status = 1) && (\Auth::User()->head_id == 0) && ((\Auth::User()->warehouse_id) == ($model->warehouse_id))){
+
+        if ($request->status == 1) {
+            
+            $assessment = \App\Models\Assessment::whereMaterialId($model->id)->first();
+
+            switch ($model->status) {
+                case '1': //disetuji kepala gudang
+                    
+                    $assessment->status = 2;
+                    $assessment->save();
+                    break;
+
+                case '2': // disetujui admin bui
+                    $assessment->status = 3;
+                    $assessment->save();
+
+                    $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                    $model->amount = $model->amount - $request->proposed_amount;
+                    $model->save();
+                    break;
+                default:
+                     return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
+                    break;
+            }
+           
+            return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Pengajuan Telah Disetujui');
+            
+        } else {
+
+            $assessment = \App\Models\Assessment::whereMaterialId($model->id)->first();
+            $assessment->status = 0;
+            if($assessment->save()){
+                $model = $this->model->findOrFail($id);
+                $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                $model->save();
+            }
+
+            return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Pengajuan Berhasil Ditolak');
+        }
+
+        /*if(($request->status = 1) && (\Auth::User()->head_id == 0) && ((\Auth::User()->warehouse_id) == ($model->warehouse_id))){
             $model = $this->model->findOrFail($id);
 
             if($model->save()){
@@ -144,7 +209,7 @@ class PengajuanInventarisasiController extends TrinataController
 
         }else{
             return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
-        }
+        }*/
     }
 
     public function getDelete($id)
