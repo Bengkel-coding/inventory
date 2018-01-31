@@ -78,7 +78,7 @@
 
                       <div class="form-group">
                         <label>Kondisi Barang </label>
-                        {!! Form::select('status' , ['y' => 'Rusak - Usulan Penghapusan' ,   'n' => 'Baik'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['y' => 'Rusak - Usulan Penghapusan'] , null ,['class' => 'form-control']) !!}
                       </div>
 
                       {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}                      

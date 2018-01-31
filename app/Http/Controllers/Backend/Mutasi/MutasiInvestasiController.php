@@ -27,7 +27,7 @@ class MutasiInvestasiController extends TrinataController
 
     public function getData(Request $request)
     {
-        if(\Auth::User()->user_id != 1){
+        if(\Auth::User()->warehouse_id > 0){
                 $model = $this->model
                         ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
                         ->groupBy('id')
