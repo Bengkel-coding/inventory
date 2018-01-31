@@ -27,7 +27,7 @@ class MutasiMroAbtController extends TrinataController
 
     public function getData(Request $request)
     {
-        if(\Auth::User()->role_id != 1){
+        if(\Auth::User()->warehouse_id > 0){
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('id')

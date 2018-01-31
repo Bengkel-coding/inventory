@@ -27,7 +27,7 @@ class InventarisInvestasiController extends TrinataController
 
     public function getData()
     {
-        if(((\Auth::User()->head_id == 0) && (\Auth::User()->warehouse_id > 0)) || (\Auth::User()->warehouse_id > 0)){
+        if(\Auth::User()->warehouse_id > 0){
             $model = $this->model
                         ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
                         ->groupBy('id')
@@ -66,6 +66,7 @@ class InventarisInvestasiController extends TrinataController
     {
         $model = $this->model->findOrFail($id);
         $data['ware'] = Warehouse::lists('name','id');
+        $model['total_price'] = $model['amount'] * $model['unit_price'];
         $model['real_amount'] = $model['amount'] - $model['total_proposed_amount'];
 
         return view($this->resource.'_form',compact('model', 'data'));

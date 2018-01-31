@@ -11,67 +11,61 @@
           <div class="col-md-7">
             @include('backend.common.errors')
 
-                     {!! Form::model($model,['files' => true]) !!} 
-
+                     @include('backend.common.flashes')
+                      {!! Form::model($model, ['class'=>'panel-body p-y-1', 'files'=>true]) !!} 
 
                       <div class="form-group">
                         <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
-
 
                       <div class="form-group">
                         <label>Nama Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('name' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>KOMAG</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('komag' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Description Material</label>
-                        {!! Form::textarea('description' , null ,['class' => 'form-control']) !!}
+                        {!! Form::textarea('description' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '', 'rows'=>'5']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Satuan Barang </label>
-                        {!! Form::select('status' , ['y' => 'M' , 'n' => 'Liter'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Tahun Perolehan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('year_acquisition' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('real_amount' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
                       <div class="form-group">
-                        <label>Harga Satuan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Harga Total</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        <label>Lokasi Penyimpanan</label>
+                        {!! Form::select('warehouse_id' , $data['ware'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Kuantitas Inventarisasi</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('proposed_amount' , null ,['class' => 'form-control']) !!}
                       </div>
+
                       <div class="form-group">
                         <label>Kondisi Barang </label>
-                        {!! Form::select('status' , ['y' => 'Rusak-usulan pengahpusan' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , ['y' => 'Rusak - Usulan Penghapusan'] , null ,['class' => 'form-control']) !!}
                       </div>
 
-
-                      
+                      {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}
 
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     

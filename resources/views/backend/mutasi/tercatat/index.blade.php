@@ -40,8 +40,7 @@
                                 <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
-                        </thead>
-                        
+                        </thead>                        
                     </table>
                 </div>
             </div>
