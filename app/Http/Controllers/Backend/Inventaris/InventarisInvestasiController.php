@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers\Backend\Inventaris;
 
-
- 
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Crud;
+use App\Models\Material;
+use App\Models\MaterialMro;
+use App\Models\Assessment;
+use App\Models\Warehouse;
 use Table;
 use Image;
 use trinata;
@@ -15,71 +15,89 @@ use trinata;
 class InventarisInvestasiController extends TrinataController
 {
   
-    public function __construct(Crud $model)
+    public function __construct(Material $model, Assessment $assessment)
     {
         parent::__construct();
+        $this->middleware('auth');
         $this->model = $model;
+        $this->assessment = $assessment;
 
         $this->resource = "backend.inventaris.investasi.";
     }
 
     public function getData()
     {
-        $model = $this->model->select('id','title','status');
+        if(((\Auth::User()->head_id == 0) && (\Auth::User()->warehouse_id > 0)) || (\Auth::User()->warehouse_id > 0)){
+            $model = $this->model
+                        ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
+                        ->groupBy('id')
+                        ->where('warehouse_id', [\Auth::User()->warehouse_id])
+                        ->orderBy('created_at','desc')
+                        ->whereType('investasi');
+        }else{
+            $model = $this->model
+                        ->select('id','name','komag','description','category', 'year_acquisition',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit_price','unit','warehouse_id')
+                        ->groupBy('id')
+                        ->orderBy('created_at','desc')
+                        ->whereType('investasi')
+                        ->get();
+        }         
 
         $data = Table::of($model)
+            ->addColumn('warehouse_id',function($model){
+                return $model->warehouse()->first()->name;
+            })
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
-                return trinata::buttons($model->id , [] , $status);
+                $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>Ajukan</a>";
+                return $button;
             })
             ->make(true);
 
         return $data;
     }
 
-    public function getIndex()
-    {
-        return view($this->resource.'index');
-    }
-
-    public function getCreate()
+    public function getIndex(Request $request)
     {
         $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
+        return view($this->resource.'index', compact('model', 'request'));
     }
 
-   public function postCreate(Requests\Backend\CrudRequest $request)
-    {
-        $model = $this->model;
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
-
-    public function getUpdate($id)
+    public function getDetail($id)
     {
         $model = $this->model->findOrFail($id);
+        $data['ware'] = Warehouse::lists('name','id');
+        $model['real_amount'] = $model['amount'] - $model['total_proposed_amount'];
 
-        return view($this->resource.'_form',compact('model'));
+        return view($this->resource.'_form',compact('model', 'data'));
     }
 
-    public function postUpdate(Requests\Backend\CrudRequest $request,$id)
+    public function postDetail(Request $request,$id)
     {
-        $model = $this->model->findOrFail($id);
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
+        if ((($request->proposed_amount) <= ($request->real_amount)) && (($request->proposed_amount) > 0)){
+            $model = $this->model->findOrFail($id);
+            $model->total_proposed_amount = $model->total_proposed_amount + $request->proposed_amount;
+            $model->status = '1';
 
-    public function getDelete($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->delete($model,[$model->image]);
-    }
+            if($model->save()){
+                $assessment = new \App\Models\Assessment;
+                $assessment->material_id = $model->id;
+                $assessment->amount = $model->amount;
+                $assessment->proposed_amount = $request->proposed_amount;
+                $assessment->user_id = \Auth::user()->id;
+                $assessment->status = $request->status;
+                $assessment->warehouse_id = $request->warehouse_id;
+                $assessment->status = 1;
+                $assessment->save();
 
-    public function getPublish($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->publish($model);
+            }else{
+                $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                $model->save();
+                return back()->with('info','Saving failed');
+            }
+        }else{
+            return back()->with('info','Jumlah pengajuan anda harus lebih kecil');
+        }
+
+        return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Data Has Been Inserted');
     }
 }

@@ -27,19 +27,19 @@ class InventarisMroAbtController extends TrinataController
 
     public function getData()
     {
-        if((\Auth::User()->head_id == 0) && (\Auth::User()->warehouse_id > 0)){
+        if(((\Auth::User()->head_id == 0) && (\Auth::User()->warehouse_id > 0)) || (\Auth::User()->warehouse_id > 0)){
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('id')
                         ->where('warehouse_id', [\Auth::User()->warehouse_id])
                         ->orderBy('created_at','desc')
-                        ->whereType('mro');
+                        ->whereType('mroabt');
         }else{
             $model = $this->model
                         ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
                         ->groupBy('id')
                         ->orderBy('created_at','desc')
-                        ->whereType('mro')
+                        ->whereType('mroabt')
                         ->get();
         }         
 

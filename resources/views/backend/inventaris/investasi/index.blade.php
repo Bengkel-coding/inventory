@@ -12,7 +12,7 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                    {!! trinata::buttonCreate() !!}
+                    <!-- {!! trinata::buttonCreate() !!}
                       <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
@@ -22,21 +22,22 @@
                         {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
                       </div>
                       
-                    <a href="#" class="btn btn-info">Lihat</a>
+                    <a href="#" class="btn btn-info">Lihat</a> -->
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Kategori</th>
+                                <th>Nama</th>
+                                <th>Komag</th>
+                                <th>Deskripsi</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
+                                <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
-                                <td>Title</td>
-                                <td>Action</td>
-                            </tr>
-                        </thead>
-                        
+                        </thead>                        
                     </table>
                 </div>
             </div>
@@ -57,12 +58,20 @@
                     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
                 } );
              
-          var table =  $('#table').DataTable({
+          // var table =  $('#table').DataTable({
+            $('#table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
-                    { data: 'title', name: 'title' },
+                    { data: 'category', name: 'category' },
+                    { data: 'name', name: 'name'},
+                    { data: 'komag', name: 'komag' },
+                    { data: 'description', name: 'description' },
+                    { data: 'amount', name: 'amount' },
+                    { data: 'unit', name: 'unit' },
+                    { data: 'warehouse_id', name: 'warehouse_id' },
+
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });
