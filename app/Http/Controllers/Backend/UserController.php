@@ -65,9 +65,9 @@ class UserController extends TrinataController
     {
         $model = $this->model;
         $roles = $this->roles();
-        $warehouse = \App\Models\Warehouse::lists('name','id');
-        $head = [0=>'Pilih Pimpinan'] + $this->model->whereNotIn('role_id', [1])->whereNotIn('id', [$model->id])->lists('name', 'id')->toArray();
-
+        $warehouse = [0 => 'Pilih Gudang'] + \App\Models\Warehouse::pluck('name','id')->toArray();
+        $head = [0=>'Pilih Pimpinan'] + $this->model->whereNotIn('role_id', [1])->lists('name', 'id')->toArray();
+        // dd($head, $this->model->whereNotIn('role_id', [1])->get(), $model->id);
         return view('backend.user._form',compact('model','roles','warehouse', 'head'));
     }
 

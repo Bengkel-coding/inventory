@@ -53,8 +53,12 @@ class RoleController extends TrinataController
 	{
 		$this->validate($request,$this->model->rules());
 
-		$this->model->create($request->all());
-
+        $model = $this->model;
+        $model->role = $request->role;
+        $model->slug = str_Slug($request->role);
+        $model->is_permanent = intval($request->is_permanent);
+        $model->save();
+		
 		return redirect(urlBackendAction('index'))->withSuccess('Data has been saved');
 	}
 
@@ -69,7 +73,11 @@ class RoleController extends TrinataController
 	{
 		$this->validate($request,$this->model->rules($id));
 
-		$this->model->findOrFail($id)->update($request->all());
+        $model = $this->model->findOrFail($id);
+        $model->role = $request->role;
+        $model->slug = str_Slug($request->role);
+        $model->is_permanent = intval($request->is_permanent);
+        $model->save();
 
 		return redirect(urlBackendAction('index'))->withSuccess('Data has been updated');
 	}

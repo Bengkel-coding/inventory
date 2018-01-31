@@ -36,13 +36,13 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Kategori</th>
+                                <!-- <th>Kategori</th> -->
                                 <th>Nama</th>
                                 <th>Komag</th>
-                                <th>Tahun Perolehan</th>
+                                <th>Deskripsi</th>
                                 <th>Jumlah</th>
-                                <!-- <th>Satuan</th> -->
                                 <!-- <th>Harga Unit</th> -->
+                                <th>Gudang</th>
                                 <th>Action</th>
                             </tr>
                             <!-- <tr>
@@ -90,13 +90,12 @@
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
-                    { data: 'category', name: 'category' },
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
-                    { data: 'year_acquisition', name: 'year_acquisition' },
+                    { data: 'description', name: 'year_acquisition' },
                     { data: 'amount', name: 'amount' },
-                    // { data: 'unit', name: 'unit' },
                     // { data: 'unit_price', name: 'unit_price' },
+                    { data: 'warehouse', name: 'warehouses.name' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]

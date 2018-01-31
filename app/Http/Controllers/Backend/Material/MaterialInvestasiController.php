@@ -27,7 +27,7 @@ class MaterialInvestasiController extends TrinataController
 
     public function getData()
     {
-        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->whereType('investasi')->orderBy('created_at','desc');
+        $model = $this->model->join('warehouses', 'materials.warehouse_id','=','warehouses.id')->select('materials.id','materials.name','materials.komag','materials.category', 'materials.year_acquisition','materials.amount','materials.unit_price','materials.unit','materials.description','warehouses.name as warehouse')->whereType('investasi')->orderBy('materials.created_at','desc');
 
         if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
         if (isset($request->category) && $request->category) $model->where('category', $request->category);
@@ -36,7 +36,7 @@ class MaterialInvestasiController extends TrinataController
         foreach ($model as $key => $value) {
             $value->categoryAttribute($value->category);
             $value->unitAttribute($value->unit);
-            // $value->unitPriceAttribute($value->unit_price);
+            $value->unitPriceAttribute($value->unit_price);
         }
 
         $data = Table::of($model)
