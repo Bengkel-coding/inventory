@@ -35,6 +35,7 @@ class PengajuanInventarisasiController extends TrinataController
                     // ->where('assessment.status', '=', 1)
                     // ->where('user_id', '=', [\Auth::User()->id])
                     ->where('assessments.warehouse_id', '=', [\Auth::User()->warehouse_id])
+                    ->orderBy('assessments.created_at','desc')
                     ->get()
                     ;
         }else{
@@ -43,6 +44,7 @@ class PengajuanInventarisasiController extends TrinataController
                     ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'assessments.warehouse_id', 'assessments.status')
                     ->join('assessments', 'materials.id', '=', 'assessments.material_id')
                     // ->where('assessments.status',2)
+                    ->orderBy('assessments.created_at','desc')
                     ->get()
                     ;
         }
