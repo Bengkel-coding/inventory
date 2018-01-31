@@ -19,7 +19,10 @@
                         <label>Role</label>
                         {!! Form::text('role' , null ,['class' => 'form-control']) !!}
                       </div>
-                      
+                      <div class="form-group">
+                        <label>Deleted</label>
+                        {!! Form::select('is_permanent' , [0 => 'Deleted', 1=>'Undeleted'], null ,['class' => 'form-control']) !!}
+                      </div>
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     
                     {!! Form::close() !!}
