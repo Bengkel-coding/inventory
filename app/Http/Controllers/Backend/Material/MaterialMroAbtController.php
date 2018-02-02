@@ -60,6 +60,29 @@ class MaterialMroAbtController extends TrinataController
         return view($this->resource.'index', compact('warehouse','urlAjax'));
     }
 
+
+    // public function getIndex(Request $request)
+    // {
+    //     $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
+    //     $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
+
+    //     $urlAjax = 'data?warehouse='.(int) $request->warehouse.'&category='.(string) $request->category;
+
+    //     $model = $this->model->join('warehouses', 'materials.warehouse_id','=','warehouses.id')->select('materials.id','materials.name','materials.komag','materials.category', 'materials.year_acquisition','materials.amount','materials.unit_price','materials.unit','materials.description','warehouses.name as warehouse')->whereType('mroabt')->orderBy('materials.created_at','desc');
+
+    //     if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
+    //     if (isset($request->category) && $request->category) $model->where('category', $request->category);
+
+    //     $model = $model->get();
+    //     foreach ($model as $key => $value) {
+    //         $value->categoryAttribute($value->category);
+    //         $value->unitAttribute($value->unit);
+    //         $value->unitPriceAttribute($value->unit_price);
+    //     }
+
+    //     return view($this->resource.'index-all', compact('warehouse','urlAjax','model'));
+    // }
+
     public function getImport(Request $request)
     {
         $model = $this->model;

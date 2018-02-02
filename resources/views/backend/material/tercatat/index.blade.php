@@ -1,6 +1,11 @@
 @extends('backend.layouts.layout')
 @section('content')
 
+<style>
+tfoot {
+     display: table-header-group;
+}
+</style>
   <div class="px-content">
     <div class="row">
       <div class="col-md-12 fadeIn animated">   
@@ -50,6 +55,22 @@
                                 <td>Action</td>
                             </tr> -->
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <!-- <th>Kategori</th> -->
+                                <th>Nama</th>
+                                <th>Komag</th>
+                                <th>Deskripsi</th>
+                                <th>Jumlah</th>
+                                <!-- <th>Harga Unit</th> -->
+                                <th>Gudang</th>
+                                <th>Action</th>
+                            </tr>
+                            <!-- <tr>
+                                <td>Title</td>
+                                <td>Action</td>
+                            </tr> -->
+                        </tfoot>
                         
                     </table>
                 </div>
@@ -80,10 +101,10 @@
         })
         
         $(document).ready(function(){
-             // $('#table thead td').each( function () {
-             //        var title = $(this).text();
-             //        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-             //    } );
+             $('#table tfoot th').each( function () {
+                    var title = $(this).text();
+                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                } );
              
           var table =  $('#table').DataTable({
                 processing: true,
@@ -102,7 +123,7 @@
             });
 
             // Apply the search
-            /*table.columns().every( function () {
+            table.columns().every( function () {
                 var that = this;
          
                 $( 'input', this.footer() ).on( 'keyup change', function () {
@@ -112,7 +133,7 @@
                             .draw();
                     }
                 } );
-            } );*/
+            } );
         });
 
     </script>

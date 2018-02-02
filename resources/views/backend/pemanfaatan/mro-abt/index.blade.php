@@ -12,17 +12,15 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                     <!--  <div class="form-group">
-                        <label>Kategori Barang</label>
-                        {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
-                      </div>
+                  <form method="get" action="">
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('warehouse' , $gudang , null ,['class' => 'form-control']) !!}
                       </div>
                       
-                    <a href="#" class="btn btn-success">Lihat</a>
- -->
+                    <button type="submit" class="btn btn-success">Lihat</button>
+                    
+                  </form>
                     <p>&nbsp;</p>
                       
                     <a href="{{urlBackendAction('ajukan')}}" class="btn btn-info btn-large">Ajukan</a>
@@ -33,6 +31,7 @@
                         <thead>
                             <tr>
                                 <th>&nbsp;</th>
+                                <th>Warehouse</th>
                                 <th>Kategori</th>
                                 <th>Nama</th>
                                 <th>Komag</th>
@@ -81,9 +80,10 @@
           var table =  $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ urlBackendAction("data") }}',
+                ajax: '{{ urlBackendAction("data") }}{{$param}}',
                 columns: [
                     { data: 'id', name: 'id' , searchable: false , bSortable: false},
+                    { data: 'warehouse_id', name: 'warehouse_id'  , bSortable: false},
                     { data: 'category', name: 'category'  , bSortable: false},
                     { data: 'name', name: 'name' , bSortable: false},
                     { data: 'komag', name: 'komag'  , bSortable: false},

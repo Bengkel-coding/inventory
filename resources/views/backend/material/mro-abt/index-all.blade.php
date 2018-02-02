@@ -1,11 +1,11 @@
 @extends('backend.layouts.layout')
 @section('content')
-
 <style>
 tfoot {
      display: table-header-group;
 }
 </style>
+
   <div class="px-content">
     <div class="row">
       <div class="col-md-12 fadeIn animated">   
@@ -49,19 +49,7 @@ tfoot {
                                 <th>Gudang</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td>Category</td>
-                                <td>Nama</td>
-                                <td>Komag</td>
-                                <td>Tahun Perolehan</td>
-                                <td>Jumlah</td>
-                                <td>Satuan</td>
-                                <td>Harga Unit</td>
-                                <td>Action</td>
-                            </tr> -->
-
                         </thead>
-
                         <tfoot>
                             <tr>
 
@@ -72,8 +60,27 @@ tfoot {
                                 <th>Harga Unit</th>
                                 <th>Gudang</th>
                                 <th>Action</th>
-                            </tr>
+                            </tr>                            
                         </tfoot>
+                        <tbody>
+                        @foreach($model as $item)
+                            <tr>
+                                <th>{{$item->name}}</th>
+                                <th>{{$item->komag}}</th>
+                                <th>{{$item->description}}</th>
+                                <th>{{$item->amount}}</th>
+                                <th>{{$item->unit_price}}</th>
+                                <th>{{$item->warehouse}}</th>
+                                <th>
+                                <?php
+
+                                    $status = $item->status == 'y' ? true : false;
+                                    echo trinata::buttons($item->id , [] , $status);
+                                ?>
+                                </th>                               
+                            </tr>
+                        @endforeach
+                        </tbody>
                         
                     </table>
                 </div>
@@ -104,30 +111,13 @@ tfoot {
         })
 
         $(document).ready(function(){
-             
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
                     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
                 } );
             
-            
-            
              
-          var table =  $('#table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! urlBackendAction($urlAjax) !!}',
-                columns: [
-                    { data: 'name', name: 'name'},
-                    { data: 'komag', name: 'komag' },
-                    { data: 'description', name: 'description' },
-                    { data: 'amount', name: 'amount' },
-                    { data: 'unit_price', name: 'unit_price' },
-                    { data: 'warehouse', name: 'warehouses.name' },
-
-                    { data: 'action', name: 'action' , searchable: false},
-                ]
-            });
+          var table =  $('#table').DataTable();
 
             // Apply the search
             table.columns().every( function () {

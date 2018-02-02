@@ -58,7 +58,6 @@
             {!! Form::close() !!}
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
-                  @include('backend.common.flashes')
 
                   <p>&nbsp;</p>
 
@@ -70,12 +69,25 @@
                                 <th>Komag</th>
                                 <th>Tahun Perolehan</th>
                                 <th>Harga Unit</th>
-                                <th>Jumlah Barang</th>
                                 <th>Jumlah Diusulkan</th>
                                 <th>Satuan</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($model->utilizationDetail()->get() as $item)
+                        <?php $detail= $item->material()->first();?>
+                          <tr>
+                                <td>{{$detail->category}}</td>
+                                <td>{{$detail->name}}</td>
+                                <td>{{$detail->komag}}</td>
+                                <td>{{$detail->year_acquisition}}</td>
+                                <td>{{$detail->unit_price}}</td>
+                                <td>{{$item->proposed_amount}}</td>
+                                <td>{{$detail->unit}}</td>
+                            
+                          </tr>
+
+                        @endforeach
                         
                         </tbody>
                         

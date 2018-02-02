@@ -1,6 +1,11 @@
 @extends('backend.layouts.layout')
 @section('content')
 
+<style>
+tfoot {
+     display: table-header-group;
+}
+</style>
   <div class="px-content">
     <div class="row">
       <div class="col-md-12 fadeIn animated">   
@@ -87,10 +92,12 @@
         })
 
         $(document).ready(function(){
-             // $('#table thead td').each( function () {
-             //        var title = $(this).text();
-             //        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-             //    } );
+          
+             $('#table tfoot th').each( function () {
+                    var title = $(this).text();
+                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                } );
+            
             
              
           var table =  $('#table').DataTable({
@@ -100,7 +107,7 @@
                 columns: [
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
-                    { data: 'description', name: 'year_acquisition' },
+                    { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     // { data: 'unit_price', name: 'unit_price' },
                     { data: 'warehouse', name: 'warehouses.name' },
@@ -112,17 +119,17 @@
             });
 
             // Apply the search
-            // table.columns().every( function () {
-            //     var that = this;
+            table.columns().every( function () {
+                var that = this;
          
-            //     $( 'input', this.footer() ).on( 'keyup change', function () {
-            //         if ( that.search() !== this.value ) {
-            //             that
-            //                 .search( this.value )
-            //                 .draw();
-            //         }
-            //     } );
-            // } );
+                $( 'input', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         });
 
     </script>

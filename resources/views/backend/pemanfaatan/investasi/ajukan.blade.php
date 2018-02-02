@@ -88,7 +88,7 @@
                                 <td>{{$item->options['komag']}}</td>
                                 <td>{{$item->options['year_acquisition']}}</td>
                                 <td>{{$item->price}}</td>
-                                <td><input type="text" class="form-control" value="{{$item->options['amount']}}" readonly="readonly"></td>
+                                <td><input type="text" class="form-control" value="{{$item->options['amount']-$item->options['total_proposed_amount']}}" readonly="readonly"></td>
                                 <td><input type="text" class="form-control" value="{{$item->qty}}" readonly="readonly"></td>
                                 <td>{{$item->options['unit']}}</td>
                                 <td><a href="{{urlBackendAction('deletecart/'.$item->id)}}"><i class="fa fa-close"></i></a></td>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Material;
 use App\Models\Utilization;
 use App\Models\UtilizationDetail;
+use App\Models\Warehouse;
 use App\Repositories\UploadArea;
 use Table;
 use Image;
@@ -26,6 +27,7 @@ class PemanfaatanInvestasiController extends TrinataController
         $this->model = $model;
         $this->utilization = $utilization;
         $this->utidetail = $utidetail;
+        $this->warehouse = new Warehouse;
         $this->uploadArea = $upload;
         $this->resource = "backend.pemanfaatan.investasi.";
     }
@@ -41,9 +43,18 @@ class PemanfaatanInvestasiController extends TrinataController
                 $qty[$value->id]=$value->qty;
         }
 
-        $model = $this->model->select('id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->whereType('investasi')->whereStatus(0)->orderBy('created_at','desc');
+        $model = $this->model->select('id','warehouse_id','name','komag','category', 'year_acquisition','amount','unit_price','unit')->whereType('investasi')->orderBy('created_at','desc');
 
+        $getId = request()->get('warehouse');
+        if(!empty($getId)){
+            $model = $model->where('warehouse_id',$getId);
+        }
+        
         $data = Table::of($model)
+            ->addColumn('warehouse_id',function($model){
+                // dd(
+                return $model->warehouse()->first()->name;
+            })
             ->addColumn('id',function($model) use($keys){
 
                 if(in_array($model->id, $keys)){
@@ -68,7 +79,9 @@ class PemanfaatanInvestasiController extends TrinataController
                     $qty = 0;
                 }
 
-                $status = '<input class="form-control" name="title" type="text" id="amount'.$model->id.'" value="'.$model->amount.'" readonly="readonly"> <input name="title"  class="form-control"  type="text" value="'.$qty.'" id="amounts'.$model->id.'" '.$readonly.'> ';
+                $amount = $model->amount-$model->total_proposed_amount;
+
+                $status = '<input class="form-control" name="title" type="text" id="amount'.$model->id.'" value="'.$amount.'" readonly="readonly"> <input name="title"  class="form-control"  type="text" value="'.$qty.'" id="amounts'.$model->id.'" '.$readonly.'> ';
                 return $status;
             })
             ->make(true);
@@ -78,7 +91,15 @@ class PemanfaatanInvestasiController extends TrinataController
 
     public function getIndex()
     {
-        return view($this->resource.'index');
+        $warehouse = $this->warehouse->first();
+        $gudang = $this->warehouse->lists('name','id');
+        $getId = request()->get('warehouse');
+        if(!empty($getId)){
+            $param = '?warehouse='.$getId;
+        }else{            
+            $param = '?warehouse='.$warehouse->id;
+        }
+        return view($this->resource.'index', compact('param','gudang'));
     }
 
 

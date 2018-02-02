@@ -172,6 +172,7 @@ class TrinataController extends Controller
                             'unit' => $material->unit,
                             'year_acquisition' => $material->year_acquisition,
                             'amount' => $material->amount,
+                            'total_proposed_amount' => $material->total_proposed_amount,
                             'warehouse_id' => $material->warehouse_id,
                             'status' => $material->status,
                             'type' => $material->type,
