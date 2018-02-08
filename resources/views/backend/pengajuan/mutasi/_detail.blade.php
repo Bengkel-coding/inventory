@@ -76,12 +76,16 @@
                         {!! Form::select('proposed_warehouse_id' , $data['ware'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
                       
+                      @if($actionAllow)
                       <div class="form-group">
                         <label>Persetujuan</label>
-                        {!! Form::select('status' , ['y' => 'Disetujui' , 'n' => 'Ditolak'] , null ,['class' => 'form-control']) !!}
+                        {!! Form::select('status' , $status , null ,['class' => 'form-control']) !!}
                       </div>
 
+                      {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}                       
+
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
+                      @endif
                     
                     {!! Form::close() !!}
 

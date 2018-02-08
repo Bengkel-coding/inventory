@@ -61,11 +61,6 @@ class MutasiMroController extends TrinataController
 
     public function getIndex(Request $request)
     {
-        // $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
-        // $warehouse = array_merge([0=>'Pilih Gudang'], $warehouse);
-
-        // $urlAjax = 'data?warehouse='.(int) $request->warehouse.'&category='.(string) $request->category;
-
         $model = $this->model;
         $data = ['ware'=> Warehouse::lists('name','id')];
 

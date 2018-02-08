@@ -131,7 +131,7 @@ class PengajuanInventarisasiController extends TrinataController
             
             $assessment = \App\Models\Assessment::whereMaterialId($model->id)->first();
 
-            switch ($model->status) {
+            switch ($assessment->status) {
                 case '1': //disetuji kepala gudang
                     
                     $assessment->status = 2;
@@ -147,7 +147,7 @@ class PengajuanInventarisasiController extends TrinataController
                     $model->save();
                     break;
                 default:
-                     return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
+                    return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
                     break;
             }
            
@@ -165,53 +165,6 @@ class PengajuanInventarisasiController extends TrinataController
 
             return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Pengajuan Berhasil Ditolak');
         }
-
-        /*if(($request->status = 1) && (\Auth::User()->head_id == 0) && ((\Auth::User()->warehouse_id) == ($model->warehouse_id))){
-            $model = $this->model->findOrFail($id);
-
-            if($model->save()){
-                $assessment = \App\Models\Assessment::whereMaterialId($model->id)->first();
-                $assessment->status = 2;
-                $assessment->save();
-            }
-
-            return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Pengajuan Telah Disetujui');
-
-        // }elseif(($request->status = 1) && (\Auth::User()->head_id != 0) && ((\Auth::User()->warehouse_id) != ($model->warehouse_id))){
-        //     return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
-
-        }elseif(($request->status = 2) && (\Auth::User()->role_id == 0) && (\Auth::User()->warehouse_id == 0)){
-
-            $assessment = \App\Models\Assessment::whereMaterialId($model->id)->first();
-            $assessment->status = 3;
-            
-            if($assessment->save()){
-                $model = $this->model->findOrFail($id);
-                $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-                $model->amount = $model->amount - $request->proposed_amount;
-            }
-
-            return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Pengajuan Telah Disetujui');
-
-        // }elseif(($request->status = 2) && (\Auth::User()->head_id == 0) && (\Auth::User()->warehouse_id > 0)){
-        //     return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
-
-        }elseif(($request->status = 0) && (\Auth::User()->head_id == 0)){
-            $assessment = \App\Models\Assessment::whereMaterialId($model->id)->first();
-            $assessment->status = 0;
-            if($assessment->save()){
-                $model = $this->model->findOrFail($id);
-                $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-            }
-
-            return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Pengajuan Berhasil Ditolak');
-
-        // }elseif(($request->status = 0) && (\Auth::User()->head_id != 0)){
-        //     return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
-
-        }else{
-            return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');
-        }*/
     }
 
     public function getDelete($id)

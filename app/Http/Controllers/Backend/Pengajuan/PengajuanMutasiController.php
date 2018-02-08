@@ -27,15 +27,23 @@ class PengajuanMutasiController extends TrinataController
 
     public function getData(Request $request)
     {
-        
-        $model = $this->model
-                    ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status')
-                    ->join('mutations', 'materials.id', '=', 'mutations.material_id')
-                    ->where('mutations.status', '=', 1)
-                    ->where('user_id', '=', \Auth::User()->id)
-                    ->get()
-                    ;
-        
+        if(\Auth::User()->head_id == 0 && \Auth::User()->warehouse_id == 0){
+            $model = $this->model
+                        ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status')
+                        ->join('mutations', 'materials.id', '=', 'mutations.material_id')
+                        ->get()
+                        ;
+        }else{
+            $model = $this->model
+                        ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status')
+                        ->join('mutations', 'materials.id', '=', 'mutations.material_id')
+                        // ->where('mutations.status', '=', 1)
+                        // ->where('user_id', '=', \Auth::User()->id)
+                        ->where('mutations.proposed_warehouse_id', '=', \Auth::User()->warehouse_id)
+                        ->orWhere('mutations.warehouse_id', '=', \Auth::User()->warehouse_id)
+                        ->get()
+                        ;
+        }
         // $model = $model->get();
 
         foreach ($model as $key => $value) {
@@ -66,52 +74,97 @@ class PengajuanMutasiController extends TrinataController
         return view($this->resource.'index', compact('model', 'request'));
     }
 
-    public function getCreate()
-    {
-        $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
-    }
-
-   public function postCreate(Requests\Backend\CrudRequest $request)
-    {
-        $model = $this->model;
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
-
     public function getDetail($id)
     {
+        $status = [1 => 'Disetujui', 0 => 'Ditolak'];
+
         $model = $this->model
-                            ->select('mutations.proposed_amount','mutations.amount','mutations.warehouse_id','mutations.proposed_warehouse_id', 'materials.category', 'materials.name', 'materials.komag', 'materials.cardnumber', 'materials.description', 'materials.unit', 'materials.year_acquisition', 'materials.unit_price')
+                            ->select('mutations.proposed_amount','mutations.amount','mutations.warehouse_id','mutations.proposed_warehouse_id', 'materials.category', 'materials.name', 'materials.komag', 'materials.cardnumber', 'materials.description', 'materials.unit', 'materials.year_acquisition', 'materials.unit_price', 'mutations.user_id', 'mutations.status')
                             ->join('mutations', 'mutations.material_id', '=', 'materials.id')
                             ->where('materials.id', $id)->first();
         
         $data = ['ware' => Warehouse::lists('name','id')];
 
-        return view($this->resource.'_detail',compact('model', 'data'));
+        if($model->status == 1 && \Auth::User()->id == $model->user_id && \Auth::User()->warehouse_id == $model->proposed_warehouse_id){
+            $status = [0 => 'Batalkan Usulan'];
+        }
+
+        // dd($model->status);
+
+        $actionAllow = true;
+        switch ($model->status) {
+            case '1': //tidak diizinkan bui, user bukan dari gudang pemohon
+                if((\Auth::User()->head_id == 0 && \Auth::User()->warehouse_id == 0) || \Auth::User()->warehouse_id != $model->proposed_warehouse_id || (\Auth::User()->head_id > 0 && \Auth::User()->id != $model->user_id)) $actionAllow = false;
+                break;
+            case '2': //tidak diizinkan admin gudang, kepala gudang (pemohon/pemberi)
+                if(\Auth::User()->head_id != 0 || \Auth::User()->warehouse_id > 0) $actionAllow = false;
+                break;
+            case '3': //tidak diizinkan bui, kepala gudang pemberi, user pemohon
+                if(\Auth::User()->head_id == 0 || \Auth::User()->warehouse_id != $model->warehouse_id) $actionAllow = false;
+                break;
+            case '4': //tidak diizinkan bui, admin gudang pemberi, user pemohon
+                if((\Auth::User()->head_id == 0 && \Auth::user()->warehouse_id == 0) || \Auth::User()->head_id > 0 || \Auth::User()->warehouse_id != $model->warehouse_id) $actionAllow = false;
+                break;
+            default:
+                $actionAllow = false;
+                break;
+        }
+
+        return view($this->resource.'_detail',compact('model', 'data', 'status', 'actionAllow'));
         
-    }
-       
+    }       
 
-    public function getUpdate($id)
-    {
-        $model = $this->model
-                            ->select('mutations.proposed_amount','mutations.amount','mutations.warehouse_id','mutations.proposed_warehouse_id', 'materials.category', 'materials.name', 'materials.komag', 'materials.cardnumber', 'materials.description', 'materials.unit', 'materials.year_acquisition', 'materials.unit_price')
-                            ->join('mutations', 'mutations.material_id', '=', 'materials.id')
-                            ->where('materials.id', $id)->first();
-        
-        $data = ['ware' => Warehouse::lists('name','id')];
-
-        return view($this->resource.'_form',compact('model', 'data'));
-    }
-
-    public function postUpdate(Requests\Backend\CrudRequest $request,$id)
+    public function postDetail(Request $request,$id)
     {
         $model = $this->model->findOrFail($id);
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
+
+        if($request->status == 1){
+            $mutation = \App\Models\Mutation::whereMaterialId($model->id)->first();
+
+            switch ($mutation->status) {
+                case '1': //disetujui kepala gudang pemohon
+                    $mutation->status = 2;
+                    $mutation->save();
+                    break;
+
+                case '2': //disetujui bui
+                    $mutation->status = 3;
+                    $mutation->save();
+                    break;
+
+                case '3': //disetujui admin gudang pemberi
+                    $mutation->status = 4;
+                    $mutation->save();
+                    break;
+
+                case '4': //disetujui kepala gudang pemberi
+                    $mutation->status = 5;
+                    $mutation->save();
+
+                    $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                    $model->amount = $model->amount - $request->proposed_amount;
+                    $model->save();
+                    break;                
+                default:
+                    return redirect(urlBackend('pengajuan-mutasi/index'))->with('info','Anda tidak memiliki otorisasi');
+                    break;
+            }
+
+            // dd($request->status, $mutation->status);
+
+            return redirect(urlBackend('pengajuan-mutasi/index'))->with('success','Pengajuan Telah Disetujui');
+
+        }else{
+            $mutation = \App\Models\Mutation::whereMaterialId($model->id)->first();
+            $mutation->status = 0;
+            if($mutation->save()){
+                $model = $this->model->findOrFail($id);
+                $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                $model->save();
+            }
+
+            return redirect(urlBackend('pengajuan-mutasi/index'))->with('success','Pengajuan Berhasil Ditolak');
+        }
     }
 
     public function getDelete($id)
