@@ -89,8 +89,6 @@ class PengajuanMutasiController extends TrinataController
             $status = [0 => 'Batalkan Usulan'];
         }
 
-        // dd($model->status);
-
         $actionAllow = true;
         switch ($model->status) {
             case '1': //tidak diizinkan bui, user bukan dari gudang pemohon
