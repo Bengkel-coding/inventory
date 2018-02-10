@@ -7,6 +7,7 @@ use App\Models\Crud;
 use App\Models\Material;
 use App\Models\MaterialMro;
 use App\Models\Assessment;
+use App\Models\LogAssessment;
 use App\Models\Warehouse;
 use App\User;
 use Table;
@@ -79,7 +80,7 @@ class InventarisMroController extends TrinataController
         if ((($request->proposed_amount) <= ($request->real_amount)) && (($request->proposed_amount) > 0)){
             $model = $this->model->findOrFail($id);
             $model->total_proposed_amount = $model->total_proposed_amount + $request->proposed_amount;
-            $model->status = '1';
+            $model->status = 1;
 
             if($model->save()){
                 $assessment = new \App\Models\Assessment;
@@ -90,7 +91,18 @@ class InventarisMroController extends TrinataController
                 $assessment->status = $request->status;
                 $assessment->warehouse_id = $request->warehouse_id;
                 $assessment->status = 1;
-                $assessment->save();
+                
+                if($assessment->save()){
+                    $log_assessment = new \App\Models\LogAssessment;
+                    $log_assessment->material_id = $model->id;
+                    $log_assessment->amount = $model->amount;
+                    $log_assessment->proposed_amount = $request->proposed_amount;
+                    $log_assessment->user_id = \Auth::user()->id;
+                    $log_assessment->status = $request->status;
+                    $log_assessment->warehouse_id = $request->warehouse_id;
+                    $log_assessment->status = 1;
+                    $log_assessment->save();
+                }
 
             }else{
                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;

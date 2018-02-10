@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Crud;
 use App\Models\Material;
 use App\Models\Assessment;
+use App\Models\LogAssessment;
 use App\Models\Warehouse;
 use App\User;
 use Table;
@@ -133,14 +134,33 @@ class PengajuanInventarisasiController extends TrinataController
 
             switch ($assessment->status) {
                 case '1': //disetuji kepala gudang
-                    
                     $assessment->status = 2;
-                    $assessment->save();
+
+                    if($assessment->save()){
+                        $log_assessment = new App\Models\LogAssessment;
+                        $log_assessment->material_id = $assessment->material_id;
+                        $log_assessment->amount = $assessment->amount;
+                        $log_assessment->proposed_amount = $assessment->proposed_amount;
+                        $log_assessment->user_id = \Auth::User()->id;
+                        $log_assessment->warehouse_id = $mutation->warehouse_id;
+                        $log_assessment->status = 2;
+                        $log_assessment->save(); 
+                    }
                     break;
 
                 case '2': // disetujui admin bui
                     $assessment->status = 3;
-                    $assessment->save();
+
+                    if($assessment->save()){
+                        $log_assessment = new App\Models\LogAssessment;
+                        $log_assessment->material_id = $assessment->material_id;
+                        $log_assessment->amount = $assessment->amount;
+                        $log_assessment->proposed_amount = $assessment->proposed_amount;
+                        $log_assessment->user_id = \Auth::User()->id;
+                        $log_assessment->warehouse_id = $mutation->warehouse_id;
+                        $log_assessment->status = 3;
+                        $log_assessment->save(); 
+                    }
 
                     $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                     $model->amount = $model->amount - $request->proposed_amount;
@@ -161,6 +181,15 @@ class PengajuanInventarisasiController extends TrinataController
                 $model = $this->model->findOrFail($id);
                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                 $model->save();
+
+                $log_assessment = new App\Models\LogAssessment;
+                $log_assessment->material_id = $assessment->material_id;
+                $log_assessment->amount = $assessment->amount;
+                $log_assessment->proposed_amount = $assessment->proposed_amount;
+                $log_assessment->user_id = \Auth::User()->id;
+                $log_assessment->warehouse_id = $mutation->warehouse_id;
+                $log_assessment->status = 0;
+                $log_assessment->save(); 
             }
 
             return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('success','Pengajuan Berhasil Ditolak');
