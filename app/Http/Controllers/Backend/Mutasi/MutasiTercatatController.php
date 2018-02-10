@@ -7,6 +7,7 @@ use App\Models\Crud;
 use App\Models\Material;
 use App\Models\MaterialMro;
 use App\Models\Mutation;
+use App\Models\LogMutation;
 use App\Models\Warehouse;
 use Table;
 use Image;
@@ -96,7 +97,7 @@ class MutasiTercatatController extends TrinataController
         if ((($request->proposed_amount) <= ($request->real_amount)) && (($request->proposed_amount) > 0) && (($request->warehouse_id) != ($request->proposed_warehouse_id))){
             $model = $this->model->findOrFail($id);
             $model->total_proposed_amount = $model->total_proposed_amount + $request->proposed_amount;
-            $model->status = '1';
+            $model->status = 1;
 
             // dd($model);
 
@@ -108,9 +109,20 @@ class MutasiTercatatController extends TrinataController
                 $mutation->warehouse_id = $request->warehouse_id;
                 $mutation->proposed_warehouse_id = $request->proposed_warehouse_id;
                 $mutation->user_id = \Auth::user()->id;
-                $mutation->status = '1';
+                $mutation->status = 1;
 
-                $mutation->save();
+                if($mutation->save()){
+                    $log_mutation = new \App\Models\logMutation;
+                    $log_mutation->material_id = $model->id;
+                    $log_mutation->amount = $model->amount;
+                    $log_mutation->proposed_amount = $request->proposed_amount;
+                    $log_mutation->warehouse_id = $request->warehouse_id;
+                    $log_mutation->proposed_warehouse_id = $request->proposed_warehouse_id;
+                    $log_mutation->user_id = \Auth::user()->id;
+                    $log_mutation->status = 1;
+                    $log_mutation->save();
+                    
+                }
 
             }else{
                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
