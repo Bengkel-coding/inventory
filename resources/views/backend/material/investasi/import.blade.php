@@ -8,22 +8,28 @@
           </div>
           <div class="panel-body">
           <div class="row">
-          <div class="col-md-7">
+          <div class="col-md-12">
             @include('backend.common.errors')
 
                      {!! Form::model($model,['files' => true]) !!} 
-
-
+                     
+                    <a href="{{asset('contents/template-import/'.Request::segment(2).'-form.xlsx')}}" class="btn" style="float: right;" target="_blank">Download template</a>
+                    <div class="col-md-7" style="clear: both;">
+                    <form method="get" action="">
+                      <div class="form-group">
+                        <label>Lokasi Gudang</label>
+                        {!! Form::select('warehouse' , $warehouse , null ,['class' => 'form-control warehouse']) !!}
+                      </div>
+                      
                       <div class="form-group">
                         <label>Pilih File</label>
-                        {!! Form::file('file' , null ,['class' => 'form-control']) !!}
+                        {!! Form::file('file' , null ,['class' => 'form-control btn']) !!}
                       </div>
-
-                      {!! Form::hidden('warehouse' , $warehouse ,['class' => 'form-control']) !!}
 
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     
-                    {!! Form::close() !!}
+                    </form>
+                    </div>
 
           </div>
         </div>

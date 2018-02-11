@@ -61,7 +61,8 @@ class MaterialTercatatController extends TrinataController
     public function getImport(Request $request)
     {
         $model = $this->model;
-        $warehouse = $request->warehouse;
+        // $warehouse = $request->warehouse;
+        $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
 
         return view($this->resource.'import',compact('model','warehouse'));
     }
@@ -113,6 +114,7 @@ class MaterialTercatatController extends TrinataController
         $model->name = $request->name;
         $model->komag = $request->komag;
         $model->code = $request->code;
+        $model->serialnumber = $request->serialnumber;
         $model->unit = $request->unit;
         $model->year_acquisition = $request->year_acquisition;
         $model->amount = $request->amount;

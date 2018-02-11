@@ -64,7 +64,9 @@ class MaterialMroController extends TrinataController
     public function getImport(Request $request)
     {
         $model = $this->model;
-        $warehouse = $request->warehouse;
+        // $warehouse = $request->warehouse;
+        $warehouse = \App\Models\Warehouse::lists('name','id')->toArray();
+        // $warehouse = array_merge($warehouse);
 
         return view($this->resource.'import',compact('model','warehouse'));
     }
@@ -132,7 +134,7 @@ class MaterialMroController extends TrinataController
 
         $model->name = $request->name;
         $model->komag = $request->komag;
-        // $model->code = $request->code;
+        $model->serialnumber = $request->serialnumber;
         $model->unit = $request->unit;
         $model->year_acquisition = $request->year_acquisition;
         $model->amount = $request->amount;
@@ -173,7 +175,7 @@ class MaterialMroController extends TrinataController
 
         $model->name = $request->name;
         $model->komag = $request->komag;
-        // $model->code = $request->code;
+        $model->serialnumber = $request->serialnumber;
         $model->unit = $request->unit;
         $model->year_acquisition = $request->year_acquisition;
         $model->amount = $request->amount;

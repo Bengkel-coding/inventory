@@ -18,6 +18,7 @@ tfoot {
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     {!! trinata::buttonCreate() !!}
+                    <!--
                     <form method="get" action="">
                       <div class="form-group">
                         <label>Kategori Material</label>
@@ -29,13 +30,12 @@ tfoot {
                       </div>
                       
                       
-                    <!-- <a href="#" class="btn btn-info">Lihat</a> -->
+                     <a href="#" class="btn btn-info">Lihat</a> 
                     <button type="submit" class="btn btn-info">Lihat</button>
-                    <a href="#" class="btn btn-danger">Ekspor</a>
+                    <a href="#" class="btn btn-danger">Ekspor</a>-->
                     
-                    <a href="javascript:void(0)" data="{{ urlBackendAction('import') }}" class="btn btn-success import">Import</a>
+                    <a href="{{ urlBackendAction('import') }}" data="{{ urlBackendAction('import') }}" class="btn btn-success btn-sm import1 ">Import</a>
                     </form>
-
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>

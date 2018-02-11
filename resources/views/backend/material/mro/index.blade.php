@@ -18,10 +18,11 @@ tfoot {
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     {!! trinata::buttonCreate() !!}
+                    <!--
                     <form method="get" action="">
                       <div class="form-group">
                         <label>Kategori Material</label>
-                        {!! Form::select('category' , [''=>'Pilih Kategori','tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control category']) !!}
+                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
                       <div class="form-group">
                         <label>Lokasi Gudang</label>
@@ -29,11 +30,11 @@ tfoot {
                       </div>
                       
                       
-                    <!-- <a href="#" class="btn btn-info">Lihat</a> -->
+                     <a href="#" class="btn btn-info">Lihat</a> 
                     <button type="submit" class="btn btn-info">Lihat</button>
-                    <a href="javascript:void(0)" class="btn btn-danger export" data="{{ urlBackendAction('export') }}">Ekspor</a>
+                    <a href="#" class="btn btn-danger">Ekspor</a>-->
                     
-                    <a href="javascript:void(0)" data="{{ urlBackendAction('import') }}" class="btn btn-success import">Import</a>
+                    <a href="{{ urlBackendAction('import') }}" data="{{ urlBackendAction('import') }}" class="btn btn-success btn-sm import1 ">Import</a>
                     </form>
                     <p>&nbsp;</p>
 

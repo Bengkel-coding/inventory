@@ -34,6 +34,10 @@
                         <label>Kode MRO</label>
                         {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div> -->
+                      <div class="form-group">
+                        <label>Serial Number</label>
+                        {!! Form::text('serialnumber' , null ,['class' => 'form-control']) !!}
+                      </div>
                       
                       <div class="form-group">
                         <label>Description Material</label>
