@@ -46,20 +46,6 @@ class PengajuanPemanfataanController extends TrinataController
         return view($this->resource.'index');
     }
 
-    public function getCreate()
-    {
-        $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
-    }
-
-   public function postCreate(Requests\Backend\CrudRequest $request)
-    {
-        $model = $this->model;
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
-
     public function getDetail($id)
     {
         $model = $this->model->findOrFail($id);
@@ -69,23 +55,4 @@ class PengajuanPemanfataanController extends TrinataController
         return view($this->resource.'_detail',compact('model','detail'));
     }
 
-    public function postUpdate(Requests\Backend\CrudRequest $request,$id)
-    {
-        $model = $this->model->findOrFail($id);
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
-    }
-
-    public function getDelete($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->delete($model,[$model->image]);
-    }
-
-    public function getPublish($id)
-    {
-        $model = $this->model->findOrFail($id);
-        return $this->publish($model);
-    }
 }

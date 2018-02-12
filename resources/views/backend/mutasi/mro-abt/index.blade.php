@@ -1,6 +1,11 @@
 @extends('backend.layouts.layout')
 @section('content')
 
+<style>
+tfoot {
+     display: table-header-group;
+}
+</style>
   <div class="px-content">
     <div class="row">
       <div class="col-md-12 fadeIn animated">   
@@ -37,7 +42,20 @@
                                 <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
-                        </thead>
+                        </thead> 
+
+                       <!--  <tfoot>
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Nama</th>
+                                <th>Komag</th>
+                                <th>Deskripsi</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
+                                <th>Warehouse</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>   -->  
                         
                     </table>
                 </div>
@@ -54,11 +72,12 @@
     <script type="text/javascript">
         
         $(document).ready(function(){
-             $('#table thead td').each( function () {
+             $('#table tfoot th').each( function () {
                     var title = $(this).text();
                     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
                 } );
-             
+            
+            
           var table =  $('#table').DataTable({
                 processing: true,
                 serverSide: true,

@@ -155,4 +155,63 @@ class PemanfaatanTercatatController extends TrinataController
 
         return redirect(urlBackendAction('index'))->withSuccess('data has been saved');
     }
+    
+
+
+    public function getRemovecart($id)
+    {
+
+        // dd($request->all(),$request['item']);
+        // $rowId = $request['item'];
+        $cartQty = Cart::content()->where('id',$id)->first();
+        Cart::remove($cartQty->rowid);
+
+        $cart = Cart::content();
+        $jumlah = count($cart);
+
+        return response()->json(['response' => 'This is get method','data' =>$jumlah,'status'=>true]);
+    }
+
+    public function getDeletecart($id)
+    {
+
+        // dd($request->all(),$request['item']);
+        // $rowId = $request['item'];
+        $cartQty = Cart::content()->where('id',$id)->first();
+        Cart::remove($cartQty->rowid);
+
+        $cart = Cart::content();
+        $jumlah = count($cart);
+
+        // return 
+        // return redirect(urlBackendAction('index'))->withSuccess('data has been saved');
+        return redirect()->back()->withSuccess('data has been deleted');
+    }
+    public function getAddcart($id,$qty=0)
+    {        
+
+        $material = $this->model->whereId($id)->first();
+        
+        Cart::add(array('id' => $id, 'name' => $material->name, 'qty' => $qty ,'price'=>$material->unit_price, 'options' => [
+                            'category' => $material->category,
+                            'cardnumber' => $material->cardnumber,
+                            'komag' => $material->komag,
+                            'description' => $material->description,
+                            'unit' => $material->unit,
+                            'year_acquisition' => $material->year_acquisition,
+                            'amount' => $material->amount,
+                            'total_proposed_amount' => $material->total_proposed_amount,
+                            'warehouse_id' => $material->warehouse_id,
+                            'status' => $material->status,
+                            'type' => $material->type,
+                            ]));
+
+        $cart = Cart::content();
+        $jumlah = count($cart);
+        // dd($cart);
+
+        return response()->json(['response' => 'This is get method','data' =>$jumlah,'status'=>true]);
+        // return view('frontend.inventaris.cart', compact('cart'));
+    }
+    
 }

@@ -11,7 +11,7 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                      <div class="form-group">
+             <!--          <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('status' , ['y' => 'ALl Kategori' , 'n' => 'kk'] , null ,['class' => 'form-control']) !!}
                       </div>
@@ -25,22 +25,20 @@
                       </div>
                       
                     <a href="#" class="btn btn-success">Lihat</a>
-                    <p>&nbsp;</p>
+                    <p>&nbsp;</p> -->
 
+                   
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>No Pengeluaran Material</th>
+                                <th>Tanggal Pengeluaran</th>
+                                <th>Kepada</th>
+                                <th>Dari</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            
-                            <tr>
-                                <td>Title</td>
-                                <td><a href="{{urlBackendAction('ajukan')}}" class="btn btn-info">Ajukan</a></td>
-                            </tr>
-                        </tbody>
+                        <!-- ini Hanya Contoh belum Server Side-->
                         
                     </table>
                 </div>
@@ -54,28 +52,25 @@
 
 @push('script-js')
     
+    
     <script type="text/javascript">
         
         $(document).ready(function(){
-             // $('#table thead td').each( function () {
-             //        var title = $(this).text();
-             //        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-             //    } );
-             
-          var table =  $('#table').DataTable();
+          // var table =  $('#table').DataTable();
 
-            // Apply the search
-            // table.columns().every( function () {
-            //     var that = this;
-         
-            //     $( 'input', this.footer() ).on( 'keyup change', function () {
-            //         if ( that.search() !== this.value ) {
-            //             that
-            //                 .search( this.value )
-            //                 .draw();
-            //         }
-            //     } );
-            // } );
+           var table =  $('#table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ urlBackendAction("data") }}',
+                columns: [
+                    { data: 'no_utilization', name: 'no_utilization' },
+                    { data: 'date_utilization', name: 'date_utilization' },
+                    { data: 'to', name: 'to' },
+                    { data: 'from', name: 'from' },
+                    { data: 'action', name: 'action' , searchable: false},
+                ]
+            });
+
         });
 
     </script>

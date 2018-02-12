@@ -85,6 +85,6 @@ class DashboardController extends TrinataController
 		$charts = $this->chart();
 		$last = UserActivity::orderBy('created_at','desc')->limit(5)->get();
 		// dd($charts);
-	   	return view('backend.dashboard' ,compact('charts','last'));
+	   	return view('backend.dashboard-grafik' ,compact('charts','last'));
 	}
 }

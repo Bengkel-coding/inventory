@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Utilization;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Return extends Model
+class Returns extends Model
 {
     use SoftDeletes;
     protected $table = 'returns';
