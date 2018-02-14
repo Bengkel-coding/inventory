@@ -127,7 +127,7 @@ class PengajuanMutasiController extends TrinataController
                     $mutation->status = 2;
 
                     if($mutation->save()){
-                        $log_mutation = new App\Models\LogMutation;
+                        $log_mutation = new \App\Models\LogMutation;
                         $log_mutation->material_id = $mutation->material_id;
                         $log_mutation->amount = $mutation->amount;
                         $log_mutation->proposed_amount = $mutation->proposed_amount;
@@ -142,7 +142,7 @@ class PengajuanMutasiController extends TrinataController
                 case '2': //disetujui bui
                     $mutation->status = 3;
                     if($mutation->save()){
-                        $log_mutation = new App\Models\LogMutation;
+                        $log_mutation = new \App\Models\LogMutation;
                         $log_mutation->material_id = $mutation->material_id;
                         $log_mutation->amount = $mutation->amount;
                         $log_mutation->proposed_amount = $mutation->proposed_amount;
@@ -157,7 +157,7 @@ class PengajuanMutasiController extends TrinataController
                 case '3': //disetujui admin gudang pemberi
                     $mutation->status = 4;
                     if($mutation->save()){
-                        $log_mutation = new App\Models\LogMutation;
+                        $log_mutation = new \App\Models\LogMutation;
                         $log_mutation->material_id = $mutation->material_id;
                         $log_mutation->amount = $mutation->amount;
                         $log_mutation->proposed_amount = $mutation->proposed_amount;
@@ -172,7 +172,7 @@ class PengajuanMutasiController extends TrinataController
                 case '4': //disetujui kepala gudang pemberi
                     $mutation->status = 5;
                     if($mutation->save()){
-                        $log_mutation = new App\Models\LogMutation;
+                        $log_mutation = new \App\Models\LogMutation;
                         $log_mutation->material_id = $mutation->material_id;
                         $log_mutation->amount = $mutation->amount;
                         $log_mutation->proposed_amount = $mutation->proposed_amount;
@@ -202,7 +202,7 @@ class PengajuanMutasiController extends TrinataController
                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                 $model->save();
 
-                $log_mutation = new App\Models\LogMutation;
+                $log_mutation = new \App\Models\LogMutation;
                         $log_mutation->material_id = $mutation->material_id;
                         $log_mutation->amount = $mutation->amount;
                         $log_mutation->proposed_amount = $mutation->proposed_amount;
