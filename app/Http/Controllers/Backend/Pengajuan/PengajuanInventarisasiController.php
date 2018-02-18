@@ -142,7 +142,7 @@ class PengajuanInventarisasiController extends TrinataController
                         $log_assessment->amount = $assessment->amount;
                         $log_assessment->proposed_amount = $assessment->proposed_amount;
                         $log_assessment->user_id = \Auth::User()->id;
-                        $log_assessment->warehouse_id = $mutation->warehouse_id;
+                        $log_assessment->warehouse_id = $assessment->warehouse_id; //update
                         $log_assessment->status = 2;
                         $log_assessment->save(); 
                     }
@@ -157,7 +157,7 @@ class PengajuanInventarisasiController extends TrinataController
                         $log_assessment->amount = $assessment->amount;
                         $log_assessment->proposed_amount = $assessment->proposed_amount;
                         $log_assessment->user_id = \Auth::User()->id;
-                        $log_assessment->warehouse_id = $mutation->warehouse_id;
+                        $log_assessment->warehouse_id = $assessment->warehouse_id; //update
                         $log_assessment->status = 3;
                         $log_assessment->save(); 
                     }
@@ -187,7 +187,7 @@ class PengajuanInventarisasiController extends TrinataController
                 $log_assessment->amount = $assessment->amount;
                 $log_assessment->proposed_amount = $assessment->proposed_amount;
                 $log_assessment->user_id = \Auth::User()->id;
-                $log_assessment->warehouse_id = $mutation->warehouse_id;
+                $log_assessment->warehouse_id = $assessment->warehouse_id; //update
                 $log_assessment->status = 0;
                 $log_assessment->save(); 
             }

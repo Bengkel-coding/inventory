@@ -28,7 +28,7 @@ class MaterialMroAbtController extends TrinataController
 
     public function getData(Request $request)
     {
-        $model = $this->model->join('warehouses', 'materials.warehouse_id','=','warehouses.id')->select('materials.id','materials.name','materials.komag','materials.category', 'materials.year_acquisition','materials.amount','materials.unit_price','materials.unit','materials.description','warehouses.name as warehouse')->whereType('mroabt')->orderBy('materials.created_at','desc');
+        $model = $this->model->join('warehouses', 'materials.warehouse_id','=','warehouses.id')->select('materials.id','materials.name','materials.komag','materials.category', 'materials.year_acquisition','materials.amount','materials.unit_price','materials.unit','materials.description','warehouses.name as warehouse','materials.status')->whereType('mroabt')->orderBy('materials.created_at','desc');
 
         if (isset($request->warehouse) && $request->warehouse > 0) $model->where('warehouse_id', $request->warehouse);
         if (isset($request->category) && $request->category) $model->where('category', $request->category);
@@ -42,7 +42,8 @@ class MaterialMroAbtController extends TrinataController
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
-                $status = $model->status == 'y' ? true : false;
+                $status = ['update','delete'];
+                if ($model->status > 0) array_splice($status, 1);
                 return trinata::buttons($model->id , [] , $status);
             })
             ->make(true);
