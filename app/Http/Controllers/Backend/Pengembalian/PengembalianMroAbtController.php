@@ -165,7 +165,7 @@ class PengembalianMroAbtController extends TrinataController
 
         Cart::destroy();
 
-        return redirect(urlBackendAction('index'))->withSuccess('data has been saved');
+        return redirect(urlBackend('pengajuan-pengembalian/index'))->withSuccess('data has been saved');
     }
 
 
