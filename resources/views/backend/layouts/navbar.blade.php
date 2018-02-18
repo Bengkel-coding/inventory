@@ -13,7 +13,7 @@
     <li>   
       <a href="{{ urlBackend('dashboard/index') }}"><i class="fa fa-home"></i> Home</a>  
     </li>   
-    @foreach($menuPencarian->get() as $row)
+  {{--  @foreach($menuPencarian->get() as $row)
 
     @if(!empty($row->childs->first()))
     <li  class="{{ searchMenu($row->id,'active') }}">
@@ -21,6 +21,7 @@
     </li> 
     @endif      
     @endforeach    
+    --}}
 
 
 
