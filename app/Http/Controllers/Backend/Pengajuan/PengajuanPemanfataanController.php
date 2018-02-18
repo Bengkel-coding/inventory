@@ -29,8 +29,14 @@ class PengajuanPemanfataanController extends TrinataController
 
     public function getData()
     {
-        $model = $this->model->select();
+        $model = $this->model->select()->get();
 // dd($model->get());
+
+        foreach ($model as $key => $value) {
+            $value->setStatusLabelUtilization($value->status);
+        }
+
+        // dd($model);
         $data = Table::of($model)
             ->addColumn('action',function($model){
                 $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>View Detail</a>";

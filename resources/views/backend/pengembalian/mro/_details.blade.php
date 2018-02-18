@@ -8,6 +8,50 @@
           <div class="panel-heading">
             <span class="panel-title"><i class="panel-title-icon fa fa-list"></i>{{ trinata::titleActionForm() }}</span>
           </div>   
+           {!! Form::model($model,['files' => true]) !!} 
+            <div class="row p-a-3">
+                <div class="col-md-6 fadeIn animated"> 
+                  <div class="form-group">
+                    <label>No Pengeluaran Material</label>
+                    {!! Form::text('no_utilization' , null ,['class' => 'form-control' ,'readonly'=>'readonly']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Pengeluaran</label>
+                    {!! Form::text('date_utilization' , null ,['class' => 'form-control datepicker','readonly'=>'readonly']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Kepada</label>
+                    {!! Form::text('to' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Dari</label>
+                    {!! Form::text('from' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Diharapkan Diterima Tanggal</label>
+                    {!! Form::text('expected_receive_date' , null ,['class' => 'form-control datepicker','readonly'=>'readonly']) !!}
+                  </div>
+                </div>
+                <div class="col-md-6 fadeIn animated"> 
+                  <div class="form-group">
+                    <label>Dibukukan Oleh</label>
+                    {!! Form::text('booked_by' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Perkiraan</label>
+                    {!! Form::text('estimation_code' , null ,['class' => 'form-control','readonly'=>'readonly']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Tanggal Dibukukan</label>
+                    {!! Form::text('date_booked' , null ,['class' => 'form-control datepicker','readonly'=>'readonly']) !!}
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan</label>
+                    {!! Form::textarea('details' , null ,['class' => 'form-control','rows'=>'5','readonly'=>'readonly']) !!}
+                  </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
           
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 

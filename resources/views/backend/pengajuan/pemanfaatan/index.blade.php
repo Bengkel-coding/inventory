@@ -49,6 +49,7 @@
                                 <th>Tanggal Pengeluaran</th>
                                 <th>Kepada</th>
                                 <th>Dari</th>
+                                <th>Status Pengajuan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -80,6 +81,7 @@
                     { data: 'date_utilization', name: 'date_utilization' },
                     { data: 'to', name: 'to' },
                     { data: 'from', name: 'from' },
+                    { data: 'status', name: 'status' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

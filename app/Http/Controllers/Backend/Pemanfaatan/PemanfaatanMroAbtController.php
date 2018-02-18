@@ -145,7 +145,8 @@ class PemanfaatanMroAbtController extends TrinataController
 
             $material = $this->model->whereId($item->id)->first();
 
-            $update['amount'] = $material->amount - $item->qty;
+            // $update['amount'] = $material->amount - $item->qty;
+            $update['total_proposed_amount'] = $material->total_proposed_amount + $item->qty;
 
             $material->update($update);
             
@@ -153,7 +154,7 @@ class PemanfaatanMroAbtController extends TrinataController
 
         Cart::destroy();
 
-        return redirect(urlBackendAction('index'))->withSuccess('data has been saved');
+        return redirect(urlBackend('pengajuan-pemanfaatan/index'))->withSuccess('data has been saved');
     }
     
 

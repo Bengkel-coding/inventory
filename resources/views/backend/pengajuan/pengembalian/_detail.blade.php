@@ -76,6 +76,7 @@
                         <tbody>
                         @foreach($model->reversionDetail()->get() as $item)
                         <?php $detail= $item->material()->first();?>
+                          @if($detail)
                           <tr>
                                 <td>{{$detail->category}}</td>
                                 <td>{{$detail->name}}</td>
@@ -86,6 +87,7 @@
                                 <td>{{$detail->unit}}</td>
                             
                           </tr>
+                          @endif
 
                         @endforeach
                         

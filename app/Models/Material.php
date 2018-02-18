@@ -88,4 +88,5 @@ class Material extends Model
         $this->attributes['status'] = $statusLabel[$value];
         
     }
+
 }

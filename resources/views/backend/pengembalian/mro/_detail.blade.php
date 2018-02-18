@@ -13,7 +13,7 @@
             <span class="panel-title"><i class="panel-title-icon fa fa-list"></i>{{ trinata::titleActionForm() }}</span>
           </div>   
             {!! Form::model($model,['files' => true]) !!} 
-           <!--  <div class="row p-a-3">
+            <div class="row p-a-3">
                 <div class="col-md-6 fadeIn animated"> 
                   <div class="form-group">
                     <label>No Pengeluaran Material</label>
@@ -54,7 +54,7 @@
                     {!! Form::textarea('details' , null ,['class' => 'form-control','rows'=>'5','readonly'=>'readonly']) !!}
                   </div>
                 </div>
-            </div> -->
+            </div>
             {!! Form::close() !!}
             <div class="row p-a-3">
 
