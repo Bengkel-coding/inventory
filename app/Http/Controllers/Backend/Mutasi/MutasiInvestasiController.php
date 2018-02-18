@@ -93,7 +93,7 @@ class MutasiInvestasiController extends TrinataController
         return view($this->resource.'_form',compact('model', 'data'));
     }
 
-    public function postUpdate(Request $request,$id)
+    public function postDetail(Request $request,$id)
     {
         // dd($id);
 
