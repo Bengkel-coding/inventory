@@ -13,9 +13,13 @@
             <div class="col-md-12 fadeIn animated">        
               <ul class="nav nav-tabs">
 
-                @if(!empty($menuPengajuan->first()->childs->first()))
                  
-                @foreach($menuPengajuan->first()->childs as $child)
+                <?php 
+                  $getChild=injectModel('Menu')->whereParentId($menuPengajuan->first()->id)->whereIn('id',$menuRole)->get();
+                ?>
+                
+                @if(!empty($getChild))
+                @foreach($getChild as $child)
                     <li class="{{ searchMenu($child->id,'active','','child') }}">
                       <a href="{{ urlBackend($child->slug.'/index') }}">
                         {{ $child->title}}

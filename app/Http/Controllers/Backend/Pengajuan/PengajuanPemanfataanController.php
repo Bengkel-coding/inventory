@@ -86,5 +86,106 @@ class PengajuanPemanfataanController extends TrinataController
         }
         return view($this->resource.'_detail',compact('model','detail','status', 'actionAllow'));
     }
+    
+    public function postDetail(Request $request,$id)
+    {
+        $model = $this->model->findOrFail($id);
 
+        if($request->status == 1){
+            $mutation = \App\Models\Mutation::whereMaterialId($model->id)->first();
+
+            switch ($mutation->status) {
+                case '1': //disetujui kepala gudang pemohon
+                    $mutation->status = 2;
+
+                    if($mutation->save()){
+                        $log_mutation = new \App\Models\LogMutation; //udah
+                        $log_mutation->material_id = $mutation->material_id;
+                        $log_mutation->amount = $mutation->amount;
+                        $log_mutation->proposed_amount = $mutation->proposed_amount;
+                        $log_mutation->warehouse_id = $mutation->warehouse_id;
+                        $log_mutation->proposed_warehouse_id = $mutation->proposed_warehouse_id;
+                        $log_mutation->user_id = \Auth::User()->id;
+                        $log_mutation->status = 2;
+                        $log_mutation->save(); 
+                    }
+                    break;
+
+                case '2': //disetujui bui
+                    $mutation->status = 3;
+                    if($mutation->save()){
+                        $log_mutation = new \App\Models\LogMutation;
+                        $log_mutation->material_id = $mutation->material_id;
+                        $log_mutation->amount = $mutation->amount;
+                        $log_mutation->proposed_amount = $mutation->proposed_amount;
+                        $log_mutation->warehouse_id = $mutation->warehouse_id;
+                        $log_mutation->proposed_warehouse_id = $mutation->proposed_warehouse_id;
+                        $log_mutation->user_id = \Auth::User()->id;
+                        $log_mutation->status = 3;
+                        $log_mutation->save(); 
+                    }
+                    break;
+
+                case '3': //disetujui admin gudang pemberi
+                    $mutation->status = 4;
+                    if($mutation->save()){
+                        $log_mutation = new \App\Models\LogMutation;
+                        $log_mutation->material_id = $mutation->material_id;
+                        $log_mutation->amount = $mutation->amount;
+                        $log_mutation->proposed_amount = $mutation->proposed_amount;
+                        $log_mutation->warehouse_id = $mutation->warehouse_id;
+                        $log_mutation->proposed_warehouse_id = $mutation->proposed_warehouse_id;
+                        $log_mutation->user_id = \Auth::User()->id;
+                        $log_mutation->status = 4;
+                        $log_mutation->save(); 
+                    }
+                    break;
+
+                case '4': //disetujui kepala gudang pemberi
+                    $mutation->status = 5;
+                    if($mutation->save()){
+                        $log_mutation = new \App\Models\LogMutation;
+                        $log_mutation->material_id = $mutation->material_id;
+                        $log_mutation->amount = $mutation->amount;
+                        $log_mutation->proposed_amount = $mutation->proposed_amount;
+                        $log_mutation->warehouse_id = $mutation->warehouse_id;
+                        $log_mutation->proposed_warehouse_id = $mutation->proposed_warehouse_id;
+                        $log_mutation->user_id = \Auth::User()->id;
+                        $log_mutation->status = 5;
+                        $log_mutation->save(); 
+                    }
+
+                    $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                    $model->amount = $model->amount - $request->proposed_amount;
+                    $model->save();
+                    break;                
+                default:
+                    return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('info','Anda tidak memiliki otorisasi');
+                    break;
+            }
+
+            return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Telah Disetujui');
+
+        }else{
+            $mutation = \App\Models\Mutation::whereMaterialId($model->id)->first();
+            $mutation->status = 0;
+            if($mutation->save()){
+                $model = $this->model->findOrFail($id);
+                $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                $model->save();
+
+                $log_mutation = new \App\Models\LogMutation;
+                        $log_mutation->material_id = $mutation->material_id;
+                        $log_mutation->amount = $mutation->amount;
+                        $log_mutation->proposed_amount = $mutation->proposed_amount;
+                        $log_mutation->warehouse_id = $mutation->warehouse_id;
+                        $log_mutation->proposed_warehouse_id = $mutation->proposed_warehouse_id;
+                        $log_mutation->user_id = \Auth::User()->id;
+                        $log_mutation->status = 0;
+                        $log_mutation->save();
+            }
+
+            return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Berhasil Ditolak');
+        }
+    }
 }

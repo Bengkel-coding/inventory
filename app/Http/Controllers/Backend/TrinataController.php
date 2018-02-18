@@ -18,7 +18,7 @@ class TrinataController extends Controller
         $menuParentRole = arrayParentMenuRole($Role->role()->get());
         $menuPengajuan = injectModel('Menu')->whereParentId(null)->where('slug','pengajuan')->orderBy('order','asc');
         $menuPencarian = injectModel('Menu')->whereParentId(null)->where('slug','pencarian')->orderBy('order','asc');
-        
+        // dd($menuParentRole);
         view()->share('menuPencarian', $menuPencarian);
         view()->share('menuPengajuan', $menuPengajuan);
         view()->share('Role', $Role);
