@@ -5,6 +5,9 @@
 tfoot {
      display: table-header-group;
 }
+tfoot th input{
+    width: 100px;
+}
 </style>
   <div class="px-content">
     <div class="row">
@@ -103,7 +106,7 @@ tfoot {
         $(document).ready(function(){
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    $(this).html( '<input type="text" placeholder="'+title+'" />' );
                 } );
              
           var table =  $('#table').DataTable({
