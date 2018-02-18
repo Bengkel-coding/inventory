@@ -29,8 +29,13 @@ class PengajuanPengembalianController extends TrinataController
 
     public function getData()
     {
-        $model = $this->model->select();
+        $model = $this->model->select()->get();
 // dd($model->get());
+
+        foreach ($model as $key => $value) {
+            $value->setStatusLabelReversion($value->status);
+        }
+
         $data = Table::of($model)
             ->addColumn('action',function($model){
                 $button = "<a href='".urlBackendAction('detail/'.$model->id)."' class='btn btn-info'>View Detail</a>";
@@ -86,70 +91,70 @@ class PengajuanPengembalianController extends TrinataController
     
     public function postDetail(Request $request,$id)
     {
-        $utilization = $this->model->findOrFail($id);
+        $reversion = $this->model->findOrFail($id);
 // dd($request->all());
         if($request->status == 1){
-            // $utilization = \App\Models\Utilization::whereMaterialId($model->id)->first();
+            // $reversion = \App\Models\reversion::whereMaterialId($model->id)->first();
 
-            switch ($utilization->status) {
+            switch ($reversion->status) {
                 case '1': //disetujui kepala gudang pemohon
-                    $utilization->status = 2;
+                    $reversion->status = 2;
 
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization; //udah
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 2;
-                    //     $log_utilization->save(); 
+                    // if($reversion->save()){
+                    //     $log_reversion = new \App\Models\Logreversion; //udah
+                    //     $log_reversion->material_id = $reversion->material_id;
+                    //     $log_reversion->amount = $reversion->amount;
+                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
+                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
+                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
+                    //     $log_reversion->user_id = \Auth::User()->id;
+                    //     $log_reversion->status = 2;
+                    //     $log_reversion->save(); 
                     // }
                     break;
 
                 case '2': //disetujui bui
-                    $utilization->status = 3;
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization;
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 3;
-                    //     $log_utilization->save(); 
+                    $reversion->status = 3;
+                    // if($reversion->save()){
+                    //     $log_reversion = new \App\Models\Logreversion;
+                    //     $log_reversion->material_id = $reversion->material_id;
+                    //     $log_reversion->amount = $reversion->amount;
+                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
+                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
+                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
+                    //     $log_reversion->user_id = \Auth::User()->id;
+                    //     $log_reversion->status = 3;
+                    //     $log_reversion->save(); 
                     // }
                     break;
 
                 case '3': //disetujui admin gudang pemberi
-                    $utilization->status = 4;
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization;
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 4;
-                    //     $log_utilization->save(); 
+                    $reversion->status = 4;
+                    // if($reversion->save()){
+                    //     $log_reversion = new \App\Models\Logreversion;
+                    //     $log_reversion->material_id = $reversion->material_id;
+                    //     $log_reversion->amount = $reversion->amount;
+                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
+                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
+                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
+                    //     $log_reversion->user_id = \Auth::User()->id;
+                    //     $log_reversion->status = 4;
+                    //     $log_reversion->save(); 
                     // }
                     break;
 
                 case '4': //disetujui kepala gudang pemberi
-                    $utilization->status = 5;
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization;
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 5;
-                    //     $log_utilization->save(); 
+                    $reversion->status = 5;
+                    // if($reversion->save()){
+                    //     $log_reversion = new \App\Models\Logreversion;
+                    //     $log_reversion->material_id = $reversion->material_id;
+                    //     $log_reversion->amount = $reversion->amount;
+                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
+                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
+                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
+                    //     $log_reversion->user_id = \Auth::User()->id;
+                    //     $log_reversion->status = 5;
+                    //     $log_reversion->save(); 
                     // }
 
                     // $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
@@ -157,34 +162,34 @@ class PengajuanPengembalianController extends TrinataController
                     // $model->save();
                     break;                
                 default:
-                    return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('info','Anda tidak memiliki otorisasi');
+                    return redirect(urlBackend('pengajuan-pengembalian/index'))->with('info','Anda tidak memiliki otorisasi');
                     break;
             }
 
-            $utilization->save();
+            $reversion->save();
 
-            return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Telah Disetujui');
+            return redirect(urlBackend('pengajuan-pengembalian/index'))->with('success','Pengajuan Telah Disetujui');
 
         }else{
-            // $utilization = \App\Models\utilization::whereMaterialId($model->id)->first();
-            // $utilization->status = 0;
-            // if($utilization->save()){
+            // $reversion = \App\Models\reversion::whereMaterialId($model->id)->first();
+            // $reversion->status = 0;
+            // if($reversion->save()){
             //     $model = $this->model->findOrFail($id);
             //     $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
             //     $model->save();
 
-            //     $log_utilization = new \App\Models\LogUtilization;
-            //             $log_utilization->material_id = $utilization->material_id;
-            //             $log_utilization->amount = $utilization->amount;
-            //             $log_utilization->proposed_amount = $utilization->proposed_amount;
-            //             $log_utilization->warehouse_id = $utilization->warehouse_id;
-            //             $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-            //             $log_utilization->user_id = \Auth::User()->id;
-            //             $log_utilization->status = 0;
-            //             $log_utilization->save();
+            //     $log_reversion = new \App\Models\Logreversion;
+            //             $log_reversion->material_id = $reversion->material_id;
+            //             $log_reversion->amount = $reversion->amount;
+            //             $log_reversion->proposed_amount = $reversion->proposed_amount;
+            //             $log_reversion->warehouse_id = $reversion->warehouse_id;
+            //             $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
+            //             $log_reversion->user_id = \Auth::User()->id;
+            //             $log_reversion->status = 0;
+            //             $log_reversion->save();
             // }
 
-            return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Berhasil Ditolak');
+            return redirect(urlBackend('pengajuan-pengembalian/index'))->with('success','Pengajuan Berhasil Ditolak');
         }
     }
 }
