@@ -71,7 +71,7 @@ tfoot th input{
                     if(title!="Action"){
                         $(this).html( '<input type="text" placeholder="'+title+'" />' );
                     }else{
-                        $(this).html( '<input type="text" placeholder="disabled"  disabled="disabled/>' );
+                        $(this).html( '<input type="text" placeholder="" disabled="disabled" />' );
 
                     }
                 } );

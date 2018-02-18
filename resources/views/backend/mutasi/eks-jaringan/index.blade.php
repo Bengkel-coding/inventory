@@ -81,10 +81,10 @@ tfoot th input{
             
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                     if(title!="Action"){
+                    if(title!="Action"){
                         $(this).html( '<input type="text" placeholder="'+title+'" />' );
                     }else{
-                        $(this).html( '<input type="text" placeholder="disabled"  disabled="disabled/>' );
+                        $(this).html( '<input type="text" placeholder="" disabled="disabled" />' );
 
                     }
                 } );
