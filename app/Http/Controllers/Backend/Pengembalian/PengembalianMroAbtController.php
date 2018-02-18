@@ -108,8 +108,9 @@ class PengembalianMroAbtController extends TrinataController
 
     public function getDetail($id)
     {
+        $model = $this->model->find($id);
         // dd($id);
-        return view($this->resource.'_details',compact('id'));
+        return view($this->resource.'_details',compact('id','model'));
     }
 
     public function getAjukan()

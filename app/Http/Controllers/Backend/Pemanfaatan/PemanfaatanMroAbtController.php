@@ -145,7 +145,8 @@ class PemanfaatanMroAbtController extends TrinataController
 
             $material = $this->model->whereId($item->id)->first();
 
-            $update['amount'] = $material->amount - $item->qty;
+            // $update['amount'] = $material->amount - $item->qty;
+            $update['total_proposed_amount'] = $material->total_proposed_amount + $item->qty;
 
             $material->update($update);
             
