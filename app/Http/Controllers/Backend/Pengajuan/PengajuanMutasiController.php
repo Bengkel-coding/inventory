@@ -127,7 +127,7 @@ class PengajuanMutasiController extends TrinataController
                     $mutation->status = 2;
 
                     if($mutation->save()){
-                        $log_mutation = new \App\Models\LogMutation;
+                        $log_mutation = new \App\Models\LogMutation; //udah
                         $log_mutation->material_id = $mutation->material_id;
                         $log_mutation->amount = $mutation->amount;
                         $log_mutation->proposed_amount = $mutation->proposed_amount;
