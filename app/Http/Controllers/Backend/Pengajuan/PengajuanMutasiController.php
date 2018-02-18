@@ -164,7 +164,7 @@ class PengajuanMutasiController extends TrinataController
                         $log_mutation->warehouse_id = $mutation->warehouse_id;
                         $log_mutation->proposed_warehouse_id = $mutation->proposed_warehouse_id;
                         $log_mutation->user_id = \Auth::User()->id;
-                        $log_mutation->status = 4;
+                        // $log_mutation->status = 4;
                         $log_mutation->save(); 
                     }
                     break;
@@ -172,6 +172,23 @@ class PengajuanMutasiController extends TrinataController
                 case '4': //disetujui kepala gudang pemberi
                     $mutation->status = 5;
                     if($mutation->save()){
+
+                        // $listModel = ['mro'=>'MaterialMro', 'mroabt'=>'MaterialMroabt', 'investasi'=>'MaterialInvestasi', 'eksjar'=>'MaterialEksjar'];
+                        // $modelPath = "App\Models\{$listModel[$model->type]}";
+
+                        // $new_material = Material::find($id);
+                        // $new = $new_material->replicate();
+                        // $new->amount = $mutation->proposed_amount;
+                        // $new->total_proposed_amount = 0;
+                        // $new->warehouse_id = $mutation->proposed_warehouse_id;
+                        // $new->save();
+
+                        // $new_typematerial = {$modelPath}::whereMaterialId($id)->first();
+                        
+                        // $new_type = $new_typematerial->replicate();
+                        // $new_type->save();
+
+
                         $log_mutation = new \App\Models\LogMutation;
                         $log_mutation->material_id = $mutation->material_id;
                         $log_mutation->amount = $mutation->amount;

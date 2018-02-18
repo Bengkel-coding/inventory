@@ -137,7 +137,7 @@ class PengajuanInventarisasiController extends TrinataController
                     $assessment->status = 2;
 
                     if($assessment->save()){
-                        $log_assessment = new App\Models\LogAssessment;
+                        $log_assessment = new \App\Models\LogAssessment; //log
                         $log_assessment->material_id = $assessment->material_id;
                         $log_assessment->amount = $assessment->amount;
                         $log_assessment->proposed_amount = $assessment->proposed_amount;
@@ -152,7 +152,7 @@ class PengajuanInventarisasiController extends TrinataController
                     $assessment->status = 3;
 
                     if($assessment->save()){
-                        $log_assessment = new App\Models\LogAssessment;
+                        $log_assessment = new \App\Models\LogAssessment; //log
                         $log_assessment->material_id = $assessment->material_id;
                         $log_assessment->amount = $assessment->amount;
                         $log_assessment->proposed_amount = $assessment->proposed_amount;
@@ -182,7 +182,7 @@ class PengajuanInventarisasiController extends TrinataController
                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                 $model->save();
 
-                $log_assessment = new App\Models\LogAssessment;
+                $log_assessment = new \App\Models\LogAssessment;
                 $log_assessment->material_id = $assessment->material_id;
                 $log_assessment->amount = $assessment->amount;
                 $log_assessment->proposed_amount = $assessment->proposed_amount;
