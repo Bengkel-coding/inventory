@@ -18,7 +18,7 @@
             <div class="row p-a-3">
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
-                    <form method="get" action="">
+                    <form method="get" action="download">
                       <div class="form-group">
                         <label>Type Material</label>
                         {!! Form::select('category' , [
