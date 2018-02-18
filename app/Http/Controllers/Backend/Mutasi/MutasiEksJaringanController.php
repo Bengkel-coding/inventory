@@ -142,7 +142,7 @@ class MutasiEksJaringanController extends TrinataController
         }
 
         // return $this->insertOrUpdate($model);
-        return redirect(urlBackendAction('index'))->with('success','Data Has Been Inserted');
+        return redirect(urlBackend('pengajuan-mutasi/index'))->with('success','Data Has Been Inserted');
     }
 
     public function getDelete($id)
