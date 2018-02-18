@@ -116,7 +116,7 @@ tfoot th input{
                 columns: [
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
-                    { data: 'description', name: 'year_acquisition' },
+                    { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     // { data: 'unit_price', name: 'unit_price' },
                     { data: 'warehouse', name: 'warehouse' },
