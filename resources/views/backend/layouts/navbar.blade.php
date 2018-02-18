@@ -26,10 +26,12 @@
 
 
     @foreach($menuPengajuan->get() as $row)
-
-    @if(!empty($row->childs->first()))
+      <?php 
+        $fisrtChild=injectModel('Menu')->whereParentId($row->id)->whereIn('id',$menuRole)->first();
+      ?>
+    @if(!empty($fisrtChild))
     <li  class="{{ searchMenu($row->id,'active') }}">   
-      <a  href="{{ urlBackend($row->childs->first()->slug.'/index') }}"><i class="fa  {{iconMenu($row->slug)}} "></i> {{$row->title}}</a>
+      <a  href="{{ urlBackend($fisrtChild->slug.'/index') }}"><i class="fa  {{iconMenu($row->slug)}} "></i> {{$row->title}}</a>
     </li> 
     @endif      
 
