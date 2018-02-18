@@ -63,6 +63,19 @@ tfoot {
                             </tr> -->
 
                         </thead>
+                        <tfoot>
+                            <tr>
+
+                                <!-- <th>Kategori</th> -->
+                                <th>Nama</th>
+                                <th>Komag</th>
+                                <th>Deskripsi</th>
+                                <th>Jumlah</th>
+                                <!-- <th>Harga Unit</th> -->
+                                <th>Gudang</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
                         
                     </table>
                 </div>
