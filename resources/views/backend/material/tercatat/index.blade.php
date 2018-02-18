@@ -106,7 +106,12 @@ tfoot th input{
         $(document).ready(function(){
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="'+title+'" />' );
+                    if(title!="Action"){
+                        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+                    }else{
+                        $(this).html( '<input type="text" placeholder="" disabled="disabled" />' );
+
+                    }
                 } );
              
           var table =  $('#table').DataTable({

@@ -126,6 +126,9 @@ tfoot th input{
                     var title = $(this).text();
                     if(title!="Action"){
                         $(this).html( '<input type="text" placeholder="'+title+'" />' );
+                    }else{
+                        $(this).html( '<input type="text" placeholder="" disabled="disabled" />' );
+
                     }
                 } );
             
