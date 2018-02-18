@@ -85,15 +85,33 @@ class MaterialTercatatController extends TrinataController
     public function getCreate()
     {
         $model = $this->model;
-        return view($this->resource.'_form',compact('model'));
+        $warehouse = \App\Models\Warehouse::lists('name','id');
+        return view($this->resource.'_form',compact('model', 'warehouse'));
     }
 
-   public function postCreate(Requests\Backend\CrudRequest $request)
+   public function postCreate(Request $request)
     {
         $model = $this->model;
-        $inputs = $request->all();
-        $inputs['image'] = $this->handleUpload($request,$model,'image',[100,100]);
-        return $this->insertOrUpdate($model,$inputs);
+        
+        if (!$this->uploadArea->isDataExist($request->category, $request->komag, $request->warehouse_id)) {
+            return redirect(urlBackendAction('index'))->with('danger','Gagal, Komag Sudah Ada');
+        }
+
+        $model->name = $request->name;
+        $model->komag = $request->komag;
+        $model->code = $request->code;
+        $model->serialnumber = $request->serialnumber;
+        $model->unit = $request->unit;
+        $model->year_acquisition = $request->year_acquisition;
+        $model->amount = $request->amount;
+        $model->unit_price = $request->unit_price;
+        $model->type = 'tercatat';
+        $model->category = $request->category;
+        $model->description = $request->description;
+        $model->warehouse_id = $request->warehouse_id;
+        $model->save();
+
+        return redirect(urlBackendAction('index'))->with('success','Data Has Been Inserted');
     }
 
     public function getUpdate($id)

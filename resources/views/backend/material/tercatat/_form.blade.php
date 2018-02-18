@@ -36,7 +36,7 @@
                       </div>
                       
                       <div class="form-group">
-                        <label>Kode MRO-ABT / Kode MI</label>
+                        <label>Kode MI</label>
                         {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div>
                       

@@ -27,7 +27,7 @@
 
                       <div class="form-group">
                         <label>KOMAG</label>
-                        {!! Form::text('komag' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('komag' , null ,['class' => 'form-control','required']) !!}
                       </div>
 
                       <!-- <div class="form-group">
