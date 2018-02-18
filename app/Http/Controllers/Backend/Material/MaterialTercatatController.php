@@ -42,7 +42,7 @@ class MaterialTercatatController extends TrinataController
             ->addColumn('action',function($model){
                 $status = ['update','delete'];
                 if ($model->status > 0) array_splice($status, 1);
-                return trinata::buttons($model->id , [] , $status);
+                return trinata::buttons($model->id , $status);
             })
             ->make(true);
 
