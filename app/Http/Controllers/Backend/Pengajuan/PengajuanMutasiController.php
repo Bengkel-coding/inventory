@@ -192,8 +192,8 @@ class PengajuanMutasiController extends TrinataController
                         //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
                         //     $new_type = $new_typematerial->replicate();
                         //     $new_type->save();
-                        // }elseif($new_type = 'mroabt'){
-                        //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
+                        // }elseif($new_type = 'eksjar'){
+                        //     $new_typematerial = MaterialEksjar::whereMaterialId($id)->first();
                         //     $new_type = $new_typematerial->replicate();
                         //     $new_type->save();
                         // }
