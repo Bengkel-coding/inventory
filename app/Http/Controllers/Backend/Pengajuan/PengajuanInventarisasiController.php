@@ -137,12 +137,12 @@ class PengajuanInventarisasiController extends TrinataController
                     $assessment->status = 2;
 
                     if($assessment->save()){
-                        $log_assessment = new App\Models\LogAssessment;
+                        $log_assessment = new \App\Models\LogAssessment; //log
                         $log_assessment->material_id = $assessment->material_id;
                         $log_assessment->amount = $assessment->amount;
                         $log_assessment->proposed_amount = $assessment->proposed_amount;
                         $log_assessment->user_id = \Auth::User()->id;
-                        $log_assessment->warehouse_id = $mutation->warehouse_id;
+                        $log_assessment->warehouse_id = $assessment->warehouse_id; //update
                         $log_assessment->status = 2;
                         $log_assessment->save(); 
                     }
@@ -152,12 +152,12 @@ class PengajuanInventarisasiController extends TrinataController
                     $assessment->status = 3;
 
                     if($assessment->save()){
-                        $log_assessment = new App\Models\LogAssessment;
+                        $log_assessment = new \App\Models\LogAssessment; //log
                         $log_assessment->material_id = $assessment->material_id;
                         $log_assessment->amount = $assessment->amount;
                         $log_assessment->proposed_amount = $assessment->proposed_amount;
                         $log_assessment->user_id = \Auth::User()->id;
-                        $log_assessment->warehouse_id = $mutation->warehouse_id;
+                        $log_assessment->warehouse_id = $assessment->warehouse_id; //update
                         $log_assessment->status = 3;
                         $log_assessment->save(); 
                     }
@@ -182,12 +182,12 @@ class PengajuanInventarisasiController extends TrinataController
                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                 $model->save();
 
-                $log_assessment = new App\Models\LogAssessment;
+                $log_assessment = new \App\Models\LogAssessment;
                 $log_assessment->material_id = $assessment->material_id;
                 $log_assessment->amount = $assessment->amount;
                 $log_assessment->proposed_amount = $assessment->proposed_amount;
                 $log_assessment->user_id = \Auth::User()->id;
-                $log_assessment->warehouse_id = $mutation->warehouse_id;
+                $log_assessment->warehouse_id = $assessment->warehouse_id; //update
                 $log_assessment->status = 0;
                 $log_assessment->save(); 
             }

@@ -73,7 +73,7 @@ class PengajuanPemanfataanController extends TrinataController
                 if((\Auth::User()->head_id != 0 && \Auth::User()->warehouse_id != 0)) $actionAllow = false;
                 break;
             case '2': //tidak diizinkan admin gudang, kepala gudang (pemohon/pemberi)
-                if(\Auth::User()->head_id != 0 || \Auth::User()->warehouse_id > 0) $actionAllow = false;
+                if(\Auth::User()->head_id == 0 && \Auth::User()->warehouse_id == 0 && \Auth::User()->role_id > 1) $actionAllow = false;
                 break;
             case '3': //tidak diizinkan bui, kepala gudang pemberi, user pemohon
                 if(\Auth::User()->head_id == 0 || \Auth::User()->warehouse_id != $model->warehouse_id) $actionAllow = false;
@@ -88,105 +88,107 @@ class PengajuanPemanfataanController extends TrinataController
         return view($this->resource.'_detail',compact('model','detail','status', 'actionAllow'));
     }
     
-    // public function postDetail(Request $request,$id)
-    // {
-    //     $model = $this->model->findOrFail($id);
+    public function postDetail(Request $request,$id)
+    {
+        $utilization = $this->model->findOrFail($id);
+// dd($request->all());
+        if($request->status == 1){
+            // $utilization = \App\Models\Utilization::whereMaterialId($model->id)->first();
 
-    //     if($request->status == 1){
-    //         $utilization = \App\Models\utilization::whereMaterialId($model->id)->first();
+            switch ($utilization->status) {
+                case '1': //disetujui kepala gudang pemohon
+                    $utilization->status = 2;
 
-    //         switch ($utilization->status) {
-    //             case '1': //disetujui kepala gudang pemohon
-    //                 $utilization->status = 2;
+                    // if($utilization->save()){
+                    //     $log_utilization = new \App\Models\LogUtilization; //udah
+                    //     $log_utilization->material_id = $utilization->material_id;
+                    //     $log_utilization->amount = $utilization->amount;
+                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
+                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
+                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
+                    //     $log_utilization->user_id = \Auth::User()->id;
+                    //     $log_utilization->status = 2;
+                    //     $log_utilization->save(); 
+                    // }
+                    break;
 
-    //                 if($utilization->save()){
-    //                     $log_utilization = new \App\Models\LogUtilization; //udah
-    //                     $log_utilization->material_id = $utilization->material_id;
-    //                     $log_utilization->amount = $utilization->amount;
-    //                     $log_utilization->proposed_amount = $utilization->proposed_amount;
-    //                     $log_utilization->warehouse_id = $utilization->warehouse_id;
-    //                     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-    //                     $log_utilization->user_id = \Auth::User()->id;
-    //                     $log_utilization->status = 2;
-    //                     $log_utilization->save(); 
-    //                 }
-    //                 break;
+                case '2': //disetujui bui
+                    $utilization->status = 3;
+                    // if($utilization->save()){
+                    //     $log_utilization = new \App\Models\LogUtilization;
+                    //     $log_utilization->material_id = $utilization->material_id;
+                    //     $log_utilization->amount = $utilization->amount;
+                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
+                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
+                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
+                    //     $log_utilization->user_id = \Auth::User()->id;
+                    //     $log_utilization->status = 3;
+                    //     $log_utilization->save(); 
+                    // }
+                    break;
 
-    //             case '2': //disetujui bui
-    //                 $utilization->status = 3;
-    //                 if($utilization->save()){
-    //                     $log_utilization = new \App\Models\LogUtilization;
-    //                     $log_utilization->material_id = $utilization->material_id;
-    //                     $log_utilization->amount = $utilization->amount;
-    //                     $log_utilization->proposed_amount = $utilization->proposed_amount;
-    //                     $log_utilization->warehouse_id = $utilization->warehouse_id;
-    //                     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-    //                     $log_utilization->user_id = \Auth::User()->id;
-    //                     $log_utilization->status = 3;
-    //                     $log_utilization->save(); 
-    //                 }
-    //                 break;
+                case '3': //disetujui admin gudang pemberi
+                    $utilization->status = 4;
+                    // if($utilization->save()){
+                    //     $log_utilization = new \App\Models\LogUtilization;
+                    //     $log_utilization->material_id = $utilization->material_id;
+                    //     $log_utilization->amount = $utilization->amount;
+                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
+                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
+                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
+                    //     $log_utilization->user_id = \Auth::User()->id;
+                    //     $log_utilization->status = 4;
+                    //     $log_utilization->save(); 
+                    // }
+                    break;
 
-    //             case '3': //disetujui admin gudang pemberi
-    //                 $utilization->status = 4;
-    //                 if($utilization->save()){
-    //                     $log_utilization = new \App\Models\LogUtilization;
-    //                     $log_utilization->material_id = $utilization->material_id;
-    //                     $log_utilization->amount = $utilization->amount;
-    //                     $log_utilization->proposed_amount = $utilization->proposed_amount;
-    //                     $log_utilization->warehouse_id = $utilization->warehouse_id;
-    //                     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-    //                     $log_utilization->user_id = \Auth::User()->id;
-    //                     $log_utilization->status = 4;
-    //                     $log_utilization->save(); 
-    //                 }
-    //                 break;
+                case '4': //disetujui kepala gudang pemberi
+                    $utilization->status = 5;
+                    // if($utilization->save()){
+                    //     $log_utilization = new \App\Models\LogUtilization;
+                    //     $log_utilization->material_id = $utilization->material_id;
+                    //     $log_utilization->amount = $utilization->amount;
+                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
+                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
+                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
+                    //     $log_utilization->user_id = \Auth::User()->id;
+                    //     $log_utilization->status = 5;
+                    //     $log_utilization->save(); 
+                    // }
 
-    //             case '4': //disetujui kepala gudang pemberi
-    //                 $utilization->status = 5;
-    //                 if($utilization->save()){
-    //                     $log_utilization = new \App\Models\LogUtilization;
-    //                     $log_utilization->material_id = $utilization->material_id;
-    //                     $log_utilization->amount = $utilization->amount;
-    //                     $log_utilization->proposed_amount = $utilization->proposed_amount;
-    //                     $log_utilization->warehouse_id = $utilization->warehouse_id;
-    //                     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-    //                     $log_utilization->user_id = \Auth::User()->id;
-    //                     $log_utilization->status = 5;
-    //                     $log_utilization->save(); 
-    //                 }
+                    // $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+                    // $model->amount = $model->amount - $request->proposed_amount;
+                    // $model->save();
+                    break;                
+                default:
+                    return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('info','Anda tidak memiliki otorisasi');
+                    break;
+            }
 
-    //                 $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-    //                 $model->amount = $model->amount - $request->proposed_amount;
-    //                 $model->save();
-    //                 break;                
-    //             default:
-    //                 return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('info','Anda tidak memiliki otorisasi');
-    //                 break;
-    //         }
+            $utilization->save();
 
-    //         return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Telah Disetujui');
+            return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Telah Disetujui');
 
-    //     }else{
-    //         $utilization = \App\Models\utilization::whereMaterialId($model->id)->first();
-    //         $utilization->status = 0;
-    //         if($utilization->save()){
-    //             $model = $this->model->findOrFail($id);
-    //             $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-    //             $model->save();
+        }else{
+            // $utilization = \App\Models\utilization::whereMaterialId($model->id)->first();
+            // $utilization->status = 0;
+            // if($utilization->save()){
+            //     $model = $this->model->findOrFail($id);
+            //     $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
+            //     $model->save();
 
-    //             $log_utilization = new \App\Models\LogUtilization;
-    //                     $log_utilization->material_id = $utilization->material_id;
-    //                     $log_utilization->amount = $utilization->amount;
-    //                     $log_utilization->proposed_amount = $utilization->proposed_amount;
-    //                     $log_utilization->warehouse_id = $utilization->warehouse_id;
-    //                     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-    //                     $log_utilization->user_id = \Auth::User()->id;
-    //                     $log_utilization->status = 0;
-    //                     $log_utilization->save();
-    //         }
+            //     $log_utilization = new \App\Models\LogUtilization;
+            //             $log_utilization->material_id = $utilization->material_id;
+            //             $log_utilization->amount = $utilization->amount;
+            //             $log_utilization->proposed_amount = $utilization->proposed_amount;
+            //             $log_utilization->warehouse_id = $utilization->warehouse_id;
+            //             $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
+            //             $log_utilization->user_id = \Auth::User()->id;
+            //             $log_utilization->status = 0;
+            //             $log_utilization->save();
+            // }
 
-    //         return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Berhasil Ditolak');
-    //     }
-    // }
+            return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Berhasil Ditolak');
+        }
+    }
 }

@@ -33,7 +33,7 @@ class PengembalianMroAbtController extends TrinataController
 
     public function getData()
     {
-        $model = $this->model->select()->where('type','mroabt');
+        $model = $this->model->select()->where('type','mroabt')->where('status',5);
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
@@ -140,6 +140,7 @@ class PengembalianMroAbtController extends TrinataController
         // $data['date_booked'] = $inputs['date_booked'];
         // $data['details'] = $inputs['details'];
         // $data['warehouse_id'] = 1;
+        $data['status'] = 1;
         $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
 
         $save = $reversion->create($data);

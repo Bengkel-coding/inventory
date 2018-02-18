@@ -35,7 +35,7 @@ class PengembalianMroController extends TrinataController
 
     public function getData()
     {
-        $model = $this->model->select()->where('type','mro');
+        $model = $this->model->select()->where('type','mro')->where('status',5);
 
         $data = Table::of($model)
             ->addColumn('action',function($model){
@@ -142,6 +142,7 @@ class PengembalianMroController extends TrinataController
         // $data['date_booked'] = $inputs['date_booked'];
         // $data['details'] = $inputs['details'];
         // $data['warehouse_id'] = 1;
+        $data['status'] = 1;
         $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
 
         $save = $reversion->create($data);
