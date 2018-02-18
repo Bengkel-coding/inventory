@@ -124,7 +124,7 @@ tfoot {
                     { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit_price', name: 'unit_price' },
-                    { data: 'warehouse', name: 'warehouses.name' },
+                    { data: 'warehouse', name: 'warehouse' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]

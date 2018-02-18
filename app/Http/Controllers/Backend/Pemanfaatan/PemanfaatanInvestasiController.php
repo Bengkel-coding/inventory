@@ -130,6 +130,7 @@ class PemanfaatanInvestasiController extends TrinataController
         $data['date_booked'] = $inputs['date_booked'];
         $data['details'] = $inputs['details'];
         $data['warehouse_id'] = 1;
+        $data['status'] = 1;
         $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
 
         $save = $utilization->create($data);
