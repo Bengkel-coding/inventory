@@ -5,6 +5,9 @@
 tfoot {
      display: table-header-group;
 }
+tfoot th input{
+    width: 100px;
+}
 </style>
   <div class="px-content">
     <div class="row">
@@ -103,7 +106,12 @@ tfoot {
         $(document).ready(function(){
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    if(title!="Action"){
+                        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+                    }else{
+                        $(this).html( '<input type="text" placeholder="" disabled="disabled" />' );
+
+                    }
                 } );
              
           var table =  $('#table').DataTable({
@@ -113,10 +121,10 @@ tfoot {
                 columns: [
                     { data: 'name', name: 'name'},
                     { data: 'komag', name: 'komag' },
-                    { data: 'description', name: 'year_acquisition' },
+                    { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     // { data: 'unit_price', name: 'unit_price' },
-                    { data: 'warehouse', name: 'warehouses.name' },
+                    { data: 'warehouse', name: 'warehouse' },
 
                     { data: 'action', name: 'action' , searchable: false},
                 ]

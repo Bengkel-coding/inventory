@@ -27,7 +27,7 @@
 
                       <div class="form-group">
                         <label>KOMAG</label>
-                        {!! Form::text('komag' , null ,['class' => 'form-control']) !!}
+                        {!! Form::text('komag' , null ,['class' => 'form-control', 'required']) !!}
                       </div>
 
                       <div class="form-group">
@@ -44,7 +44,10 @@
                         <label>Description Material</label>
                         {!! Form::textarea('description' , null ,['class' => 'form-control']) !!}
                       </div>
-
+                      <div class="form-group">
+                        <label>Satuan Barang </label>
+                        {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
+                      </div>
                       <div class="form-group">
                         <label>Merk</label>
                         {!! Form::text('merk' , isset($model->id) ? $model->jaringan->merk : null ,['class' => 'form-control']) !!}

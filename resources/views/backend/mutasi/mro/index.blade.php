@@ -5,6 +5,9 @@
 tfoot {
      display: table-header-group;
 }
+tfoot th input{
+    width: 100px;
+}
 </style>
   <div class="px-content">
     <div class="row">
@@ -34,7 +37,7 @@ tfoot {
                             </tr>
                         </thead> 
 
-                        <!-- <tfoot>
+                        <tfoot>
                             <tr>
                                 <th>Kategori</th>
                                 <th>Nama</th>
@@ -45,7 +48,7 @@ tfoot {
                                 <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
-                        </tfoot>     -->
+                        </tfoot>    
                         
                     </table>
                 </div>
@@ -62,14 +65,20 @@ tfoot {
     <script type="text/javascript">
         
         $(document).ready(function(){
+         
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    if(title!="Action"){
+                        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+                    }else{
+                        $(this).html( '<input type="text" placeholder="" disabled="disabled" />' );
+
+                    }
                 } );
             
             
           // var table =  $('#table').DataTable({
-            $('#table').DataTable({
+           var table =   $('#table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
@@ -85,6 +94,7 @@ tfoot {
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });
+
 
             // Apply the search
             table.columns().every( function () {

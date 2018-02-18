@@ -54,6 +54,18 @@
                     {!! Form::textarea('details' , null ,['class' => 'form-control','rows'=>'5','readonly'=>'readonly']) !!}
                   </div>
                 </div>
+                
+                @if($actionAllow)
+                <div class="form-group">
+                  <label>Persetujuan</label>
+                  {!! Form::select('status' , $status , null ,['class' => 'form-control']) !!}
+                </div>
+
+                {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}                       
+
+                <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
+                @endif
+                    
             </div>
             {!! Form::close() !!}
             <div class="row p-a-3">

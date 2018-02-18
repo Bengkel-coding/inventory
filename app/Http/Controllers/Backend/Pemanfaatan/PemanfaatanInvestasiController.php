@@ -130,6 +130,7 @@ class PemanfaatanInvestasiController extends TrinataController
         $data['date_booked'] = $inputs['date_booked'];
         $data['details'] = $inputs['details'];
         $data['warehouse_id'] = 1;
+        $data['status'] = 1;
         $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
 
         $save = $utilization->create($data);
@@ -155,7 +156,7 @@ class PemanfaatanInvestasiController extends TrinataController
 
         Cart::destroy();
 
-        return redirect(urlBackendAction('index'))->withSuccess('data has been saved');
+        return redirect(urlBackend('pengajuan-pemanfaatan/index'))->withSuccess('data has been saved');
     }
     
 

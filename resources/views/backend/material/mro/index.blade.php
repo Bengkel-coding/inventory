@@ -5,6 +5,9 @@
 tfoot {
      display: table-header-group;
 }
+tfoot th input{
+    width: 100px;
+}
 </style>
   <div class="px-content">
     <div class="row">
@@ -121,7 +124,12 @@ tfoot {
          
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    if(title!="Action"){
+                        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+                    }else{
+                        $(this).html( '<input type="text" placeholder="" disabled="disabled" />' );
+
+                    }
                 } );
             
             
@@ -137,8 +145,7 @@ tfoot {
                     { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit_price', name: 'unit_price' },
-                    { data: 'warehouse', name: 'warehouses.name' },
-
+                    { data: 'warehouse', name: 'warehouse' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

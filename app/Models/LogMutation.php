@@ -35,4 +35,9 @@ class LogMutation extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    static function saveLog($request=false)
+    {
+        dd($this->all());
+    }
+
 }
