@@ -121,7 +121,9 @@ tfoot {
          
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    if(title!="Action"){
+                        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    }
                 } );
             
             
@@ -137,8 +139,7 @@ tfoot {
                     { data: 'description', name: 'description' },
                     { data: 'amount', name: 'amount' },
                     { data: 'unit_price', name: 'unit_price' },
-                    { data: 'warehouse', name: 'warehouses.name' },
-
+                    { data: 'warehouse', name: 'warehouse' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });
