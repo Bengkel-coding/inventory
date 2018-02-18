@@ -24,9 +24,14 @@
             <li class="px-nav-item {{ searchMenu($row->id,'active') }}">
           @endif
           <a href="{{ ($row->controller != '#' ? urlBackend($row->slug.'/index') : '#') }}"><i class="px-nav-icon fa {{(!empty($row->icon)) ? $row->icon : iconMenu($row->slug) }}"></i><span class="px-nav-label">{{ $row->title }}</span></a>
-          @if(!empty($row->childs->first()->id))
+
+          <?php 
+            $getChild=injectModel('Menu')->whereParentId($row->id)->whereIn('id',$menuRole)->get();
+          ?>
+          @if(!empty($getChild))
           <ul class="px-nav-dropdown-menu">
-            @foreach($row->childs as $child)
+
+            @foreach($getChild as $child)
             <li class="px-nav-item {{ searchMenu($child->id,'active','','child') }}"><a href="{{ urlBackend($child->slug.'/index') }}">
               <span class="px-nav-label">{{ $child->title}} </span></a>
             </li>
