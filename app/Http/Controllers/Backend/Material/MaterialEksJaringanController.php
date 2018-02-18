@@ -113,13 +113,14 @@ class MaterialEksJaringanController extends TrinataController
         $model->warehouse_id = $request->warehouse_id;
         
         if ($model->save()) {
-            $mro = new \App\Models\MaterialEksjar;
-            $mro->merk = $request->merk;
-            $mro->specification = $request->specification;
-            $mro->year_production = $request->year_production;
-            $mro->previous_location = $request->previous_location;
-            $mro->note = $request->note;
-            $mro->save();
+            $eksjar = new \App\Models\MaterialEksjar;
+            $eksjar->material_id = $model->id;
+            $eksjar->merk = $request->merk;
+            $eksjar->specification = $request->specification;
+            $eksjar->year_production = $request->year_production;
+            $eksjar->previous_location = $request->previous_location;
+            $eksjar->note = $request->note;
+            $eksjar->save();
         }
 
         return redirect(urlBackendAction('index'))->with('success','Data Has Been Inserted');
