@@ -5,6 +5,9 @@
 tfoot {
      display: table-header-group;
 }
+tfoot th input{
+    width: 100px;
+}
 </style>
   <div class="px-content">
     <div class="row">
@@ -47,7 +50,7 @@ tfoot {
                             </tr>
                         </thead>      
 
-                        <!-- <tfoot>
+                        <tfoot>
                             <tr>
                                 <th>Kategori</th>
                                 <th>Nama</th>
@@ -58,7 +61,7 @@ tfoot {
                                 <th>Warehouse</th>
                                 <th>Action</th>
                             </tr>
-                        </tfoot>   -->                     
+                        </tfoot>                       
                     </table>
                 </div>
             </div>
@@ -76,7 +79,7 @@ tfoot {
         $(document).ready(function(){
              $('#table tfoot th').each( function () {
                     var title = $(this).text();
-                    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    $(this).html( '<input type="text" placeholder=" '+title+'" />' );
                 } );
             
             
