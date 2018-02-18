@@ -1,6 +1,11 @@
 @extends('backend.layouts.layout')
 @section('content')
 
+<style>
+tfoot {
+     display: table-header-group;
+}
+</style>
   <div class="px-content">
     <div class="row">
       <div class="col-md-12 fadeIn animated">   
@@ -17,13 +22,6 @@
                     <table class = 'table' id = 'table'>
                         <thead>
                             <tr>
-                                <td>Nama</td>
-                                <td>Alamat</td>
-                                <td>Telp</td>
-                                <td>Penanggung Jawab</td>
-                                <th>&nbsp;</th>
-                            </tr>
-                            <tr>     
                                 <th>Nama</th>
                                 <th>Alamat</th>
                                 <th>Telp</th>
@@ -32,6 +30,16 @@
                             </tr>
                        
                         </thead>
+                        <tfoot>
+                            
+                            <tr>     
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Telp</th>
+                                <th>Penanggung Jawab</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
                         
                     </table>
                 </div>
@@ -49,7 +57,7 @@
     <script type="text/javascript">
         
         $(document).ready(function(){
-             $('#table thead td').each( function () {
+             $('#table tfoot th').each( function () {
                     var title = $(this).text();
                     if(title!="Action"){
                         $(this).html( '<input type="text" placeholder="'+title+'" />' );

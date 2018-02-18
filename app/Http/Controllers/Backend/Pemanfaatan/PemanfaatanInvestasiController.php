@@ -155,7 +155,7 @@ class PemanfaatanInvestasiController extends TrinataController
 
         Cart::destroy();
 
-        return redirect(urlBackendAction('index'))->withSuccess('data has been saved');
+        return redirect(urlBackend('pengajuan-pemanfaatan/index'))->withSuccess('data has been saved');
     }
     
 
