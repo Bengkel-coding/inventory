@@ -181,23 +181,23 @@ class PengajuanMutasiController extends TrinataController
                         // dd($new);
                         $new->save();
 
-                        if($new->type = 'mro'){
-                            $new_typematerial = MaterialMro::whereMaterialId($id)->first();
-                            $new_type = $new_typematerial->replicate();
-                            $new_type->save();
-                        }elseif($new_type = 'mroabt'){
-                            $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
-                            $new_type = $new_typematerial->replicate();
-                            $new_type->save();
-                        }elseif($new_type = 'investasi'){
-                            $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
-                            $new_type = $new_typematerial->replicate();
-                            $new_type->save();
-                        }elseif($new_type = 'eksjar'){
-                            $new_typematerial = MaterialEksjar::whereMaterialId($id)->first();
-                            $new_type = $new_typematerial->replicate();
-                            $new_type->save();
-                        }
+                        // if($new->type = 'mro'){
+                        //     $new_typematerial = MaterialMro::whereMaterialId($id)->first();
+                        //     $new_type = $new_typematerial->replicate();
+                        //     $new_type->save();
+                        // }elseif($new_type = 'mroabt'){
+                        //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
+                        //     $new_type = $new_typematerial->replicate();
+                        //     $new_type->save();
+                        // }elseif($new_type = 'investasi'){
+                        //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
+                        //     $new_type = $new_typematerial->replicate();
+                        //     $new_type->save();
+                        // }elseif($new_type = 'eksjar'){
+                        //     $new_typematerial = MaterialEksjar::whereMaterialId($id)->first();
+                        //     $new_type = $new_typematerial->replicate();
+                        //     $new_type->save();
+                        // }
 
 
 
