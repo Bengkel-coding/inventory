@@ -5,8 +5,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Crud;
 use App\Models\Material;
+use App\Models\MaterialMro;
+use App\Models\MaterialMroabt;
+use App\Models\MaterialInvestasi;
+use App\Models\MaterialEksjar;
 use App\Models\Mutation;
 use App\Models\LogMutation;
+use App\Models\LogMaterial;
 use App\Models\Warehouse;
 use App\User;
 use Table;
@@ -178,28 +183,32 @@ class PengajuanMutasiController extends TrinataController
                         $new->amount = $mutation->proposed_amount;
                         $new->total_proposed_amount = 0;
                         $new->warehouse_id = $mutation->proposed_warehouse_id;
-                        // dd($new);
                         $new->save();
 
-                        // if($new->type = 'mro'){
-                        //     $new_typematerial = MaterialMro::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }elseif($new_type = 'mroabt'){
-                        //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }elseif($new_type = 'investasi'){
-                        //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }elseif($new_type = 'eksjar'){
-                        //     $new_typematerial = MaterialEksjar::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }
+                        // $log_material = new \App\Models\LogMaterial;
+                        // $log_material->material_id = 
 
-
+                        if($new->type == 'mro'){
+                            $new_typematerial = MaterialMro::whereMaterialId($id)->first();
+                            $new_data = $new_typematerial->replicate();
+                            $new_data->material_id = $new->id;
+                            $new_data->save();
+                        }elseif($new->type == 'mroabt'){
+                            $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
+                            $new_data = $new_typematerial->replicate();
+                            $new_data->material_id = $new->id;
+                            $new_data->save();
+                        }elseif($new->type == 'investasi'){
+                            $new_typematerial = MaterialInvestasi::whereMaterialId($id)->first();
+                            $new_data = $new_typematerial->replicate();
+                            $new_data->material_id = $new->id;
+                            $new_data->save();
+                        }elseif($new->type == 'eksjar'){
+                            $new_typematerial = MaterialEksjar::whereMaterialId($id)->first();
+                            $new_data = $new_typematerial->replicate();
+                            $new_data->material_id = $new->id;
+                            $new_data->save();
+                        }
 
                         $log_mutation = new \App\Models\LogMutation;
                         $log_mutation->material_id = $mutation->material_id;
