@@ -173,30 +173,31 @@ class PengajuanMutasiController extends TrinataController
                     $mutation->status = 5;
                     if($mutation->save()){
 
-                        // $new_material = Material::find($id);
-                        // $new = $new_material->replicate();
-                        // $new->amount = $mutation->proposed_amount;
-                        // $new->total_proposed_amount = 0;
-                        // $new->warehouse_id = $mutation->proposed_warehouse_id;
-                        // $new->save();
+                        $new_material = Material::find($id);
+                        $new = $new_material->replicate();
+                        $new->amount = $mutation->proposed_amount;
+                        $new->total_proposed_amount = 0;
+                        $new->warehouse_id = $mutation->proposed_warehouse_id;
+                        // dd($new);
+                        $new->save();
 
-                        // if($new->type = 'mro'){
-                        //     $new_typematerial = MaterialMro::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }elseif($new_type = 'mroabt'){
-                        //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }elseif($new_type = 'investasi'){
-                        //     $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }elseif($new_type = 'eksjar'){
-                        //     $new_typematerial = MaterialEksjar::whereMaterialId($id)->first();
-                        //     $new_type = $new_typematerial->replicate();
-                        //     $new_type->save();
-                        // }
+                        if($new->type = 'mro'){
+                            $new_typematerial = MaterialMro::whereMaterialId($id)->first();
+                            $new_type = $new_typematerial->replicate();
+                            $new_type->save();
+                        }elseif($new_type = 'mroabt'){
+                            $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
+                            $new_type = $new_typematerial->replicate();
+                            $new_type->save();
+                        }elseif($new_type = 'investasi'){
+                            $new_typematerial = MaterialMroabt::whereMaterialId($id)->first();
+                            $new_type = $new_typematerial->replicate();
+                            $new_type->save();
+                        }elseif($new_type = 'eksjar'){
+                            $new_typematerial = MaterialEksjar::whereMaterialId($id)->first();
+                            $new_type = $new_typematerial->replicate();
+                            $new_type->save();
+                        }
 
 
 
