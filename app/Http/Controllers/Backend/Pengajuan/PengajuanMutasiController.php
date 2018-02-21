@@ -12,6 +12,10 @@ use App\Models\MaterialEksjar;
 use App\Models\Mutation;
 use App\Models\LogMutation;
 use App\Models\LogMaterial;
+use App\Models\LogMaterialMro;
+use App\Models\LogMaterialMroabt;
+use App\Models\LogMaterialInvestasi;
+use App\Models\LogMaterialEksjar;
 use App\Models\Warehouse;
 use App\User;
 use Table;
@@ -43,8 +47,6 @@ class PengajuanMutasiController extends TrinataController
             $model = $this->model
                         ->select('materials.type', 'materials.id', 'materials.name', 'materials.komag', 'materials.description', 'mutations.warehouse_id', 'mutations.proposed_warehouse_id', 'mutations.status')
                         ->join('mutations', 'materials.id', '=', 'mutations.material_id')
-                        // ->where('mutations.status', '=', 1)
-                        // ->where('user_id', '=', \Auth::User()->id)
                         ->where('mutations.proposed_warehouse_id', '=', \Auth::User()->warehouse_id)
                         ->orWhere('mutations.warehouse_id', '=', \Auth::User()->warehouse_id)
                         ->get()
@@ -178,15 +180,33 @@ class PengajuanMutasiController extends TrinataController
                     $mutation->status = 5;
                     if($mutation->save()){
 
+                        $log_material = new \App\Models\LogMaterial;
+                        $log_material->id = $model->id;
+                        $log_material->category = $model->category;
+                        $log_material->name = $model->name;
+                        $log_material->cardnumber = $model->cardnumber;
+                        $log_material->komag = $model->komag;
+                        $log_material->code = $model->code;
+                        $log_material->serialnumber = $model->serialnumber;
+                        $log_material->description = $model->description;
+                        $log_material->unit = $model->unit;
+                        $log_material->year_acquisition = $model->year_acquisition;
+                        $log_material->amount = $model->amount;
+                        $log_material->unit_price = $model->unit_price;
+                        $log_material->total_proposed_amount = $model->total_proposed_amount;
+                        $log_material->details = $model->details;
+                        $log_material->warehouse_id = $model->warehouse_id;
+                        $log_material->status = $model->status;
+                        $log_material->type = $model->type;
+                        $log_material->note = $model->note;
+                        $log_material->save();
+
                         $new_material = Material::find($id);
                         $new = $new_material->replicate();
                         $new->amount = $mutation->proposed_amount;
                         $new->total_proposed_amount = 0;
                         $new->warehouse_id = $mutation->proposed_warehouse_id;
                         $new->save();
-
-                        // $log_material = new \App\Models\LogMaterial;
-                        // $log_material->material_id = 
 
                         if($new->type == 'mro'){
                             $new_typematerial = MaterialMro::whereMaterialId($id)->first();
