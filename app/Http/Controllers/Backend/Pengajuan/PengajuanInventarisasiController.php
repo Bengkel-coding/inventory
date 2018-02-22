@@ -155,7 +155,7 @@ class PengajuanInventarisasiController extends TrinataController
                     if($assessment->save()){
 
                         $log_material = new \App\Models\LogMaterial;
-                        $log_material->id = $model->id;
+                        $log_material->material_id = $model->id;
                         $log_material->category = $model->category;
                         $log_material->name = $model->name;
                         $log_material->cardnumber = $model->cardnumber;
