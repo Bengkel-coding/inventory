@@ -13,12 +13,10 @@
 
                      {!! Form::model($model,['files' => true]) !!} 
 
-
                       <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
-
 
                       <div class="form-group">
                         <label>Nama Material</label>
@@ -30,17 +28,18 @@
                         {!! Form::text('komag' , null ,['class' => 'form-control','required']) !!}
                       </div>
 
-                      <!-- <div class="form-group">
-                        <label>Kode MRO</label>
-                        {!! Form::text('code' , null ,['class' => 'form-control']) !!}
-                      </div> -->
+                      <div class="form-group">
+                        <label>Nomor Kartu</label>
+                        {!! Form::text('cardnumber' , null ,['class' => 'form-control']) !!}
+                      </div>
+
                       <div class="form-group">
                         <label>Serial Number</label>
                         {!! Form::text('serialnumber' , null ,['class' => 'form-control']) !!}
                       </div>
                       
                       <div class="form-group">
-                        <label>Description Material</label>
+                        <label>Deskripsi Material</label>
                         {!! Form::textarea('description' , null ,['class' => 'form-control']) !!}
                       </div>
 
@@ -51,28 +50,27 @@
 
                       <div class="form-group">
                         <label>Tahun Perolehan</label>
-                        {!! Form::text('year_acquisition' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('year_acquisition' , null ,['class' => 'form-control']) !!}
                       </div>
-
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('amount' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Harga Satuan</label>
-                        {!! Form::text('unit_price' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('unit_price' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
-                        <label>Tingkat Persedian Minimal(min)</label>
-                        {!! Form::text('min_stock_level' , isset($model->id) ? $model->mro->min_stock_level : null ,['class' => 'form-control']) !!}
+                        <label>Tingkat Persedian Minimal (min)</label>
+                        {!! Form::number('min_stock_level' , isset($model->id) ? $model->mro->min_stock_level : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
-                        <label>Tingkat Persedian Maksimal(maks)</label>
-                        {!! Form::text('max_stock_level' , isset($model->id) ? $model->mro->max_stock_level : null ,['class' => 'form-control']) !!}
+                        <label>Tingkat Persedian Maksimal (maks)</label>
+                        {!! Form::number('max_stock_level' , isset($model->id) ? $model->mro->max_stock_level : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
@@ -85,13 +83,8 @@
                         {!! Form::select('status' , ['ds' => 'DS', 'fm' => 'FM' , 'pds' => 'PDS' , 'sm' => 'SM'] , isset($model->id) ? $model->mro->status : null ,['class' => 'form-control']) !!}
                       </div>
                       
-                      <!-- <div class="form-group">
-                        <label>Keterangan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div> -->
-
                       <div class="form-group">
-                        <label>Lokasi </label>
+                        <label>Lokasi Penyimpanan</label>
                         {!! Form::select('warehouse_id' , $warehouse , null ,['class' => 'form-control']) !!}
                       </div>
                       
@@ -108,6 +101,6 @@
 @endsection
 @push('script-js')
 <script type="text/javascript">
-  
+
 </script>
 @endpush

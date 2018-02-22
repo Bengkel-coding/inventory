@@ -13,12 +13,10 @@
 
                      {!! Form::model($model,['files' => true]) !!} 
 
-
                       <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
-
 
                       <div class="form-group">
                         <label>Nama Material</label>
@@ -31,21 +29,22 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Serial Number</label>
-                        {!! Form::text('serialnumber' , null ,['class' => 'form-control']) !!}
-                      </div>
-                      
-                      <div class="form-group">
                         <label>Kode MI</label>
                         {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div>
+
                       <div class="form-group">
                         <label>Nomor Kartu</label>
                         {!! Form::text('cardnumber' , null ,['class' => 'form-control']) !!}
                       </div>
-                      
+
                       <div class="form-group">
-                        <label>Description Material</label>
+                        <label>Serial Number</label>
+                        {!! Form::text('serialnumber' , null ,['class' => 'form-control']) !!}
+                      </div>                      
+                                            
+                      <div class="form-group">
+                        <label>Deskripsi Material</label>
                         {!! Form::textarea('description' , null ,['class' => 'form-control']) !!}
                       </div>
 
@@ -56,36 +55,31 @@
 
                       <div class="form-group">
                         <label>Tahun Perolehan</label>
-                        {!! Form::text('year_acquisition' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('year_acquisition' , null ,['class' => 'form-control']) !!}
                       </div>
-
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('amount' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Harga Satuan</label>
-                        {!! Form::text('unit_price' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('unit_price' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Surplus Material</label>
-                        {!! Form::text('surplus_material' , isset($model->id) ? $model->investasi->surplus_material : null ,['class' => 'form-control']) !!}
+                        {!! Form::number('surplus_material' , isset($model->id) ? $model->investasi->surplus_material : null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
                         <label>Status</label>
                         {!! Form::select('status' , ['' => '-', 'merah' => 'Merah' , 'kuning' => 'Kuning' , 'hijau' => 'Hijau' , 'hijaumuda' => 'Hijau Muda'] , isset($model->id) ? $model->investasi->status : null ,['class' => 'form-control']) !!}
                       </div>
-                      <!-- <div class="form-group">
-                        <label>Keterangan</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div> -->
 
                       <div class="form-group">
-                        <label>Lokasi </label>
+                        <label>Lokasi Penyimpanan</label>
                         {!! Form::select('warehouse_id' , $warehouse , null ,['class' => 'form-control']) !!}
                       </div>
                       

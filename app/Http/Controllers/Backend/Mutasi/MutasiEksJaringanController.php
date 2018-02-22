@@ -31,7 +31,7 @@ class MutasiEksJaringanController extends TrinataController
     {
         if(\Auth::User()->warehouse_id > 0){
             $model = $this->model
-                        ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id')
+                        ->select('id','name','komag','description','category',\DB::raw('sum(amount - total_proposed_amount) as amount'),'unit','warehouse_id', 'serialnumber')
                         ->groupBy('id')
                         ->whereNotIn('warehouse_id', [\Auth::User()->warehouse_id])
                         ->orderBy('created_at','desc')

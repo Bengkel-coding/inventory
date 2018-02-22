@@ -13,12 +13,10 @@
 
                      {!! Form::model($model,['files' => true]) !!} 
 
-
                       <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
                       </div>
-
 
                       <div class="form-group">
                         <label>Nama Material</label>
@@ -31,38 +29,39 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Serial Number</label>
-                        {!! Form::text('serialnumber' , null ,['class' => 'form-control']) !!}
-                      </div>
-
-                      <div class="form-group">
                         <label>Kode MRO-ABT / Kode MI</label>
                         {!! Form::text('code' , null ,['class' => 'form-control']) !!}
                       </div>
+
+                      <div class="form-group">
+                        <label>Nomor Kartu</label>
+                        {!! Form::text('cardnumber' , null ,['class' => 'form-control']) !!}
+                      </div>
+
+                      <div class="form-group">
+                        <label>Serial Number</label>
+                        {!! Form::text('serialnumber' , null ,['class' => 'form-control']) !!}
+                      </div>
                       
                       <div class="form-group">
-                        <label>Description Material</label>
+                        <label>Deskripsi Material</label>
                         {!! Form::textarea('description' , null ,['class' => 'form-control']) !!}
                       </div>
+
                       <div class="form-group">
                         <label>Satuan Barang </label>
                         {!! Form::select('unit' , ['buah' => 'Buah', 'liter' => 'Liter' , 'meter' => 'Meter' , 'pieces' => 'Pieces' , 'roll' => 'Roll' , 'unit' => 'Unit'] , null ,['class' => 'form-control']) !!}
                       </div>
+
                       <div class="form-group">
                         <label>Merk</label>
                         {!! Form::text('merk' , isset($model->id) ? $model->jaringan->merk : null ,['class' => 'form-control']) !!}
                       </div>
 
-
                       <div class="form-group">
                         <label>Spesifikasi</label>
                         {!! Form::text('specification' , isset($model->id) ? $model->jaringan->specification : null ,['class' => 'form-control']) !!}
                       </div>
-
-                      <!-- <div class="form-group">
-                        <label>Serial Number</label>
-                        {!! Form::text('title' , null ,['class' => 'form-control']) !!}
-                      </div> -->
 
                       <div class="form-group">
                         <label>Tahun Pembuatan</label>
@@ -71,7 +70,7 @@
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
-                        {!! Form::text('amount' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       <div class="form-group">
@@ -87,8 +86,7 @@
                       <div class="form-group">
                         <label>Lokasi Penyimpanan</label>
                         {!! Form::select('warehouse_id' , $warehouse , null ,['class' => 'form-control']) !!}
-                      </div>
-                      
+                      </div>                      
 
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     
