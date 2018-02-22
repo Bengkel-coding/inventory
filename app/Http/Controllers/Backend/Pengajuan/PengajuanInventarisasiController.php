@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Crud;
 use App\Models\Material;
 use App\Models\Assessment;
+use App\Models\LogMaterial;
 use App\Models\LogAssessment;
 use App\Models\Warehouse;
 use App\User;
@@ -152,6 +153,28 @@ class PengajuanInventarisasiController extends TrinataController
                     $assessment->status = 3;
 
                     if($assessment->save()){
+
+                        $log_material = new \App\Models\LogMaterial;
+                        $log_material->id = $model->id;
+                        $log_material->category = $model->category;
+                        $log_material->name = $model->name;
+                        $log_material->cardnumber = $model->cardnumber;
+                        $log_material->komag = $model->komag;
+                        $log_material->code = $model->code;
+                        $log_material->serialnumber = $model->serialnumber;
+                        $log_material->description = $model->description;
+                        $log_material->unit = $model->unit;
+                        $log_material->year_acquisition = $model->year_acquisition;
+                        $log_material->amount = $model->amount;
+                        $log_material->unit_price = $model->unit_price;
+                        $log_material->total_proposed_amount = $model->total_proposed_amount;
+                        $log_material->details = $model->details;
+                        $log_material->warehouse_id = $model->warehouse_id;
+                        $log_material->status = $model->status;
+                        $log_material->type = $model->type;
+                        $log_material->note = $model->note;
+                        $log_material->save();
+
                         $log_assessment = new \App\Models\LogAssessment; //log
                         $log_assessment->material_id = $assessment->material_id;
                         $log_assessment->amount = $assessment->amount;

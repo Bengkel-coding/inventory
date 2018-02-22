@@ -21,20 +21,6 @@ tfoot th input{
                 <div class="col-md-12 fadeIn animated"> 
                   @include('backend.common.flashes')
                     
-                      <!-- <form method="get" action="">
-                      <div class="form-group">
-                        <label>Kategori Material</label>
-                        {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Lokasi Gudang</label>
-                        {!! Form::select('status' , ['y' => 'Bogor' , 'n' => 'Jakarta'] , null ,['class' => 'form-control']) !!}
-                      </div>
-                      
-                    <a href="#" class="btn btn-info">Lihat</a> -->
-                    <!-- <button type="submit" class="btn btn-info">Lihat</button> -->
-                    </form>
                     <p>&nbsp;</p>
 
                     <table class = 'table' id = 'table'>
@@ -55,7 +41,7 @@ tfoot th input{
                             <tr>
                                 <th>Kategori</th>
                                 <th>Nama</th>
-                                <th>Komag</th>
+                                <!-- <th>Komag</th> -->
                                 <th>Deskripsi</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
