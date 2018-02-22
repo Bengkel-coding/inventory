@@ -20,7 +20,7 @@
                   @include('backend.common.flashes')
                     <form method="get" action="download">
                       <div class="form-group">
-                        <label>Type Material</label>
+                        <!-- <label>Type Material</label>
                         {!! Form::select('category' , [
                                                         'mro' => 'MRO' , 
                                                         'mro-abt' => 'MRO ABT' , 
@@ -29,7 +29,7 @@
                                                         'tercatat' => 'Tercatat'
                                                         ] 
                                                         , null ,['class' => 'form-control']) !!}
-                      </div>
+                      </div> -->
                       <div class="form-group">
                         <label>Periode</label>
                           {!! Form::text('periode' ,  null ,['class' => 'form-control datepicker']) !!}
