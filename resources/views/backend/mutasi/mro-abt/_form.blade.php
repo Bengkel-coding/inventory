@@ -20,15 +20,9 @@
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
                       </div>
 
-
                       <div class="form-group">
                         <label>Nama Material</label>
                         {!! Form::text('name' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
-                      </div>
-
-                      <div class="form-group">
-                        <label>Nomor Kartu</label>
-                        {!! Form::text('cardnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
 
                       <div class="form-group">
@@ -42,7 +36,17 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Description Material</label>
+                        <label>Nomor Kartu</label>
+                        {!! Form::text('cardnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                      </div>
+
+                      <div class="form-group">
+                        <label>Serial Number</label>
+                        {!! Form::text('serialnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                      </div>
+
+                      <div class="form-group">
+                        <label>Deskripsi Material</label>
                         {!! Form::textarea('description' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '', 'rows'=>'5']) !!}
                       </div>
 
@@ -84,7 +88,7 @@
 
                       <div class="form-group">
                         <label>Kuantitas Mutasi</label>
-                        {!! Form::text('proposed_amount' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('proposed_amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}                      

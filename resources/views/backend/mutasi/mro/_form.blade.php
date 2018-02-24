@@ -34,6 +34,11 @@
                         <label>Nomor Kartu</label>
                         {!! Form::text('cardnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
+
+                      <div class="form-group">
+                        <label>Serial Number</label>
+                        {!! Form::text('serialnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                      </div>
                       
                       <div class="form-group">
                         <label>Deskripsi Material</label>
@@ -49,7 +54,6 @@
                         <label>Tahun Perolehan</label>
                          {!! Form::text('year_acquisition' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
                       </div>
-
 
                       <div class="form-group">
                         <label>Jumlah Material</label>
@@ -78,7 +82,7 @@
 
                       <div class="form-group">
                         <label>Kuantitas Mutasi</label>
-                        {!! Form::text('proposed_amount' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('proposed_amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}

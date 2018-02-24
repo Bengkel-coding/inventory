@@ -17,7 +17,6 @@
                       <div class="form-group">
                         <label>Kategori Barang</label>
                         {!! Form::select('category' , ['tubular' => 'Tubular Good' , 'cock' => 'Cock & Value' , 'fitting' => 'Fitting & Flange' , 'instrument' => 'Instrument' , 'bahankimia' => 'Bahan Kimia / Peralatan' , 'lainlain' => 'Lain-lain'] , null ,['class' => 'form-control', 'disabled'=>'disabled']) !!}
-                        <!-- {!! Form::text('category' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!} -->
                       </div>
 
                       <div class="form-group">
@@ -41,7 +40,12 @@
                       </div>
 
                       <div class="form-group">
-                        <label>Description Material</label>
+                        <label>Serial Number</label>
+                        {!! Form::text('serialnumber' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '']) !!}
+                      </div>
+
+                      <div class="form-group">
+                        <label>Deskripsi Material</label>
                         {!! Form::textarea('description' , null ,['class' => 'form-control', (!empty($model->id)) ? 'readonly' : '', 'rows'=>'5']) !!}
                       </div>
 
@@ -83,7 +87,7 @@
 
                       <div class="form-group">
                         <label>Kuantitas Mutasi</label>
-                        {!! Form::text('proposed_amount' , null ,['class' => 'form-control']) !!}
+                        {!! Form::number('proposed_amount' , null ,['class' => 'form-control']) !!}
                       </div>
 
                       {!! Form::hidden('warehouse_id' , $model->warehouse_id , null ,['class' => 'form-control']) !!}
