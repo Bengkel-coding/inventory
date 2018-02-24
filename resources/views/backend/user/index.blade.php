@@ -17,6 +17,7 @@
                     <table class="table table-striped table-bordered dataTable no-footer" id="table" role="grid" aria-describedby="datatables_info">
                         <thead>
                             <tr>
+                                <th width = ''>Username</th>
                                 <th width = ''>Role</th>
                                 <th width = ''>Name</th>
                                 <th width = ''>Email</th>
@@ -45,6 +46,7 @@
                 serverSide: true,
                 ajax: '{{ urlBackendAction("data") }}',
                 columns: [
+                    { data: 'username', name: 'username' },
                     { data: 'role', name: 'roles.role' },
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
