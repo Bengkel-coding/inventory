@@ -65,7 +65,8 @@ class LaporanController extends TrinataController
     public function getDownload(Request $request)
     {
     	
-    	$categoryList = ['mro'=>'sheetMro',
+    	$categoryList = [
+                        'mro'=>'sheetMro',
                         'mroabt'=>'sheetMroAbt', 
                         'investasi'=>'sheetInvestasi',
                         'eksjar'=>'sheetEksjar',
@@ -78,31 +79,33 @@ class LaporanController extends TrinataController
 
     public function prepareExcel($categoryList, $request)
     {
-    	$filename = 'export-material-'.date('Ymdhis');
-        
-        Excel::create($filename, function($excel) use($categoryList, $request) {
+        // $filename = 'export-material-'.date('Ymdhis');
+    	$filename = public_path('contents/template-export/template.xlsx');
+        // dd($filename);
+        // Excel::create($filename, function($excel) use($categoryList, $request) {
+        Excel::load($filename, function($excel) use($categoryList, $request) {
             
             foreach ($categoryList as $key => $value) {
                 $data = $this->getMaterialData($key);
                 if ($data) {
                     
-                    $sheetname = ucfirst($key);
+                    $sheetname = strtoupper($key);
+                    
                     $excel->sheet($sheetname, function($sheet) use($data, $request, $value) {
                         
-                        $this->{$value}($sheet);
-                        $baris = 4;
-                   
+                        // $this->{$value}($sheet);
+                        $baris = 5;
+                        // dd($sheet);
                         foreach($data as $keys => $dataBaris){
                             $sheet->row($baris++, $this->prepareData($dataBaris, $keys));
                         }
 
+                        $sheet = false;
                     });
                 }
             }
 
-            
-
-        })->export('xls');
+        })->setFilename('Laporan-material-'.date('Ymdhis'))->export('xls');
     }
 
     public function getMaterialData($category)
@@ -123,13 +126,7 @@ class LaporanController extends TrinataController
 		if(in_array($value->type, $needCode)) $datas[] = $value->kode;
 		$datas[] = $value->description;
 
-		/*if ($value->type == 'eksjar') {
-            $datas = array_merge($datas, $this->dataEksjar($value));
-        } elseif ($value->type == 'tercatat') {
-            $datas = array_merge($datas, $this->dataTercatat($value));
-        } */
-
-        $datas = array_merge($datas, $this->{$parseData[$value->type]}($value));
+		$datas = array_merge($datas, $this->{$parseData[$value->type]}($value));
 
 		return $datas;
     }
