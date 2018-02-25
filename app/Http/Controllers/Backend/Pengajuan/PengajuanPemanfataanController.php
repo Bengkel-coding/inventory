@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\TrinataController;
 use App\Models\Crud;
 use App\Models\Material;
 use App\Models\Utilization;
+use App\Models\LogUtilization;
 use App\Models\UtilizationDetail;
 use Table;
 use Image;
@@ -91,6 +92,8 @@ class PengajuanPemanfataanController extends TrinataController
     public function postDetail(Request $request,$id)
     {
         $utilization = $this->model->findOrFail($id);
+        // $detail = $utilization->utilizationDetail();
+        // dd($detail->get());
 // dd($request->all());
         if($request->status == 1){
             // $utilization = \App\Models\Utilization::whereMaterialId($model->id)->first();
@@ -99,73 +102,127 @@ class PengajuanPemanfataanController extends TrinataController
                 case '1': //disetujui kepala gudang pemohon
                     $utilization->status = 2;
 
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization; //udah
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 2;
-                    //     $log_utilization->save(); 
-                    // }
+                    if($utilization->save()){
+                        $log_utilization = new LogUtilization; //udah
+                        $log_utilization->no_utilization = $utilization->no_utilization;
+                        $log_utilization->date_utilization = $utilization->date_utilization;
+                        $log_utilization->to = $utilization->to;
+                        $log_utilization->from = $utilization->from;
+                        $log_utilization->expected_receive_date = $utilization->expected_receive_date;
+                        $log_utilization->booked_by = $utilization->booked_by;
+                        $log_utilization->estimation_code = $utilization->estimation_code;
+                        $log_utilization->date_booked = $utilization->date_booked;
+                        $log_utilization->details = $utilization->details;
+                        $log_utilization->type = $utilization->type;
+                        $log_utilization->warehouse_id = $utilization->warehouse_id;
+                        $log_utilization->user_id = \Auth::User()->id;
+                        $log_utilization->status = 2;
+                        $log_utilization->save(); 
+                    }
                     break;
 
                 case '2': //disetujui bui
                     $utilization->status = 3;
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization;
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 3;
-                    //     $log_utilization->save(); 
-                    // }
+                    if($utilization->save()){
+                        $log_utilization = new LogUtilization; //udah
+                        $log_utilization->no_utilization = $utilization->no_utilization;
+                        $log_utilization->date_utilization = $utilization->date_utilization;
+                        $log_utilization->to = $utilization->to;
+                        $log_utilization->from = $utilization->from;
+                        $log_utilization->expected_receive_date = $utilization->expected_receive_date;
+                        $log_utilization->booked_by = $utilization->booked_by;
+                        $log_utilization->estimation_code = $utilization->estimation_code;
+                        $log_utilization->date_booked = $utilization->date_booked;
+                        $log_utilization->details = $utilization->details;
+                        $log_utilization->type = $utilization->type;
+                        $log_utilization->warehouse_id = $utilization->warehouse_id;
+                        $log_utilization->user_id = \Auth::User()->id;
+                        $log_utilization->status = 3;
+                        $log_utilization->save(); 
+                    }
                     break;
 
                 case '3': //disetujui admin gudang pemberi
                     $utilization->status = 4;
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization;
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 4;
-                    //     $log_utilization->save(); 
-                    // }
+                    if($utilization->save()){
+                        $log_utilization = new LogUtilization; //udah
+                        $log_utilization->no_utilization = $utilization->no_utilization;
+                        $log_utilization->date_utilization = $utilization->date_utilization;
+                        $log_utilization->to = $utilization->to;
+                        $log_utilization->from = $utilization->from;
+                        $log_utilization->expected_receive_date = $utilization->expected_receive_date;
+                        $log_utilization->booked_by = $utilization->booked_by;
+                        $log_utilization->estimation_code = $utilization->estimation_code;
+                        $log_utilization->date_booked = $utilization->date_booked;
+                        $log_utilization->details = $utilization->details;
+                        $log_utilization->type = $utilization->type;
+                        $log_utilization->warehouse_id = $utilization->warehouse_id;
+                        $log_utilization->user_id = \Auth::User()->id;
+                        $log_utilization->status = 4;
+                        $log_utilization->save(); 
+                    }
                     break;
 
                 case '4': //disetujui kepala gudang pemberi
                     $utilization->status = 5;
-                    // if($utilization->save()){
-                    //     $log_utilization = new \App\Models\LogUtilization;
-                    //     $log_utilization->material_id = $utilization->material_id;
-                    //     $log_utilization->amount = $utilization->amount;
-                    //     $log_utilization->proposed_amount = $utilization->proposed_amount;
-                    //     $log_utilization->warehouse_id = $utilization->warehouse_id;
-                    //     $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-                    //     $log_utilization->user_id = \Auth::User()->id;
-                    //     $log_utilization->status = 5;
-                    //     $log_utilization->save(); 
-                    // }
+                    if($utilization->save()){
+                        $log_utilization = new LogUtilization; //udah
+                        $log_utilization->no_utilization = $utilization->no_utilization;
+                        $log_utilization->date_utilization = $utilization->date_utilization;
+                        $log_utilization->to = $utilization->to;
+                        $log_utilization->from = $utilization->from;
+                        $log_utilization->expected_receive_date = $utilization->expected_receive_date;
+                        $log_utilization->booked_by = $utilization->booked_by;
+                        $log_utilization->estimation_code = $utilization->estimation_code;
+                        $log_utilization->date_booked = $utilization->date_booked;
+                        $log_utilization->details = $utilization->details;
+                        $log_utilization->type = $utilization->type;
+                        $log_utilization->warehouse_id = $utilization->warehouse_id;
+                        $log_utilization->user_id = \Auth::User()->id;
+                        $log_utilization->status = 5;
+                        $log_utilization->save(); 
+                    
 
-                    // $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-                    // $model->amount = $model->amount - $request->proposed_amount;
-                    // $model->save();
+                        foreach ($utilization->utilizationDetail()->get() as $key => $value) 
+                        {
+
+                            $model = new Material;
+                            $model = $model->findOrFail($value->material_id);
+
+                            $log_material = new \App\Models\LogMaterial;
+                            $log_material->material_id = $model->id;
+                            $log_material->category = $model->category;
+                            $log_material->name = $model->name;
+                            $log_material->cardnumber = $model->cardnumber;
+                            $log_material->komag = $model->komag;
+                            $log_material->code = $model->code;
+                            $log_material->serialnumber = $model->serialnumber;
+                            $log_material->description = $model->description;
+                            $log_material->unit = $model->unit;
+                            $log_material->year_acquisition = $model->year_acquisition;
+                            $log_material->amount = $model->amount;
+                            $log_material->unit_price = $model->unit_price;
+                            $log_material->total_proposed_amount = $model->total_proposed_amount;
+                            $log_material->details = $model->details;
+                            $log_material->warehouse_id = $model->warehouse_id;
+                            $log_material->status = $model->status;
+                            $log_material->type = $model->type;
+                            $log_material->note = $model->note;
+                            $log_material->save();
+
+                            $model->total_proposed_amount = $model->total_proposed_amount - $value->proposed_amount;
+                            $model->amount = $model->amount - $value->proposed_amount;
+                            $model->save();
+                        }
+                    }
+                    
                     break;                
                 default:
                     return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('info','Anda tidak memiliki otorisasi');
                     break;
             }
 
-            $utilization->save();
+            // $utilization->save();
 
             return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Telah Disetujui');
 
