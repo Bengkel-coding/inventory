@@ -188,6 +188,10 @@ class PengajuanInventarisasiController extends TrinataController
                     $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                     $model->amount = $model->amount - $request->proposed_amount;
                     $model->save();
+                    $log_material->amount_current = $model->amount;
+                    $log_material->action = 'inventarisasi';
+                    $log_material->save();
+
                     break;
                 default:
                     return redirect(urlBackend('pengajuan-inventarisasi/index'))->with('info','Anda tidak memiliki otorisasi');

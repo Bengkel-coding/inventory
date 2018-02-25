@@ -244,6 +244,9 @@ class PengajuanMutasiController extends TrinataController
                     $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
                     $model->amount = $model->amount - $request->proposed_amount;
                     $model->save();
+                    $log_material->amount_current = $model->amount;
+                    $log_material->action = 'mutasi';
+                    $log_material->save();
                     break;                
                 default:
                     return redirect(urlBackend('pengajuan-mutasi/index'))->with('info','Anda tidak memiliki otorisasi');
