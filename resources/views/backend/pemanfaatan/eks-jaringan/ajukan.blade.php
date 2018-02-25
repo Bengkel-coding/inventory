@@ -14,6 +14,7 @@
           </div>   
             {!! Form::model($model,['files' => true]) !!} 
             <div class="row p-a-3">
+                  @include('backend.common.flashes')
                 <div class="col-md-6 fadeIn animated"> 
                   <div class="form-group">
                     <label>No Pengeluaran Material</label>

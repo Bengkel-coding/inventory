@@ -126,46 +126,51 @@ class PengembalianMroAbtController extends TrinataController
         $reversion = $this->reversion;
         $inputs = $request->all();
         $cart = Cart::content();
+        $head = \Auth::user()->head()->first();
 
         // dd($inputs,$cart);
 
-        $data['user_id'] = \Auth::user()->id;
-        $data['no_return'] = $inputs['no_return'];
-        $data['date_return'] = $inputs['date_return'];
-        $data['received_by'] = $inputs['received_by'];
-        $data['no_request'] = $inputs['no_request'];
-        $data['date_request'] = $inputs['date_request'];
-        // $data['expected_receive_date'] = $inputs['expected_receive_date'];
-        // $data['estimation_code'] = $inputs['estimation_code'];
-        // $data['date_booked'] = $inputs['date_booked'];
-        // $data['details'] = $inputs['details'];
-        $data['warehouse_id'] = 1;
-        $data['status'] = 1;
-        $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
+        if ($head->warehouse_id==0) {
+            return redirect(urlBackend('pengembalian-mro-abt/ajukan'))->withInfo('data warehouse empty');        
+        }else{
+            $data['user_id'] = \Auth::user()->id;
+            $data['no_return'] = $inputs['no_return'];
+            $data['date_return'] = $inputs['date_return'];
+            $data['received_by'] = $inputs['received_by'];
+            $data['no_request'] = $inputs['no_request'];
+            $data['date_request'] = $inputs['date_request'];
+            // $data['expected_receive_date'] = $inputs['expected_receive_date'];
+            // $data['estimation_code'] = $inputs['estimation_code'];
+            // $data['date_booked'] = $inputs['date_booked'];
+            // $data['details'] = $inputs['details'];
+            $data['warehouse_id'] = $head->warehouse_id;
+            $data['status'] = 1;
+            $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
 
-        $save = $reversion->create($data);
+            $save = $reversion->create($data);
 
-        foreach (Cart::content() as $key => $item) {             
+            foreach (Cart::content() as $key => $item) {             
 
-            $reversiondetails = $this->reversiondetail;
-            $reversiondetail['reversion_id']    = $save->id;
-            $reversiondetail['material_id']       = $item->id;
-            $reversiondetail['proposed_amount']   = $item->qty;
-            $reversiondetail['real_amount']       = $item->options['proposed_amount'];
+                $reversiondetails = $this->reversiondetail;
+                $reversiondetail['reversion_id']    = $save->id;
+                $reversiondetail['material_id']       = $item->id;
+                $reversiondetail['proposed_amount']   = $item->qty;
+                $reversiondetail['real_amount']       = $item->options['proposed_amount'];
 
-            $reversiondetails->create($reversiondetail);
+                $reversiondetails->create($reversiondetail);
 
-            // $material = $this->model->whereId($item->id)->first();
+                // $material = $this->model->whereId($item->id)->first();
 
-            // $update['amount'] = $material->amount - $item->qty;
+                // $update['amount'] = $material->amount - $item->qty;
 
-            // $material->update($update);
-            
-         }     
+                // $material->update($update);
+                
+             }     
 
-        Cart::destroy();
+            Cart::destroy();
 
-        return redirect(urlBackend('pengajuan-pengembalian/index'))->withSuccess('data has been saved');
+            return redirect(urlBackend('pengajuan-pengembalian/index'))->withSuccess('data has been saved');
+        }
     }
 
 

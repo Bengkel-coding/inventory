@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Role;
+use App\User;
 
 class User extends Authenticatable
 {
@@ -55,5 +56,10 @@ class User extends Authenticatable
         
         return $rule;
         
+    }
+
+    public function head()
+    {
+        return $this->belongsTo(User::class,'head_id');
     }
 }

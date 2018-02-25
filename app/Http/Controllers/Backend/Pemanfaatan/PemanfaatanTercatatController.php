@@ -115,47 +115,52 @@ class PemanfaatanTercatatController extends TrinataController
         $utilization = $this->utilization;
         $inputs = $request->all();
         $cart = Cart::content();
+        $head = \Auth::user()->head()->first();
 
         // dd($inputs,$cart);
 
-        $data['user_id'] = \Auth::user()->id;
-        $data['no_utilization'] = $inputs['no_utilization'];
-        $data['date_utilization'] = $inputs['date_utilization'];
-        $data['to'] = $inputs['to'];
-        $data['from'] = $inputs['from'];
-        $data['booked_by'] = $inputs['booked_by'];
-        $data['expected_receive_date'] = $inputs['expected_receive_date'];
-        $data['estimation_code'] = $inputs['estimation_code'];
-        $data['date_booked'] = $inputs['date_booked'];
-        $data['details'] = $inputs['details'];
-        $data['warehouse_id'] = 1;
-        $data['status'] = 1;
-        $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
+        if ($head->warehouse_id==0) {
+            return redirect(urlBackend('pemanfaatan-tercatat/ajukan'))->withInfo('data warehouse empty');
+        }else{
+            $data['user_id'] = \Auth::user()->id;
+            $data['no_utilization'] = $inputs['no_utilization'];
+            $data['date_utilization'] = $inputs['date_utilization'];
+            $data['to'] = $inputs['to'];
+            $data['from'] = $inputs['from'];
+            $data['booked_by'] = $inputs['booked_by'];
+            $data['expected_receive_date'] = $inputs['expected_receive_date'];
+            $data['estimation_code'] = $inputs['estimation_code'];
+            $data['date_booked'] = $inputs['date_booked'];
+            $data['details'] = $inputs['details'];
+            $data['warehouse_id'] = $head->warehouse_id;
+            $data['status'] = 1;
+            $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
 
-        $save = $utilization->create($data);
+            $save = $utilization->create($data);
 
-        foreach (Cart::content() as $key => $item) {             
+            foreach (Cart::content() as $key => $item) {             
 
-            $utidetails = $this->utidetail;
-            $utidetail['utilization_id']    = $save->id;
-            $utidetail['material_id']       = $item->id;
-            $utidetail['proposed_amount']   = $item->qty;
-            $utidetail['real_amount']       = $item->options['amount'];
+                $utidetails = $this->utidetail;
+                $utidetail['utilization_id']    = $save->id;
+                $utidetail['material_id']       = $item->id;
+                $utidetail['proposed_amount']   = $item->qty;
+                $utidetail['real_amount']       = $item->options['amount'];
 
-            $utidetails->create($utidetail);
+                $utidetails->create($utidetail);
 
-            $material = $this->model->whereId($item->id)->first();
+                $material = $this->model->whereId($item->id)->first();
 
-            // $update['amount'] = $material->amount - $item->qty;
-            $update['total_proposed_amount'] = $material->total_proposed_amount + $item->qty;
+                // $update['amount'] = $material->amount - $item->qty;
+                $update['total_proposed_amount'] = $material->total_proposed_amount + $item->qty;
 
-            $material->update($update);
-            
-         }     
+                $material->update($update);
+                
+             }     
 
-        Cart::destroy();
+            Cart::destroy();
 
-        return redirect(urlBackend('pengajuan-pemanfaatan/index'))->withSuccess('data has been saved');
+            return redirect(urlBackend('pengajuan-pemanfaatan/index'))->withSuccess('data has been saved');
+        }
     }
     
 
