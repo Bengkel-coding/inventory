@@ -53,6 +53,7 @@
                                 <th>Tanggal Pengembalian</th>
                                 <th>Diterima dari</th>
                                 <th>No permintaan</th>
+                                <th>Status Pengajuan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -84,6 +85,7 @@
                     { data: 'date_return', name: 'date_return' },
                     { data: 'received_by', name: 'received_by' },
                     { data: 'no_request', name: 'no_request' },
+                    { data: 'status', name: 'status' },
                     { data: 'action', name: 'action' , searchable: false},
                 ]
             });

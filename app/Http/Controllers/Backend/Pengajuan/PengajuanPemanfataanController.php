@@ -227,23 +227,35 @@ class PengajuanPemanfataanController extends TrinataController
             return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Telah Disetujui');
 
         }else{
-            // $utilization = \App\Models\utilization::whereMaterialId($model->id)->first();
-            // $utilization->status = 0;
-            // if($utilization->save()){
-            //     $model = $this->model->findOrFail($id);
-            //     $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-            //     $model->save();
 
-            //     $log_utilization = new \App\Models\LogUtilization;
-            //             $log_utilization->material_id = $utilization->material_id;
-            //             $log_utilization->amount = $utilization->amount;
-            //             $log_utilization->proposed_amount = $utilization->proposed_amount;
-            //             $log_utilization->warehouse_id = $utilization->warehouse_id;
-            //             $log_utilization->proposed_warehouse_id = $utilization->proposed_warehouse_id;
-            //             $log_utilization->user_id = \Auth::User()->id;
-            //             $log_utilization->status = 0;
-            //             $log_utilization->save();
-            // }
+            $utilization->status = 0;
+            if($utilization->save()){
+                foreach ($utilization->utilizationDetail()->get() as $key => $value) 
+                {
+
+                    $model = new Material;
+                    $model = $model->findOrFail($value->material_id);
+
+                    $model->total_proposed_amount = $model->total_proposed_amount - $value->proposed_amount;
+                    $model->save();
+                }
+
+                $log_utilization = new LogUtilization; //udah
+                $log_utilization->no_utilization = $utilization->no_utilization;
+                $log_utilization->date_utilization = $utilization->date_utilization;
+                $log_utilization->to = $utilization->to;
+                $log_utilization->from = $utilization->from;
+                $log_utilization->expected_receive_date = $utilization->expected_receive_date;
+                $log_utilization->booked_by = $utilization->booked_by;
+                $log_utilization->estimation_code = $utilization->estimation_code;
+                $log_utilization->date_booked = $utilization->date_booked;
+                $log_utilization->details = $utilization->details;
+                $log_utilization->type = $utilization->type;
+                $log_utilization->warehouse_id = $utilization->warehouse_id;
+                $log_utilization->user_id = \Auth::User()->id;
+                $log_utilization->status = 0;
+                $log_utilization->save();
+            }
 
             return redirect(urlBackend('pengajuan-pemanfaatan/index'))->with('success','Pengajuan Berhasil Ditolak');
         }
