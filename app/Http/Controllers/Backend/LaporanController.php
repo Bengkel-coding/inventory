@@ -67,10 +67,10 @@ class LaporanController extends TrinataController
     	
     	$categoryList = [
                         'mro'=>'sheetMro',
-                        'mroabt'=>'sheetMroAbt', 
-                        'investasi'=>'sheetInvestasi',
-                        'eksjar'=>'sheetEksjar',
-                        'tercatat'=>'sheetTercatat',
+                        // 'mroabt'=>'sheetMroAbt', 
+                        // 'investasi'=>'sheetInvestasi',
+                        // 'eksjar'=>'sheetEksjar',
+                        // 'tercatat'=>'sheetTercatat',
                         ];
     	
     	$this->prepareExcel($categoryList, $request);
@@ -95,9 +95,10 @@ class LaporanController extends TrinataController
                         
                         // $this->{$value}($sheet);
                         $baris = 5;
-                        // dd($sheet);
+                        $date = \Carbon\Carbon::createFromFormat('m-Y', $request->periode)->format('Y-m');
+                        // dd($date);
                         foreach($data as $keys => $dataBaris){
-                            $sheet->row($baris++, $this->prepareData($dataBaris, $keys));
+                            $sheet->row($baris++, $this->prepareData($dataBaris, $keys, $date));
                         }
 
                         $sheet = false;
@@ -105,15 +106,15 @@ class LaporanController extends TrinataController
                 }
             }
 
-        })->setFilename('Laporan-material-'.date('Ymdhis'))->export('xls');
+        })->setFilename('Laporan-material-'.$request->periode.'-'.date('Ymdhis'))->export('xls');
     }
 
     public function getMaterialData($category)
     {
-    	return Material::whereType($category)->orderBy('category','warehouse_id')->take(10)->get();
+    	return Material::whereType($category)->orderBy('category','warehouse_id')->get();
     }
 
-    public function prepareData($value, $key)
+    public function prepareData($value, $key, $date=false)
     {
         $needCode = ['mroabt','investasi','eksjar','tercatat'];
     	$parseData = ['mro'=>'dataMro','mroabt'=>'dataMroabt','investasi'=>'dataInvestasi',
@@ -126,40 +127,68 @@ class LaporanController extends TrinataController
 		if(in_array($value->type, $needCode)) $datas[] = $value->kode;
 		$datas[] = $value->description;
 
-		$datas = array_merge($datas, $this->{$parseData[$value->type]}($value));
-
+		$datas = array_merge($datas, $this->{$parseData[$value->type]}($value, $date));
+        // dd($datas);
 		return $datas;
     }
 
-    public function dataMro($value)
+    public function logMaterial($value, $date, $action=false)
+    {
+        $total = 0;
+        $model = \App\Models\LogMaterial::whereMaterialId($value->id)
+                        ->where('created_at', 'like', '%'.$date);
+        if ($action) {
+            $model = $model->whereAction($action);
+            $model = $model->orderBy('id')->first();
+        } else {
+            $model = $model->orderBy('id','desc')->first();
+        }
+
+        if ($model) {
+            $total = $model->amount_current;
+        }
+
+        return $total;
+    }
+
+    
+
+    public function dataMro($value, $date=false)
     {
         $data = [];
         
+        $mro = \App\Models\MaterialMro::whereMaterialId($value->id)->first();
+        $material = ($this->logMaterial($value, $date) > 0) ? $this->logMaterial($value, $date) : $value->amount;
+        $utilization = $this->logMaterial($value, $date, 'utilization');
+        $reversion  = $this->logMaterial($value, $date, 'reversion');
+        $mutasiin  = $this->logMaterial($value, $date, 'mutation_in');
+        $mutasiout  = $this->logMaterial($value, $date, 'mutation_out');
+        
         $data[] = ucfirst($value->unit);
         $data[] = $value->year_acquisition;
+        $data[] = $material;
+        $data[] = number_format($value->unit_price);
+        $data[] = number_format($material * $value->unit_price);  
+        $data[] = 0;
+        $data[] = 0;
+        $data[] = $utilization;
+        $data[] = $utilization * $value->unit_price;
+        $data[] = $reversion;
+        $data[] = $reversion * $value->unit_price;
+        $data[] = $mutasiin;
+        $data[] = $mutasiin * $value->unit_price ;
+        $data[] = $mutasiout;
+        $data[] = $mutasiout * $value->unit_price ;
         $data[] = $value->amount;
         $data[] = number_format($value->unit_price);
-        $data[] = number_format($value->amount * $value->unit_price);  
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
-        $data[] = '';
+        $data[] = number_format($value->amount * $value->unit_price);
+        $data[] = $mro->min_stock_level;
+        $data[] = $mro->max_stock_level;
+        $data[] = $mro->excess_stock;
+        $data[] = $mro->status;
+        $data[] = $value->note;
         $data[] = $this->getWarehouse($value->warehouse_id);
-    
+        
         return $data;
     }
 
