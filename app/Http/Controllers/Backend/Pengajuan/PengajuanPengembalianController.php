@@ -11,6 +11,7 @@ use App\Models\Crud;
 use App\Models\Material;
 use App\Models\Reversion;
 use App\Models\ReversionDetail;
+use App\Models\LogReversion;
 use Table;
 use Image;
 use trinata;
@@ -58,7 +59,7 @@ class PengajuanPengembalianController extends TrinataController
         $model = $this->model->findOrFail($id);
         $detail = $this->detail->where('reversion_id',$model->id)->get();
 
-        // dd($detail);
+        // dd(\Auth::User());
 
 
         if($model->status == 1 && \Auth::User()->id == $model->user_id && \Auth::User()->warehouse_id == $model->proposed_warehouse_id){
@@ -88,10 +89,11 @@ class PengajuanPengembalianController extends TrinataController
     }
 
     
-    
     public function postDetail(Request $request,$id)
     {
         $reversion = $this->model->findOrFail($id);
+        // $detail = $reversion->reversionDetail();
+        // dd($detail->get());
 // dd($request->all());
         if($request->status == 1){
             // $reversion = \App\Models\reversion::whereMaterialId($model->id)->first();
@@ -100,94 +102,135 @@ class PengajuanPengembalianController extends TrinataController
                 case '1': //disetujui kepala gudang pemohon
                     $reversion->status = 2;
 
-                    // if($reversion->save()){
-                    //     $log_reversion = new \App\Models\Logreversion; //udah
-                    //     $log_reversion->material_id = $reversion->material_id;
-                    //     $log_reversion->amount = $reversion->amount;
-                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
-                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
-                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
-                    //     $log_reversion->user_id = \Auth::User()->id;
-                    //     $log_reversion->status = 2;
-                    //     $log_reversion->save(); 
-                    // }
+                    if($reversion->save()){
+                        $log_reversion = new LogReversion; //udah
+                        $log_reversion->no_return = $reversion->no_return;
+                        $log_reversion->date_return = $reversion->date_return;
+                        $log_reversion->received_by = $reversion->received_by;
+                        $log_reversion->no_request = $reversion->no_request;
+                        $log_reversion->date_request = $reversion->date_request;
+                        $log_reversion->amount_return = $reversion->amount_return;
+                        $log_reversion->warehouse_id = $reversion->warehouse_id;
+                        $log_reversion->user_id = \Auth::User()->id;
+                        $log_reversion->status = 2;
+                        $log_reversion->save(); 
+                    }
                     break;
 
                 case '2': //disetujui bui
                     $reversion->status = 3;
-                    // if($reversion->save()){
-                    //     $log_reversion = new \App\Models\Logreversion;
-                    //     $log_reversion->material_id = $reversion->material_id;
-                    //     $log_reversion->amount = $reversion->amount;
-                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
-                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
-                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
-                    //     $log_reversion->user_id = \Auth::User()->id;
-                    //     $log_reversion->status = 3;
-                    //     $log_reversion->save(); 
-                    // }
+                    if($reversion->save()){
+                        $log_reversion = new LogReversion; //udah
+                        $log_reversion->no_return = $reversion->no_return;
+                        $log_reversion->date_return = $reversion->date_return;
+                        $log_reversion->received_by = $reversion->received_by;
+                        $log_reversion->no_request = $reversion->no_request;
+                        $log_reversion->date_request = $reversion->date_request;
+                        $log_reversion->amount_return = $reversion->amount_return;
+                        $log_reversion->warehouse_id = $reversion->warehouse_id;
+                        $log_reversion->user_id = \Auth::User()->id;
+                        $log_reversion->status = 3;
+                        $log_reversion->save(); 
+                    }
                     break;
 
                 case '3': //disetujui admin gudang pemberi
                     $reversion->status = 4;
-                    // if($reversion->save()){
-                    //     $log_reversion = new \App\Models\Logreversion;
-                    //     $log_reversion->material_id = $reversion->material_id;
-                    //     $log_reversion->amount = $reversion->amount;
-                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
-                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
-                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
-                    //     $log_reversion->user_id = \Auth::User()->id;
-                    //     $log_reversion->status = 4;
-                    //     $log_reversion->save(); 
-                    // }
+                    if($reversion->save()){
+                        $log_reversion = new LogReversion; //udah
+                        $log_reversion->no_return = $reversion->no_return;
+                        $log_reversion->date_return = $reversion->date_return;
+                        $log_reversion->received_by = $reversion->received_by;
+                        $log_reversion->no_request = $reversion->no_request;
+                        $log_reversion->date_request = $reversion->date_request;
+                        $log_reversion->amount_return = $reversion->amount_return;
+                        $log_reversion->warehouse_id = $reversion->warehouse_id;
+                        $log_reversion->user_id = \Auth::User()->id;
+                        $log_reversion->status = 4;
+                        $log_reversion->save(); 
+                    }
                     break;
 
                 case '4': //disetujui kepala gudang pemberi
                     $reversion->status = 5;
-                    // if($reversion->save()){
-                    //     $log_reversion = new \App\Models\Logreversion;
-                    //     $log_reversion->material_id = $reversion->material_id;
-                    //     $log_reversion->amount = $reversion->amount;
-                    //     $log_reversion->proposed_amount = $reversion->proposed_amount;
-                    //     $log_reversion->warehouse_id = $reversion->warehouse_id;
-                    //     $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
-                    //     $log_reversion->user_id = \Auth::User()->id;
-                    //     $log_reversion->status = 5;
-                    //     $log_reversion->save(); 
-                    // }
+                    if($reversion->save()){
+                        $log_reversion = new LogReversion; //udah
+                        $log_reversion->no_return = $reversion->no_return;
+                        $log_reversion->date_return = $reversion->date_return;
+                        $log_reversion->received_by = $reversion->received_by;
+                        $log_reversion->no_request = $reversion->no_request;
+                        $log_reversion->date_request = $reversion->date_request;
+                        $log_reversion->amount_return = $reversion->amount_return;
+                        $log_reversion->warehouse_id = $reversion->warehouse_id;
+                        $log_reversion->user_id = \Auth::User()->id;
+                        $log_reversion->status = 5;
+                        $log_reversion->save(); 
+                    
 
-                    // $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-                    // $model->amount = $model->amount - $request->proposed_amount;
-                    // $model->save();
+                        foreach ($reversion->reversionDetail()->get() as $key => $value) 
+                        {
+
+                            $model = new Material;
+                            $model = $model->findOrFail($value->material_id);
+
+                            $log_material = new \App\Models\LogMaterial;
+                            $log_material->material_id = $model->id;
+                            $log_material->category = $model->category;
+                            $log_material->name = $model->name;
+                            $log_material->cardnumber = $model->cardnumber;
+                            $log_material->komag = $model->komag;
+                            $log_material->code = $model->code;
+                            $log_material->serialnumber = $model->serialnumber;
+                            $log_material->description = $model->description;
+                            $log_material->unit = $model->unit;
+                            $log_material->year_acquisition = $model->year_acquisition;
+                            $log_material->amount = $model->amount;
+                            $log_material->unit_price = $model->unit_price;
+                            $log_material->total_proposed_amount = $model->total_proposed_amount;
+                            $log_material->details = $model->details;
+                            $log_material->warehouse_id = $model->warehouse_id;
+                            $log_material->status = $model->status;
+                            $log_material->type = $model->type;
+                            $log_material->note = $model->note;
+                            $log_material->save();
+
+                            // $model->total_proposed_amount = $model->total_proposed_amount - $value->proposed_amount;
+                            $model->amount = $model->amount + $value->proposed_amount;
+                            $model->save();
+
+                            $log_material->amount_current = $model->amount;
+                            $log_material->action = "pengembalian";
+                            $log_material->save();
+                        }
+                    }
+                    
                     break;                
                 default:
                     return redirect(urlBackend('pengajuan-pengembalian/index'))->with('info','Anda tidak memiliki otorisasi');
                     break;
             }
 
-            $reversion->save();
+            // $reversion->save();
 
             return redirect(urlBackend('pengajuan-pengembalian/index'))->with('success','Pengajuan Telah Disetujui');
 
         }else{
-            // $reversion = \App\Models\reversion::whereMaterialId($model->id)->first();
-            // $reversion->status = 0;
-            // if($reversion->save()){
-            //     $model = $this->model->findOrFail($id);
-            //     $model->total_proposed_amount = $model->total_proposed_amount - $request->proposed_amount;
-            //     $model->save();
 
-            //     $log_reversion = new \App\Models\Logreversion;
-            //             $log_reversion->material_id = $reversion->material_id;
-            //             $log_reversion->amount = $reversion->amount;
-            //             $log_reversion->proposed_amount = $reversion->proposed_amount;
-            //             $log_reversion->warehouse_id = $reversion->warehouse_id;
-            //             $log_reversion->proposed_warehouse_id = $reversion->proposed_warehouse_id;
-            //             $log_reversion->user_id = \Auth::User()->id;
-            //             $log_reversion->status = 0;
-            //             $log_reversion->save();
-            // }
+            $reversion->status = 0;
+            if($reversion->save()){
+
+                $log_reversion = new LogReversion; //udah
+                $log_reversion->no_return = $reversion->no_return;
+                $log_reversion->date_return = $reversion->date_return;
+                $log_reversion->received_by = $reversion->received_by;
+                $log_reversion->no_request = $reversion->no_request;
+                $log_reversion->date_request = $reversion->date_request;
+                $log_reversion->amount_return = $reversion->amount_return;
+                $log_reversion->warehouse_id = $reversion->warehouse_id;
+                $log_reversion->user_id = \Auth::User()->id;
+                $log_reversion->status = 0;
+                $log_reversion->save(); 
+            }
 
             return redirect(urlBackend('pengajuan-pengembalian/index'))->with('success','Pengajuan Berhasil Ditolak');
         }

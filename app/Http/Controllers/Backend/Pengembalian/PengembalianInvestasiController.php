@@ -141,7 +141,7 @@ class PengembalianInvestasiController extends TrinataController
         // $data['estimation_code'] = $inputs['estimation_code'];
         // $data['date_booked'] = $inputs['date_booked'];
         // $data['details'] = $inputs['details'];
-        // $data['warehouse_id'] = 1;
+        $data['warehouse_id'] = 1;
         $data['status'] = 1;
         $data['created_at'] = \Carbon\Carbon::now('Asia/Jakarta')->toDateTimeString();
 
