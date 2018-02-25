@@ -197,6 +197,10 @@ class PengajuanPengembalianController extends TrinataController
                             // $model->total_proposed_amount = $model->total_proposed_amount - $value->proposed_amount;
                             $model->amount = $model->amount + $value->proposed_amount;
                             $model->save();
+
+                            $log_material->amount_current = $model->amount;
+                            $log_material->action = "pengembalian";
+                            $log_material->save();
                         }
                     }
                     
