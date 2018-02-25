@@ -78,11 +78,11 @@
             </div>
 
             <div class="row">
-              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/mutation?type=approved')}}"><strong>{{$data_total['mutation_approved']}}</strong> approved</a></div>
+              <div class="col-md-6 m-b-3"><i class="fa fa-refresh text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/mutation?type=process')}}"><strong>{{$data_total['mutation_process']}}</strong> process</a></div>
             </div>
 
             <div class="row">
-              <div class="col-md-6 m-b-3"><i class="fa fa-refresh text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/mutation?type=process')}}"><strong>{{$data_total['mutation_process']}}</strong> process</a></div>
+              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/mutation?type=approved')}}"><strong>{{$data_total['mutation_approved']}}</strong> approved</a></div>
             </div>
           </div>
         </div>
@@ -103,10 +103,10 @@
               <div class="col-md-6 m-y-3"><i class="fa fa-clock-o text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/utilization?type=pending')}}"><strong>{{$data_total['utilization_pending']}}</strong> pending</a></div>
             </div>
             <div class="row">
-              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/utilization?type=approved')}}"><strong>{{$data_total['utilization_approved']}}</strong> approved</a></div>
+              <div class="col-md-6 m-b-3"><i class="fa fa-refresh text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/utilization?type=process')}}"><strong>{{$data_total['utilization_process']}}</strong> process</a></div>
             </div>
             <div class="row">
-              <div class="col-md-6 m-b-3"><i class="fa fa-refresh text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/utilization?type=process')}}"><strong>{{$data_total['utilization_process']}}</strong> process</a></div>
+              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/utilization?type=approved')}}"><strong>{{$data_total['utilization_approved']}}</strong> approved</a></div>
             </div>
           </div>
         </div>
@@ -126,12 +126,12 @@
             <div class="row">
               <div class="col-md-6 m-y-3"><i class="fa fa-clock-o text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/reversion?type=pending')}}"><strong>{{$data_total['reversion_pending']}}</strong> pending</a></div>
             </div>
-            <div class="row">
-              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/reversion?type=approved')}}"><strong>{{$data_total['reversion_approved']}}</strong> approved</a></div>
-            </div>
 
             <div class="row">
               <div class="col-md-6 m-b-3"><i class="fa fa-refresh text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/reversion?type=process')}}"><strong>{{$data_total['reversion_process']}}</strong> process</a></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/reversion?type=approved')}}"><strong>{{$data_total['reversion_approved']}}</strong> approved</a></div>
             </div>
           </div>
         </div>
@@ -151,12 +151,12 @@
             <div class="row">
               <div class="col-md-6 m-y-3"><i class="fa fa-clock-o text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/assessment?type=pending')}}"><strong>{{$data_total['assessment_pending']}}</strong> pending</a></div>
             </div>
-            <div class="row">
-              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/assessment?type=approved')}}"><strong>{{$data_total['assessment_approved']}}</strong> approved</a></div>\
-            </div>
 
             <div class="row">
               <div class="col-md-6 m-b-3"><i class="fa fa-refresh text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/assessment?type=process')}}"><strong>{{$data_total['assessment_process']}}</strong> process</a></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/assessment?type=approved')}}"><strong>{{$data_total['assessment_approved']}}</strong> approved</a></div>\
             </div>
           </div>
         </div>
