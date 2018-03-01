@@ -67,10 +67,10 @@ class LaporanController extends TrinataController
     	
     	$categoryList = [
                         'mro'=>'sheetMro',
-                        // 'mroabt'=>'sheetMroAbt', 
-                        // 'investasi'=>'sheetInvestasi',
-                        // 'eksjar'=>'sheetEksjar',
-                        // 'tercatat'=>'sheetTercatat',
+                        'mroabt'=>'sheetMroAbt', 
+                        'investasi'=>'sheetInvestasi',
+                        'eksjar'=>'sheetEksjar',
+                        'tercatat'=>'sheetTercatat',
                         ];
     	
     	$this->prepareExcel($categoryList, $request);
