@@ -56,6 +56,8 @@
                         {!! Form::password('verify_password',['class' => 'form-control']) !!}
                       </div>
                       
+                      {!! Form::hidden('role_id',$model->role_id, ['class' => 'form-control']) !!}
+
                       <button type="submit" class="btn btn-primary">{{ !empty($model->id) ? 'Update' : 'Save' }}</button>
                     
                     {!! Form::close() !!}

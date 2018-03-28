@@ -30,6 +30,7 @@ class ProfileController extends TrinataController
 
     	$inputs['password'] = \Hash::make($request->password);
     	$inputs['role_id'] = $this->model->role_id;
+        
     	return $inputs;
     }
 

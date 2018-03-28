@@ -156,7 +156,7 @@
               <div class="col-md-6 m-b-3"><i class="fa fa-refresh text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/assessment?type=process')}}"><strong>{{$data_total['assessment_process']}}</strong> process</a></div>
             </div>
             <div class="row">
-              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/assessment?type=approved')}}"><strong>{{$data_total['assessment_approved']}}</strong> approved</a></div>\
+              <div class="col-md-6 m-b-3"><i class="fa fa-check text-muted"></i>&nbsp;&nbsp;<a href="{{ urlBackend('dashboard/assessment?type=approved')}}"><strong>{{$data_total['assessment_approved']}}</strong> approved</a></div>
             </div>
           </div>
         </div>
